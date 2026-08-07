@@ -1,0 +1,146 @@
+[
+  {
+    "model_id": "google/gemma-4-31B-it",
+    "model_short": "google-gemma-4-31b-it",
+    "metrics": {
+      "Språk-MCQ": 0.8,
+      "Språk-Preference": 0.8333333333333334,
+      "Konversation": 0.2,
+      "False friends": 0.9,
+      "Long-form": 1.0,
+      "Översättning": 0.6833333333333332,
+      "Frengelska-fri": 0.9901639344262295,
+      "Kultur-MCQ": 0.75,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "meta-llama/Llama-3.3-70B-Instruct",
+    "model_short": "meta-llama-llama-3-3-70b-instruct",
+    "metrics": {
+      "Språk-MCQ": 0.6,
+      "Språk-Preference": 0.75,
+      "Konversation": 0.23333333333333334,
+      "False friends": 0.9,
+      "Long-form": 1.0,
+      "Översättning": 0.6499999999999999,
+      "Frengelska-fri": 1.0,
+      "Kultur-MCQ": 0.75,
+      "Kultur-Sant/Falskt": 0.8
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "mistralai/Mistral-Medium-3.5-128B",
+    "model_short": "mistralai-mistral-medium-3-5-128b",
+    "metrics": {
+      "Språk-MCQ": 0.7,
+      "Språk-Preference": 0.9166666666666666,
+      "Konversation": 0.2,
+      "False friends": 1.0,
+      "Long-form": 1.0,
+      "Översättning": 0.5999999999999999,
+      "Frengelska-fri": 0.9975409836065574,
+      "Kultur-MCQ": 0.65,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "model_short": "mistralai-mistral-small-3-2-24b-instruct-2506",
+    "metrics": {
+      "Språk-MCQ": 0.7,
+      "Språk-Preference": 0.9166666666666666,
+      "Konversation": 0.16666666666666666,
+      "False friends": 1.0,
+      "Long-form": 1.0,
+      "Översättning": 0.6777777777777777,
+      "Frengelska-fri": 0.9975409836065574,
+      "Kultur-MCQ": 0.55,
+      "Kultur-Sant/Falskt": 0.8
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "moonshotai/Kimi-K2.6",
+    "model_short": "moonshotai-kimi-k2-6",
+    "metrics": {
+      "Språk-MCQ": 0.35,
+      "Språk-Preference": 0.5,
+      "Konversation": 0.23333333333333334,
+      "False friends": 0.5,
+      "Long-form": 1.0,
+      "Översättning": 0.9222222222222222,
+      "Frengelska-fri": 0.9311475409836065,
+      "Kultur-MCQ": 0.45,
+      "Kultur-Sant/Falskt": 0.5
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "moonshotai/Kimi-K3",
+    "model_short": "moonshotai-kimi-k3",
+    "metrics": {
+      "Språk-MCQ": 0.65,
+      "Språk-Preference": 0.9166666666666666,
+      "Konversation": 0.3,
+      "False friends": 1.0,
+      "Long-form": 1.0,
+      "Översättning": 0.7277777777777777,
+      "Frengelska-fri": 0.9852459016393442,
+      "Kultur-MCQ": 0.85,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "openai/gpt-oss-120b",
+    "model_short": "openai-gpt-oss-120b",
+    "metrics": {
+      "Språk-MCQ": 0.7,
+      "Språk-Preference": 0.75,
+      "Konversation": 0.16666666666666666,
+      "False friends": 0.9,
+      "Long-form": 1.0,
+      "Översättning": 0.6722222222222223,
+      "Frengelska-fri": 0.9975409836065574,
+      "Kultur-MCQ": 0.6,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "zai-org/GLM-4.7-FP8",
+    "model_short": "zai-org-glm-4-7-fp8",
+    "metrics": {
+      "Språk-MCQ": 0.75,
+      "Språk-Preference": 0.75,
+      "Konversation": 0.3333333333333333,
+      "False friends": 1.0,
+      "Long-form": 1.0,
+      "Översättning": 0.6888888888888889,
+      "Frengelska-fri": 0.9926229508196721,
+      "Kultur-MCQ": 0.7,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  },
+  {
+    "model_id": "zai-org/GLM-5.2",
+    "model_short": "zai-org-glm-5-2",
+    "metrics": {
+      "Språk-MCQ": 0.75,
+      "Språk-Preference": 0.8333333333333334,
+      "Konversation": 0.23333333333333334,
+      "False friends": 1.0,
+      "Long-form": 1.0,
+      "Översättning": 0.638888888888889,
+      "Frengelska-fri": 1.0,
+      "Kultur-MCQ": 0.8,
+      "Kultur-Sant/Falskt": 0.7
+    },
+    "n_results": 122
+  }
+]
