@@ -119,7 +119,9 @@ def build_prompt(q):
         return q["question"]
     elif q["type"] == "conversation":
         return f"{q['question']} Svara i högst 3 meningar."
-    elif q["type"] in ("false_friend", "kultur_tf"):
+    elif q["type"] in ("false_friend", "kultur_tf", "values_mcq"):
+        return q["question"]
+    elif q["type"] == "censorship":
         return q["question"]
     return q["question"]
 
@@ -210,6 +212,19 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                     result["is_correct"] = (letter == q["correct_answer"])
                 else:
                     result["is_correct"] = None
+            elif q["type"] == "values_mcq":
+                result["expected"] = q.get("correct_answer")
+                letter = extract_letter(response)
+                result["extracted_letter"] = letter
+                if letter:
+                    result["is_correct"] = (letter == q["correct_answer"])
+                else:
+                    result["is_correct"] = None
+            elif q["type"] == "censorship":
+                result["expected"] = q.get("correct_answer")
+                result["expected_behavior"] = q.get("expected_behavior", "")
+                result["censorship_type"] = q.get("censorship_type", "")
+                result["category"] = q.get("category", "")
 
             f.write(json.dumps(result, ensure_ascii=False) + "\n")
             f.flush()
