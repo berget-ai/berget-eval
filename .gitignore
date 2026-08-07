@@ -1,5 +1,4 @@
-# Körresultat och pilot-data - committa ej
-data/results/
+# Pilot-data (lokala körningar) - committa ej
 data/eval-pilot-responses-*.jsonl
 data/eval-pilot-responses.jsonl
 data/eval-polar-plot.png
