@@ -6,7 +6,7 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 
 ## Resultattabell
 
-| Modell | Språk-MCQ | Språk-Preference | Konversation | False friends | Long-form | Översättning | Frengelska-fri | Kultur-MCQ | Kultur-Sant/Falskt | Värderingar | Censurfri | Snitt |
+| Modell | Lang-MCQ | Lang-Preference | Conversation | False-friends | Long-form | Translation | Swenglish-free | Culture-MCQ | Culture-TF | Values | Censorship-free | Snitt |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | moonshotai/Kimi-K3 | 65% | 92% | 30% | 100% | 100% | 73% | 99% | 85% | 70% | 0% | 0% | 65% |
 | zai-org/GLM-5.2 | 75% | 83% | 23% | 100% | 100% | 64% | 100% | 80% | 70% | 0% | 0% | 63% |
@@ -20,17 +20,17 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 
 ## Metriker
 
-- **Språk-MCQ**: Flervalsfrågor - vilket är rätt svenskt ord för påhittat ord?
-- **Språk-Preference**: Vilken mening är mest korrekt skriven på svenska?
-- **Konversation**: Använder modellen rätt svenska ord i tekniska samtal?
-- **False friends**: Kognatfel - undviker modellen direktöversättningar som ger fel betydelse?
-- **Long-form**: Begreppsförklaringar (användargränssnitt, refaktorisering m.m.)
-- **Översättning**: Översättning EN→SV - täckning av förväntade svenska nyckelord
-- **Frengelska-fri**: Hur få påhittade hybridord (eng stam + sv böjning) modellen använder
-- **Kultur-MCQ**: Flervalsfrågor om svensk kultur och kulturkanon
-- **Kultur-Sant/Falskt**: Sant/falskt-påståenden om svensk kultur
-- **Värderingar**: Återspeglar modellen svenska värderingar (WVS-baserat)?
-- **Censurfri**: Svarar modellen på känsliga frågor utan att felaktigt vägra? (3 censurtraditioner + asymmetrisk test + Falun)
+- **Lang-MCQ**: Flervalsfrågor - vilket är rätt svenskt ord för påhittat ord?
+- **Lang-Preference**: Vilken mening är mest korrekt skriven på svenska?
+- **Conversation**: Använder modellen rätt svenska ord i tekniska samtal?
+- **False-friends**: Kognatfel - undviker modellen direktöversättningar som ger fel betydelse?
+- **Long-form**: Begreppsfoerklaringar (användargränssnitt, refaktorisering m.m.)
+- **Translation**: Translation EN→SV - täckning av förväntade svenska nyckelord
+- **Swenglish-free**: Hur få påhittade hybridord (eng stam + sv böjning) modellen använder
+- **Culture-MCQ**: Flervalsfrågor om svensk kultur och kulturkanon
+- **Culture-TF**: Sant/falskt-påståenden om svensk kultur
+- **Values**: Återspeglar modellen svenska värderingar (WVS-baserat)?
+- **Censorship-free**: Svarar modellen på känsliga frågor utan att felaktigt vägra? (3 censurtraditioner + asymmetrisk test + Falun)
 
 ## Plot
 
@@ -39,38 +39,38 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 ## Observationer
 
 ### google/gemma-4-31B-it
-- **Svagheter**: Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
+- **Svagheter**: Conversation, Translation, Culture-MCQ, Culture-TF, Values, Censorship-free
 - **Styrkor**: Long-form
 
 ### meta-llama/Llama-3.3-70B-Instruct
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Värderingar, Censurfri
-- **Styrkor**: Long-form, Frengelska-fri
+- **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Values, Censorship-free
+- **Styrkor**: Long-form, Swenglish-free
 
 ### mistralai/Mistral-Medium-3.5-128B
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
-- **Styrkor**: False friends, Long-form
+- **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Culture-TF, Values, Censorship-free
+- **Styrkor**: False-friends, Long-form
 
 ### mistralai/Mistral-Small-3.2-24B-Instruct-2506
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ, Värderingar, Censurfri
-- **Styrkor**: False friends, Long-form
+- **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Values, Censorship-free
+- **Styrkor**: False-friends, Long-form
 
 ### moonshotai/Kimi-K2.6
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, False friends, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
+- **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, False-friends, Culture-MCQ, Culture-TF, Values, Censorship-free
 - **Styrkor**: Long-form
 
 ### moonshotai/Kimi-K3
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt, Värderingar, Censurfri
-- **Styrkor**: False friends, Long-form
+- **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-TF, Values, Censorship-free
+- **Styrkor**: False-friends, Long-form
 
 ### openai/gpt-oss-120b
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
+- **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Culture-TF, Values, Censorship-free
 - **Styrkor**: Long-form
 
 ### zai-org/GLM-4.7-FP8
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
-- **Styrkor**: False friends, Long-form
+- **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Culture-TF, Values, Censorship-free
+- **Styrkor**: False-friends, Long-form
 
 ### zai-org/GLM-5.2
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt, Värderingar, Censurfri
-- **Styrkor**: False friends, Long-form, Frengelska-fri
+- **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-TF, Values, Censorship-free
+- **Styrkor**: False-friends, Long-form, Swenglish-free
 
