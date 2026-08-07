@@ -15,9 +15,49 @@ permissions:
   contents: write
 
 jobs:
-  eval:
+  # ── 1. Hämta modellista och skapa run-katalog ──────────────────────────────
+  setup:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.get-models.outputs.matrix }}
+      out_dir: ${{ steps.set-dir.outputs.out_dir }}
+      tag: ${{ steps.set-dir.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Get model list
+        id: get-models
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          MATRIX=$(python scripts/list_models.py)
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+      - name: Set output directory
+        id: set-dir
+        run: |
+          TAG="${{ github.event.inputs.tag || 'weekly' }}"
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
+          OUT_DIR="data/results/${TIMESTAMP}-${TAG}"
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+  # ── 2. Kör ett jobb per modell parallellt ─────────────────────────────────
+  eval:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,43 +68,84 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install --quiet matplotlib numpy
+        run: pip install --quiet matplotlib numpy
 
-      - name: Run full evaluation
+      - name: Run evaluation for ${{ matrix.model }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
-          TAG="${{ github.event.inputs.tag || 'weekly' }}"
-          python scripts/run_eval.py --tag "$TAG"
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          mkdir -p "$OUT_DIR"
+          python scripts/run_eval.py \
+            --models "${{ matrix.model }}" \
+            --out-dir "$OUT_DIR" \
+            --tag "${{ needs.setup.outputs.tag }}"
+
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results-${{ strategy.job-index }}
+          path: ${{ needs.setup.outputs.out_dir }}
+          if-no-files-found: warn
+
+  # ── 3. Sammanställ, döm och committa ──────────────────────────────────────
+  finalize:
+    needs: [setup, eval]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install --quiet matplotlib numpy
+
+      - name: Download all model artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: eval-results-*
+          path: artifact-tmp/
+          merge-multiple: true
+
+      - name: Merge artifacts into results dir
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          mkdir -p "$OUT_DIR"
+          # Kopiera alla .jsonl-filer från artifacts till rätt katalog
+          find artifact-tmp/ -name "*.jsonl" -exec cp {} "$OUT_DIR/" \;
 
       - name: Run sleeper agent judge
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
-          LATEST_DIR=$(ls -td data/results/*/ | head -1)
-          echo "Kör sleeper judge på: $LATEST_DIR"
-          python scripts/judge_sleeper.py --results-dir "$LATEST_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          echo "Kör sleeper judge på: $OUT_DIR"
+          python scripts/judge_sleeper.py --results-dir "$OUT_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
 
       - name: Generate summary
         run: |
-          LATEST_DIR=$(ls -td data/results/*/ | head -1)
-          echo "Senaste resultat-katalog: $LATEST_DIR"
-          python scripts/summarize_eval.py --results-dir "$LATEST_DIR"
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          python scripts/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Commit results
         run: |
-          LATEST_DIR=$(ls -td data/results/*/ | head -1)
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/results/
-          git commit -m "chore: veckolig modellutvärdering $(basename $LATEST_DIR)" || echo "Inget att committa"
+          git commit -m "chore: veckolig modellutvärdering $(basename $OUT_DIR)" || echo "Inget att committa"
           git push
 
-      - name: Upload artifacts
+      - name: Upload final artifacts
         uses: actions/upload-artifact@v4
         with:
           name: evaluation-results
-          path: data/results/
+          path: ${{ needs.setup.outputs.out_dir }}
