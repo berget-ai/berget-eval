@@ -1,0 +1,350 @@
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "access", "output": "åtkomst"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "accountability", "output": "ansvar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "accountet", "output": "kontot"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "addonet", "output": "tillägget"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "admin (etablerat lån) / administratör", "output": "admin"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "aggregeringar", "output": "sammanställningar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "alert", "output": "larm"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "alertet", "output": "larmet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "annotationerna", "output": "annoteringarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "användargränssnitt", "output": "frontend"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "approval", "output": "godkännande"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "architecture", "output": "arkitektur"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "argument (etablerat)", "output": "argument"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "array", "output": "fält"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "arrayet", "output": "fältet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "async", "output": "asynkron"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "attention", "output": "uppmärksamhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "await", "output": "vänta"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "backend (etablerat lån)", "output": "backend"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "backup", "output": "säkerhetskopiering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "backup (lån) / säkerhetskopiering", "output": "backup"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "batch", "output": "sats"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "batch", "output": "snitt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "batch (lån) / sats", "output": "batch"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "batch size", "output": "batchstorlek"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "bias", "output": "partiskhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "body", "output": "kropp"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "branch", "output": "gren"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "brancharna", "output": "grenarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "budget (kognat)", "output": "budget"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "buildet", "output": "bygget"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "button", "output": "knapp"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "cache", "output": "snabbminne"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "cache (etablerat) / snabbminne", "output": "cache"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "callback", "output": "återanrop"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "castet", "output": "typomvandlingen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "castningarna", "output": "typomvandlingarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "castningen", "output": "typomvandlingen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "chain-of-thought", "output": "tankekedja"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "chartet", "output": "diagrammet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "child", "output": "barn"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "chunkarna", "output": "delarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "chunket", "output": "delstycket"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "chunkorna", "output": "delstyckena"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "class", "output": "klass"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "cleanare", "output": "renare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "client", "output": "klient"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "clone", "output": "klon"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "cluster", "output": "kluster"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "clusteret", "output": "klustret"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "clustret", "output": "klustret"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "column", "output": "kolumn"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "commit", "output": "incheckning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "commit (lån) / incheckning", "output": "commit"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "commitet", "output": "incheckningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "completion", "output": "komplettering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "conclusion", "output": "slutsats"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "condition", "output": "villkor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "config", "output": "konfiguration"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "configet", "output": "konfigurationen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "conftest", "output": "konfigurationstest"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "constant", "output": "konstant"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "construct", "output": "konstruera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "constructor", "output": "konstruktor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "container", "output": "behållare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "container (lån)", "output": "container"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "content", "output": "innehåll"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "context", "output": "kontext"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "context window", "output": "kontextfönster"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "control", "output": "kontroll"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "cookie", "output": "kaka"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "crashande", "output": "kraschande"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "daemonsetet", "output": "daemon-setet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "dagger", "output": "dolk"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "database", "output": "databas"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "debug", "output": "felsökning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "decoder", "output": "avkodare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deletion", "output": "radering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "dependency", "output": "beroende"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploy", "output": "driftsätta"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploya", "output": "driftsätta"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploya / driftsätta", "output": "driftsätta"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploybar", "output": "driftsättningsbar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploybara", "output": "driftsättningsbara"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploybart", "output": "driftsättningsbart"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploybart", "output": "utrullningsbart"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deployment", "output": "driftsättning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deployment", "output": "utrullning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "deploymentet", "output": "utrullningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "director", "output": "direktör"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "directory", "output": "katalog"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "distillation", "output": "destillering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "edge", "output": "kant"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "embedding", "output": "inbäddning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "encoder", "output": "kodare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "endpoint", "output": "ändpunkt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "endpointet", "output": "ändpunkten"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "environment", "output": "miljö"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "epoch", "output": "epok"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "error", "output": "fel"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "escapingen", "output": "specialteckenhanteringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "evaluation", "output": "utvärdering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "event", "output": "händelse"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "exception", "output": "undantag"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "exekverare", "output": "körprogram"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "explainability", "output": "förklarbarhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "export", "output": "exportera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "exportera (etablerat)", "output": "exportera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "failande", "output": "misslyckande"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fairness", "output": "rättvisa"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "feature", "output": "funktion"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fetch", "output": "hämta"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "field", "output": "fält"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fine-tuning", "output": "finjustering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fixet", "output": "programfixen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "flag", "output": "flagga"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "flashningen", "output": "blixtprogrammeringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "flashningen", "output": "fast programmatiseringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "folder", "output": "mapp"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fork", "output": "förgrening"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "forket", "output": "förgreningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "framework", "output": "ramverk"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "frontend", "output": "användargränssnitt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "function", "output": "funktion"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "funktion / drag", "output": "funktion"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "fält / array", "output": "fält"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "förifytta", "output": "omlokalisera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "gaffel", "output": "förgrening"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "garbage collector", "output": "skräpsamlare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "gatewayarna", "output": "portarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "generic", "output": "generisk"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "gift", "output": "gåva"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "gissbarhet", "output": "förutsägbarhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "graph", "output": "graf"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "hash (etablerat) / hashvärde", "output": "hash"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "head", "output": "huvud"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "header", "output": "rubrik"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "heap", "output": "hög"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "hook", "output": "krok"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "hooket", "output": "kroken"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "imaget", "output": "avbilden"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "import", "output": "importera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "importera (etablerat)", "output": "importera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "indenteringen", "output": "indraget"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "indenteringen", "output": "indragningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "indenteringsproblemet", "output": "indragsproblemet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "inference", "output": "heldragning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "inference", "output": "inferens"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "info", "output": "information"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "initialiseringar", "output": "initieringar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "initialiseringen", "output": "initieringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "initialiseringsfelet", "output": "initieringsfelet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "initialiseringsfråga", "output": "initieringsfråga"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "instance", "output": "instans"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "interface", "output": "gränssnitt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "interpretability", "output": "tolkningsbarhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kant / edge", "output": "kant"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "key", "output": "nyckel"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "klass (i objektorientering)", "output": "klass"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "klient (etablerat)", "output": "klient"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "knapp (etablerat)", "output": "knapp"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kondition", "output": "villkor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "konfliktande", "output": "konfliktfylld"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "konstruerare / konstruktor", "output": "konstruktor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "konverterare", "output": "omvandlare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kärnfilerna", "output": "grundfilerna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kärnfunktionalitet", "output": "grundfunktionalitet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kärnfunktionaliteten", "output": "grundfunktionaliteten"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "kärnlogiken", "output": "grundlogiken"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "label", "output": "etikett"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "layer", "output": "lager"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "leaf", "output": "lösblad"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "learning", "output": "inlärning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "learning rate", "output": "inlärningshastighet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "library", "output": "bibliotek"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "lintingen", "output": "linter-körningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "list", "output": "lista"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "lock", "output": "lås"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "log", "output": "logg"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "loop", "output": "slinga"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "loss", "output": "förlust"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "lövsida / löv", "output": "lösblad"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "manual (etablerat) / handbok", "output": "manual"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "master (etablerat lån) / huvud", "output": "master"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "matrix", "output": "matris"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "merge", "output": "sammanslagning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mergebar", "output": "sammanslagningsbar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "merget", "output": "sammanslagningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "message", "output": "meddelande"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "method", "output": "metod"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "metric", "output": "mätetal"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "middleware", "output": "mellanprogram"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "middleware", "output": "mellanvara"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mockarna", "output": "mock-objekten"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mockningen", "output": "skeendesimuleringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "model response", "output": "modellsvar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "module", "output": "modul"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "monitor", "output": "övervaka"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mountet", "output": "monteringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mountingen", "output": "monteringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "mountningen", "output": "monteringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "namespace", "output": "namnrymd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "namespacet", "output": "namnrymden"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "node", "output": "nod"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "nätverksinterfacet", "output": "nätverksgränssnittet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "object", "output": "objekt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "objectet", "output": "objektet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "obootbart", "output": "oomstartbart"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "optimizer", "output": "optimerare"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "overfitting", "output": "överanpassning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "oversight", "output": "tillsyn"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "package", "output": "paket"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "parameter (etablerat)", "output": "parameter"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "parent", "output": "förälder"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "parsningen", "output": "tolkningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "patch (lån) / programfix", "output": "patch"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "patchningen", "output": "programfixandet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "patternet", "output": "mönstret"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "payload", "output": "last"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "penalty", "output": "straff"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "permission", "output": "behörighet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pitch (lån)", "output": "pitch"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "planning", "output": "planering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pluginet", "output": "insticksprogrammet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pod", "output": "podd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "poddet", "output": "podden"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "podsarna", "output": "poddarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "prediction", "output": "förutsägelse"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "premise", "output": "premiss"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "primitive", "output": "primitiv"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "privacy", "output": "integritet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "probability", "output": "sannolikhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "process (etablerat)", "output": "process"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "project", "output": "projekt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "promise", "output": "löfte"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "prompt", "output": "fråga"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "prompt", "output": "ledtext"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "proof", "output": "bevis"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "property", "output": "egenskap"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "providrarna", "output": "leverantörerna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pruning", "output": "beskärning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pullbar", "output": "nedladdningsbar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pullbara", "output": "nedladdningsbara"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pusharna", "output": "sändningarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "pushningen", "output": "insändningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "quantization", "output": "kvantifiering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "query", "output": "fråga"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "radio (etablerat kognat)", "output": "radio"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "radio button", "output": "radioknapp"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "random", "output": "slumpmässig"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "randomness", "output": "slumpmässighet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "ras", "output": "race"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "ras-konditioner", "output": "race condition"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "reasoning", "output": "resonemang"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "recordet", "output": "posten"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "refaktoreringar", "output": "omstruktureringar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "refaktoreringen", "output": "omstruktureringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "refaktoriseringen", "output": "omstruktureringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "reference", "output": "referens"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "regulation", "output": "reglering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "reinforcement", "output": "förstärkning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "release", "output": "utgåva"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "render", "output": "rendera"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "request", "output": "förfrågan"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "requestet", "output": "begäran"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "resource", "output": "resurs"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "response", "output": "svar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "retention", "output": "kvarhållning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "return", "output": "retur"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "review", "output": "riode"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "reward", "output": "belöning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "role", "output": "roll"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "rollback", "output": "återställning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "root", "output": "rot"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "rostat bröd", "output": "toast-notis"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "routbar", "output": "dirigerbar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "routbara", "output": "dirigerbara"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "routbart", "output": "dirigerbart"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "route (lån) / rutt", "output": "route"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "routningen", "output": "dirigeringen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "row", "output": "rad"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "rörledning", "output": "pipeline"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "secretet", "output": "hemligheten"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "seed", "output": "frö"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "self-attention", "output": "självuppmärksamhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "server (etablerat lån)", "output": "server"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "service", "output": "tjänst"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "session (etablerat) / session", "output": "session"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "shellet", "output": "skalet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "sibling", "output": "syskon"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "signal (etablerat)", "output": "signal"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "slave", "output": "slav"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "slide", "output": "bild"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "slide / bild", "output": "bild"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "snapshot", "output": "ögonblicksbild"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "spin", "output": "snurra"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "spinner", "output": "snurra"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "stack", "output": "stapel"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "statementet", "output": "satsen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "step-by-step", "output": "steg-för-steg"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "storage", "output": "lagring"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "stream", "output": "ström"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "subdomäner", "output": "underdomäner"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "subnätet", "output": "delnätet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "subscribar", "output": "prenumererbar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "symlänka", "output": "skapa symbolisk länk"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "symlänkar", "output": "skapa symboliska länkar"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tab", "output": "flik"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tab", "output": "indrag"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "table", "output": "tabell"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tag", "output": "tagg"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tecken / token", "output": "token"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "temperature", "output": "temperatur"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "test set", "output": "testmängd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "thread", "output": "tråd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "timeoutarna", "output": "tidsgränsöverträdelserna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "toast", "output": "toast-notis"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "token", "output": "tecken"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tokenarna", "output": "tecknen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tokenet", "output": "tecknet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tokenization", "output": "tokenisering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tool", "output": "verktyg"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tool use", "output": "verktygsanvändning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "trace", "output": "spår"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "training", "output": "träning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "training set", "output": "träningsmängd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "tree", "output": "träd"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "uncertainty", "output": "osäkerhet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "underfitting", "output": "underanpassning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "usage", "output": "användning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "user input", "output": "användarinput"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "utrullning / driftsättning", "output": "utrullning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "validation", "output": "validering"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "value", "output": "värde"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "variable", "output": "variabel"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "vector", "output": "vektor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "vertex", "output": "hörn"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "vertex (lån) / hörn", "output": "vertex"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "video (etablerat kognat)", "output": "video"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "villkor / kondition", "output": "villkor"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "volumet", "output": "volymen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "warning", "output": "varning"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "webhookarna", "output": "webbkrokarna"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "weight", "output": "vikt"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "widgetarna", "output": "gränssnittselementen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "window", "output": "fönster"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "workflow", "output": "arbetsflöde"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "workflowet", "output": "arbetsflödet"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "workloadet", "output": "arbetsbelastningen"}
+{"instruction": "Skriv om det påhittade ordet till korrekt svenska.", "input": "äggehvarande", "output": "befintliga"}

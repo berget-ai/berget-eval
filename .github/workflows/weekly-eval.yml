@@ -1,0 +1,62 @@
+name: Svensk språk- och kulturkompetens - veckolig modellutvärdering
+
+on:
+  schedule:
+    # Söndag 23:00 UTC = måndag 00:00 CET (vintertid) / 01:00 CEST (sommartid)
+    - cron: "0 23 * * 0"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag för körningen (t.ex. 'weekly', 'manual')"
+        required: false
+        default: "manual"
+
+permissions:
+  contents: write
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --quiet matplotlib numpy
+
+      - name: Run full evaluation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          TAG="${{ github.event.inputs.tag || 'weekly' }}"
+          python scripts/run_eval.py --tag "$TAG"
+
+      - name: Generate summary
+        run: |
+          # Leta senaste results-katalogen
+          LATEST_DIR=$(ls -td data/results/*/ | head -1)
+          echo "Senaste resultat-katalog: $LATEST_DIR"
+          python scripts/summarize_eval.py --results-dir "$LATEST_DIR"
+
+      - name: Commit results
+        run: |
+          LATEST_DIR=$(ls -td data/results/*/ | head -1)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/results/
+          git commit -m "chore: veckolig modellutvärdering $(basename $LATEST_DIR)" || echo "Inget att committa"
+          git push
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-results
+          path: data/results/

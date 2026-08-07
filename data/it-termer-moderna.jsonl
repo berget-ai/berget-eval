@@ -1,0 +1,198 @@
+{"svenska": "race condition", "källa": "etablerat_lån", "kategori": "it_säkerhet", "kommentar": "Även om 'race' finns i CS, saknas sammansättningen 'race condition' som etablerat begrepp"}
+{"svenska": "tävlingsvillkor", "källa": "svensk_form", "kategori": "it_säkerhet", "kommentar": "Svenskt alternativ till 'race condition'"}
+{"svenska": "toast", "källa": "etablerat_lån", "kategori": "ui", "kommentar": "Avisering i UI. Ej 'rostat bröd'"}
+{"svenska": "toast-notis", "källa": "svensk_form", "kategori": "ui", "kommentar": "Svensk form för UI-avisering"}
+{"svenska": "aviseringsruta", "källa": "svensk_form", "kategori": "ui", "kommentar": " Beskrivande svensk form"}
+{"svenska": "pipeline", "källa": "etablerat_lån", "kategori": "devops", "kommentar": "Etablerat lån. 'Rörledning' är otydligt i IT"}
+{"svenska": "processledning", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svenskt alternativ"}
+{"svenska": "kontext", "källa": "etablerat_lån", "kategori": "programmering", "kommentar": "Etablerat, alternativt 'sammanhang'"}
+{"svenska": "sammanhang", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Mera allmänt än 'kontext'"}
+{"svenska": "kö", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Korrekt svensk form för 'queue'"}
+{"svenska": "lås", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Korrekt svensk form för 'lock'"}
+{"svenska": "knapp", "källa": "svensk_form", "kategori": "ui", "kommentar": "Korrekt svensk form för 'button'"}
+{"svenska": "ström", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Korrekt svensk form för 'stream'"}
+{"svenska": "verktyg", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Korrekt svensk form för 'tool'"}
+{"svenska": "inlärning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Korrekt svensk form för 'learning' (maskininlärning)"}
+{"svenska": "lärande", "källa": "svensk_form", "kategori": "ai", "kommentar": "Alternativ svensk form"}
+{"svenska": "tecken", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'token' (dubbelbetydelse med 'character')"}
+{"svenska": "hörn", "källa": "svensk_form", "kategori": "grafik", "kommentar": "Svensk form för 'vertex'"}
+{"svenska": "epok", "källa": "svensk_form", "kategori": "ai", "kommentar": "Korrekt svensk form för 'epoch' (träningsomgång)"}
+{"svenska": "sats", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'batch' (databatch)"}
+{"svenska": "lösblad", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'leaf' (i trädstruktur)"}
+{"svenska": "barn", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'child' (i träd)"}
+{"svenska": "förälder", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'parent' (i träd)"}
+{"svenska": "syskon", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'sibling' (i träd)"}
+{"svenska": "snurra", "källa": "svensk_form", "kategori": "ui", "kommentar": "Svensk form för 'spinner' (loading-indikator)"}
+{"svenska": "tråd", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'thread'"}
+{"svenska": "slinga", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'loop'"}
+{"svenska": "tagg", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'tag' (i källkod)"}
+{"svenska": "etikett", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'label'"}
+{"svenska": "gren", "källa": "svensk_form", "kategori": "git", "kommentar": "Svensk form för 'branch' (Git)"}
+{"svenska": "förgrening", "källa": "svensk_form", "kategori": "git", "kommentar": "Svensk form för 'fork' (Git)"}
+{"svenska": "sammanslagning", "källa": "svensk_form", "kategori": "git", "kommentar": "Svensk form för 'merge' (Git)"}
+{"svenska": "incheckning", "källa": "svensk_form", "kategori": "git", "kommentar": "Svensk form för 'commit' (Git)"}
+{"svenska": "felsökning", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'debug'"}
+{"svenska": "logg", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'log' (noun)"}
+{"svenska": "driftsättning", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'deployment'"}
+{"svenska": "utrullning", "källa": "svensk_form", "kategori": "devops", "kommentar": "Alternativ svensk form för 'deployment'"}
+{"svenska": "behållare", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'container'"}
+{"svenska": "podd", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'pod' (Kubernetes)"}
+{"svenska": "kluster", "källa": "etablerat_lån", "kategori": "devops", "kommentar": "Etablerat för 'cluster'"}
+{"svenska": "ändpunkt", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'endpoint'"}
+{"svenska": "rubrik", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'header' (HTTP)"}
+{"svenska": "kropp", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'body' (HTTP)"}
+{"svenska": "last", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'payload' (HTTP)"}
+{"svenska": "förfrågan", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'request'"}
+{"svenska": "svar", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'response'"}
+{"svenska": "hämta", "källa": "svensk_form", "kategori": "api", "kommentar": "Svensk form för 'fetch'"}
+{"svenska": "återanrop", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'callback'"}
+{"svenska": "löfte", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'promise' (JavaScript)"}
+{"svenska": "asynkron", "källa": "etablerat_lån", "kategori": "programmering", "kommentar": "Etablerat för 'async'"}
+{"svenska": "vänta", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'await'"}
+{"svenska": "rendera", "källa": "etablerat_lån", "kategori": "frontend", "kommentar": "Etablerat lån för 'render'"}
+{"svenska": "rita upp", "källa": "svensk_form", "kategori": "frontend", "kommentar": "Beskrivande svensk form"}
+{"svenska": "krok", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'hook' (React/hooks)"}
+{"svenska": "mellanprogram", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'middleware'. Även 'mellanvara'"}
+{"svenska": "snabbminne", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'cache'"}
+{"svenska": "databas", "källa": "etablerat_lån", "kategori": "databas", "kommentar": "Etablerat lån för 'database'"}
+{"svenska": "tabell", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'table'"}
+{"svenska": "rad", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'row'"}
+{"svenska": "kolumn", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'column'"}
+{"svenska": "nyckel", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'key'"}
+{"svenska": "värde", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'value'"}
+{"svenska": "klient", "källa": "etablerat_lån", "kategori": "nätverk", "kommentar": "Etablerat för 'client'"}
+{"svenska": "server", "källa": "etablerat_lån", "kategori": "nätverk", "kommentar": "Etablerat lån"}
+{"svenska": "användargränssnitt", "källa": "svensk_form", "kategori": "ui", "kommentar": "Svensk form för 'frontend'/'UI'"}
+{"svenska": "ramverk", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'framework'"}
+{"svenska": "bibliotek", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'library' (kod)"}
+{"svenska": "modul", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'module'"}
+{"svenska": "paket", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'package'"}
+{"svenska": "beroende", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'dependency'"}
+{"svenska": "miljö", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'environment'"}
+{"svenska": "variabel", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'variable'"}
+{"svenska": "konstant", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'constant'"}
+{"svenska": "funktion", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'function'"}
+{"svenska": "metod", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'method'"}
+{"svenska": "klass", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'class'"}
+{"svenska": "objekt", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'object'"}
+{"svenska": "instans", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'instance'"}
+{"svenska": "egenskap", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'property'"}
+{"svenska": "fält", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'field' (post i objekt)"}
+{"svenska": "parameter", "källa": "etablerat_lån", "kategori": "programmering", "kommentar": "Etablerat lån"}
+{"svenska": "argument", "källa": "etablerat_lån", "kategori": "programmering", "kommentar": "Etablerat lån"}
+{"svenska": "retur", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'return'"}
+{"svenska": "undantag", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'exception'"}
+{"svenska": "fel", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'error'"}
+{"svenska": "varning", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'warning'"}
+{"svenska": "information", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'info' (loggnivå)"}
+{"svenska": "spår", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'trace' (loggnivå)"}
+{"svenska": "övervaka", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'monitor'"}
+{"svenska": "larm", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'alert'"}
+{"svenska": "mätetal", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'metric'"}
+{"svenska": "utgåva", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'release'"}
+{"svenska": "återställning", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'rollback'/'restore'"}
+{"svenska": "säkerhetskopiering", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'backup'"}
+{"svenska": "nod", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'node' (i kluster)"}
+{"svenska": "kant", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'edge' (i graf)"}
+{"svenska": "graf", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'graph'"}
+{"svenska": "träd", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'tree'"}
+{"svenska": "rot", "källa": "svensk_form", "kategori": "datastruktur", "kommentar": "Svensk form för 'root' (i träd)"}
+{"svenska": "konfiguration", "källa": "svensk_form", "kategori": "programmering", "kommentar": "Svensk form för 'config'"}
+{"svenska": "version", "källa": "etablerat_lån", "kategori": "devops", "kommentar": "Etablerat lån"}
+{"svenska": "fråga", "källa": "svensk_form", "kategori": "databas", "kommentar": "Svensk form för 'query' (SQL)"}
+{"svenska": "tjänst", "källa": "svensk_form", "kategori": "devops", "kommentar": "Svensk form för 'service' (i Kubernetes)"}
+{"svenska": "schema", "källa": "etablerat_lån", "kategori": "databas", "kommentar": "Etablerat lån för 'schema' (databas)"}
+{"svenska": "vektor", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån för 'vector' (embeddings)"}
+{"svenska": "inbäddning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'embedding'"}
+{"svenska": "tokenisering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'tokenization'"}
+{"svenska": "vikt", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'weight' (i modell)"}
+{"svenska": "snitt", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'batch' (alternativ)"}
+{"svenska": "inferens", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån för 'inference'"}
+{"svenska": "träning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'training'"}
+{"svenska": "finjustering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'fine-tuning'"}
+{"svenska": "fråga", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'prompt' (alternativ)"}
+{"svenska": "ledtext", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'prompt' (användarledning)"}
+{"svenska": "temperatur", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'temperature' (i sampling)"}
+{"svenska": "slumpmässighet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'randomness'"}
+{"svenska": "kontextfönster", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'context window'"}
+{"svenska": "uppmärksamhet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'attention' (mekanism i Transformer)"}
+{"svenska": "huvud", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'head' (attention head)"}
+{"svenska": "lager", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'layer' (i nätverk)"}
+{"svenska": "mask", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'mask' (attention mask)"}
+{"svenska": "tokens", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån (pluralform vanlig)"}
+{"svenska": "komplettering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'completion'"}
+{"svenska": "heldragning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'inference' (start)"}
+{"svenska": "chatt", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån"}
+{"svenska": "meddelande", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'message'"}
+{"svenska": "roll", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'role' (system/user/assistant)"}
+{"svenska": "innehåll", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'content'"}
+{"svenska": "användarinput", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'user input'"}
+{"svenska": "modellsvar", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'model response'"}
+{"svenska": "kontext", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån"}
+{"svenska": "referens", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'reference' (RAG context)"}
+{"svenska": "kvantifiering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'quantization' (FP8/INT4)"}
+{"svenska": "destillering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'distillation' (kunskapsöverföring)"}
+{"svenska": "pruning", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån. Alt. 'beskärning'"}
+{"svenska": "beskärning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'pruning' (av modell)"}
+{"svenska": "arkitektur", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Svensk form för 'architecture' (modellarkitektur)"}
+{"svenska": "transformer", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån (modelltyp)"}
+{"svenska": "kodare", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'encoder'"}
+{"svenska": "avkodare", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'decoder'"}
+{"svenska": "självuppmärksamhet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'self-attention'"}
+{"svenska": "matris", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat för 'matrix'"}
+{"svenska": "gradient", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån"}
+{"svenska": "optimerare", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'optimizer'"}
+{"svenska": "förlust", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'loss' (loss function)"}
+{"svenska": "epok", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'epoch' (träningscykel)"}
+{"svenska": "batchstorlek", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'batch size'"}
+{"svenska": "inlärningshastighet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'learning rate'"}
+{"svenska": "överanpassning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'overfitting'"}
+{"svenska": "underanpassning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'underfitting'"}
+{"svenska": "validering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'validation'"}
+{"svenska": "testmängd", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'test set'"}
+{"svenska": "träningsmängd", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'training set'"}
+{"svenska": "etikett", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'label' (i klassificering)"}
+{"svenska": "klass", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'class' (i klassificering)"}
+{"svenska": "förutsägelse", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'prediction'"}
+{"svenska": "slumpmässig", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'random'"}
+{"svenska": "frö", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'seed' (i sampling)"}
+{"svenska": "dolk", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'dagger' (RLHF method)"}
+{"svenska": "förstärkning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'reinforcement' (RL)"}
+{"svenska": "belöning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'reward' (i RL)"}
+{"svenska": "straff", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'penalty' (i RL)"}
+{"svenska": "policy", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån för 'policy' (i RL)"}
+{"svenska": "miljö", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'environment' (RL env)"}
+{"svenska": "agent", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån"}
+{"svenska": "verktygsanvändning", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'tool use' (agent capability)"}
+{"svenska": "planering", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'planning' (agent)"}
+{"svenska": "resonemang", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'reasoning' (CoT)"}
+{"svenska": "tankekedja", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'chain-of-thought' (CoT)"}
+{"svenska": "steg-för-steg", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'step-by-step'"}
+{"svenska": " slutsats", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'conclusion'"}
+{"svenska": "premiss", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'premise'"}
+{"svenska": "hypotes", "källa": "etablerat_lån", "kategori": "ai", "kommentar": "Etablerat lån"}
+{"svenska": "bevis", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'proof'"}
+{"svenska": "sannolikhet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'probability'"}
+{"svenska": "osäkerhet", "källa": "svensk_form", "kategori": "ai", "kommentar": "Svensk form för 'uncertainty'"}
+{"svenska": "förklarbarhet", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'explainability'"}
+{"svenska": "tolkningsbarhet", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'interpretability'"}
+{"svenska": "partiskhet", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'bias'"}
+{"svenska": "rättvisa", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'fairness'"}
+{"svenska": "integritet", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'privacy'"}
+{"svenska": "transparens", "källa": "etablerat_lån", "kategori": "ai_erk", "kommentar": "Etablerat lån"}
+{"svenska": "ansvar", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'accountability'"}
+{"svenska": "tillsyn", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'oversight'"}
+{"svenska": "reglering", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'regulation'"}
+{"svenska": "eftersyn", "källa": "svensk_form", "kategori": "ai_erk", "komarak": "Svensk form för 'audit'"}
+{"svenska": "utvärdering", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'evaluation'"}
+{"svenska": "riode", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'review'"}
+{"svenska": "godkännande", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'approval'"}
+{"svenska": "samtycke", "källa": "svensk_form", "kategori": "ai_erk", "comentar": "Svensk form för 'consent'"}
+{"svenska": "användning", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'usage'"}
+{"svenska": "lagring", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'storage'"}
+{"svenska": "kvarhållning", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'retention'"}
+{"svenska": "radering", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'deletion'"}
+{"svenska": "export", "källa": "etablerat_lån", "kategori": "ai_erk", "kommentar": "Etablerat lån"}
+{"svenska": "import", "källa": "etablerat_lån", "kategori": "ai_erk", "kommentar": "Etablerat lån"}
+{"svenska": "åtkomst", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'access'"}
+{"svenska": "behörighet", "källa": "svensk_form", "kategori": "ai_erk", "kommentar": "Svensk form för 'permission'/'authorization'"}

@@ -1,0 +1,19 @@
+# Körresultat och pilot-data - committa ej
+data/results/
+data/eval-pilot-responses-*.jsonl
+data/eval-pilot-responses.jsonl
+data/eval-polar-plot.png
+data/eval-summary.json
+data/eval-summary.md
+data/*.bak
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
