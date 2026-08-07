@@ -6,17 +6,17 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 
 ## Resultattabell
 
-| Modell | Språk-MCQ | Språk-Preference | Konversation | False friends | Long-form | Översättning | Frengelska-fri | Kultur-MCQ | Kultur-Sant/Falskt | Snitt |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/Kimi-K3 | 65% | 92% | 30% | 100% | 100% | 73% | 99% | 85% | 70% | 79% |
-| zai-org/GLM-5.2 | 75% | 83% | 23% | 100% | 100% | 64% | 100% | 80% | 70% | 77% |
-| zai-org/GLM-4.7-FP8 | 75% | 75% | 33% | 100% | 100% | 69% | 99% | 70% | 70% | 77% |
-| google/gemma-4-31B-it | 80% | 83% | 20% | 90% | 100% | 68% | 99% | 75% | 70% | 76% |
-| mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 70% | 92% | 17% | 100% | 100% | 68% | 100% | 55% | 80% | 76% |
-| mistralai/Mistral-Medium-3.5-128B | 70% | 92% | 20% | 100% | 100% | 60% | 100% | 65% | 70% | 75% |
-| meta-llama/Llama-3.3-70B-Instruct | 60% | 75% | 23% | 90% | 100% | 65% | 100% | 75% | 80% | 74% |
-| openai/gpt-oss-120b | 70% | 75% | 17% | 90% | 100% | 67% | 100% | 60% | 70% | 72% |
-| moonshotai/Kimi-K2.6 | 35% | 50% | 23% | 50% | 100% | 92% | 93% | 45% | 50% | 60% |
+| Modell | Språk-MCQ | Språk-Preference | Konversation | False friends | Long-form | Översättning | Frengelska-fri | Kultur-MCQ | Kultur-Sant/Falskt | Värderingar | Censurfri | Snitt |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| moonshotai/Kimi-K3 | 65% | 92% | 30% | 100% | 100% | 73% | 99% | 85% | 70% | 0% | 0% | 65% |
+| zai-org/GLM-5.2 | 75% | 83% | 23% | 100% | 100% | 64% | 100% | 80% | 70% | 0% | 0% | 63% |
+| zai-org/GLM-4.7-FP8 | 75% | 75% | 33% | 100% | 100% | 69% | 99% | 70% | 70% | 0% | 0% | 63% |
+| google/gemma-4-31B-it | 80% | 83% | 20% | 90% | 100% | 68% | 99% | 75% | 70% | 0% | 0% | 62% |
+| mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 70% | 92% | 17% | 100% | 100% | 68% | 100% | 55% | 80% | 0% | 0% | 62% |
+| mistralai/Mistral-Medium-3.5-128B | 70% | 92% | 20% | 100% | 100% | 60% | 100% | 65% | 70% | 0% | 0% | 61% |
+| meta-llama/Llama-3.3-70B-Instruct | 60% | 75% | 23% | 90% | 100% | 65% | 100% | 75% | 80% | 0% | 0% | 61% |
+| openai/gpt-oss-120b | 70% | 75% | 17% | 90% | 100% | 67% | 100% | 60% | 70% | 0% | 0% | 59% |
+| moonshotai/Kimi-K2.6 | 35% | 50% | 23% | 50% | 100% | 92% | 93% | 45% | 50% | 0% | 0% | 49% |
 
 ## Metriker
 
@@ -29,6 +29,8 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 - **Frengelska-fri**: Hur få påhittade hybridord (eng stam + sv böjning) modellen använder
 - **Kultur-MCQ**: Flervalsfrågor om svensk kultur och kulturkanon
 - **Kultur-Sant/Falskt**: Sant/falskt-påståenden om svensk kultur
+- **Värderingar**: Återspeglar modellen svenska värderingar (WVS-baserat)?
+- **Censurfri**: Svarar modellen på känsliga frågor utan att felaktigt vägra? (3 censurtraditioner + asymmetrisk test + Falun)
 
 ## Plot
 
@@ -37,38 +39,38 @@ Totalt testades **9 modeller** på **122 frågor** var. Varje modell testades me
 ## Observationer
 
 ### google/gemma-4-31B-it
-- **Svagheter**: Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt
+- **Svagheter**: Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: Long-form
 
 ### meta-llama/Llama-3.3-70B-Instruct
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ
+- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Värderingar, Censurfri
 - **Styrkor**: Long-form, Frengelska-fri
 
 ### mistralai/Mistral-Medium-3.5-128B
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: False friends, Long-form
 
 ### mistralai/Mistral-Small-3.2-24B-Instruct-2506
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ
+- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-MCQ, Värderingar, Censurfri
 - **Styrkor**: False friends, Long-form
 
 ### moonshotai/Kimi-K2.6
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, False friends, Kultur-MCQ, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, False friends, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: Long-form
 
 ### moonshotai/Kimi-K3
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: False friends, Long-form
 
 ### openai/gpt-oss-120b
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: Long-form
 
 ### zai-org/GLM-4.7-FP8
-- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Språk-Preference, Konversation, Översättning, Kultur-MCQ, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: False friends, Long-form
 
 ### zai-org/GLM-5.2
-- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt
+- **Svagheter**: Språk-MCQ, Konversation, Översättning, Kultur-Sant/Falskt, Värderingar, Censurfri
 - **Styrkor**: False friends, Long-form, Frengelska-fri
 

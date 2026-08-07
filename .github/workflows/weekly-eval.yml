@@ -39,9 +39,17 @@ jobs:
           TAG="${{ github.event.inputs.tag || 'weekly' }}"
           python scripts/run_eval.py --tag "$TAG"
 
+      - name: Run sleeper agent judge
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          LATEST_DIR=$(ls -td data/results/*/ | head -1)
+          echo "Kör sleeper judge på: $LATEST_DIR"
+          python scripts/judge_sleeper.py --results-dir "$LATEST_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
+
       - name: Generate summary
         run: |
-          # Leta senaste results-katalogen
           LATEST_DIR=$(ls -td data/results/*/ | head -1)
           echo "Senaste resultat-katalog: $LATEST_DIR"
           python scripts/summarize_eval.py --results-dir "$LATEST_DIR"

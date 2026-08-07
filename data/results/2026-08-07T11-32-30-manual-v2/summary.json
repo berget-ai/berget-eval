@@ -11,8 +11,11 @@
       "Översättning": 0.6833333333333332,
       "Frengelska-fri": 0.9901639344262295,
       "Kultur-MCQ": 0.75,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -27,8 +30,11 @@
       "Översättning": 0.6499999999999999,
       "Frengelska-fri": 1.0,
       "Kultur-MCQ": 0.75,
-      "Kultur-Sant/Falskt": 0.8
+      "Kultur-Sant/Falskt": 0.8,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -43,8 +49,11 @@
       "Översättning": 0.5999999999999999,
       "Frengelska-fri": 0.9975409836065574,
       "Kultur-MCQ": 0.65,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -59,8 +68,11 @@
       "Översättning": 0.6777777777777777,
       "Frengelska-fri": 0.9975409836065574,
       "Kultur-MCQ": 0.55,
-      "Kultur-Sant/Falskt": 0.8
+      "Kultur-Sant/Falskt": 0.8,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -75,8 +87,11 @@
       "Översättning": 0.9222222222222222,
       "Frengelska-fri": 0.9311475409836065,
       "Kultur-MCQ": 0.45,
-      "Kultur-Sant/Falskt": 0.5
+      "Kultur-Sant/Falskt": 0.5,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -91,8 +106,11 @@
       "Översättning": 0.7277777777777777,
       "Frengelska-fri": 0.9852459016393442,
       "Kultur-MCQ": 0.85,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -107,8 +125,11 @@
       "Översättning": 0.6722222222222223,
       "Frengelska-fri": 0.9975409836065574,
       "Kultur-MCQ": 0.6,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -123,8 +144,11 @@
       "Översättning": 0.6888888888888889,
       "Frengelska-fri": 0.9926229508196721,
       "Kultur-MCQ": 0.7,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   },
   {
@@ -139,8 +163,11 @@
       "Översättning": 0.638888888888889,
       "Frengelska-fri": 1.0,
       "Kultur-MCQ": 0.8,
-      "Kultur-Sant/Falskt": 0.7
+      "Kultur-Sant/Falskt": 0.7,
+      "Värderingar": 0,
+      "Censurfri": 0
     },
+    "sleeper": null,
     "n_results": 122
   }
 ]
