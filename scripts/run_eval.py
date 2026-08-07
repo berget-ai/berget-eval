@@ -106,8 +106,10 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3)
 
 def build_prompt(q):
     if q["type"] in ("mcq", "kultur_mcq"):
-        opts = "\n".join(f"{l}. {o}" for l, o in zip(q["options_labels"], q["options"]))
-        return f"{q['question']}\n\n{opts}"
+        if "options_labels" in q:
+            opts = "\n".join(f"{l}. {o}" for l, o in zip(q["options_labels"], q["options"]))
+            return f"{q['question']}\n\n{opts}"
+        return q["question"]
     elif q["type"] == "preference":
         opts = "\n".join(f"{l}. {o}" for l, o in zip(q["options_labels"], q["options"]))
         return f"{q['question']}\n\n{opts}"
@@ -115,7 +117,9 @@ def build_prompt(q):
         return f"{q['question']} Svara kort (max {q.get('max_words', 80)} ord)."
     elif q["type"] == "translation":
         return q["question"]
-    elif q["type"] == "kultur_tf":
+    elif q["type"] == "conversation":
+        return f"{q['question']} Svara i högst 3 meningar."
+    elif q["type"] in ("false_friend", "kultur_tf"):
         return q["question"]
     return q["question"]
 
@@ -178,9 +182,11 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 result["expected"] = q.get("correct_answer")
                 letter = extract_letter(response)
                 result["extracted_letter"] = letter
-                if letter:
+                if "correct_index" in q and "options_labels" in q and letter:
                     idx = q["options_labels"].index(letter)
                     result["is_correct"] = (idx == q["correct_index"])
+                elif letter:
+                    result["is_correct"] = (letter == q.get("correct_answer"))
                 else:
                     result["is_correct"] = None
             elif q["type"] == "kultur_tf":
@@ -192,6 +198,18 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 result["expected"] = q.get("expected_keywords")
             elif q["type"] == "long_form":
                 result["expected"] = q.get("concept")
+            elif q["type"] == "conversation":
+                result["check_for"] = q.get("check_for", [])
+                result["avoid"] = q.get("avoid", [])
+                result["expected"] = q.get("correct_answer", "")
+            elif q["type"] == "false_friend":
+                result["expected"] = q.get("correct_answer")
+                letter = extract_letter(response)
+                result["extracted_letter"] = letter
+                if letter:
+                    result["is_correct"] = (letter == q["correct_answer"])
+                else:
+                    result["is_correct"] = None
 
             f.write(json.dumps(result, ensure_ascii=False) + "\n")
             f.flush()
@@ -212,7 +230,7 @@ def main():
     args = parser.parse_args()
 
     if not API_KEY:
-        print("ERROR: BERGET_API_KEY eller OPENAI_API_KEY måste vara satt", file=sys.stderr)
+        print("ERROR: OPENAI_API_KEY måste vara satt", file=sys.stderr)
         sys.exit(1)
 
     # Ladda frågor

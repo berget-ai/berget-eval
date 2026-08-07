@@ -70,6 +70,8 @@ def compute_metrics(results):
     metrics = {
         "Språk-MCQ": 0,
         "Språk-Preference": 0,
+        "Konversation": 0,
+        "False friends": 0,
         "Long-form": 0,
         "Översättning": 0,
         "Frengelska-fri": 1.0,
@@ -90,6 +92,22 @@ def compute_metrics(results):
         elif r["type"] == "preference":
             totals["Språk-Preference"] += 1
             if r.get("is_correct"): corrects["Språk-Preference"] += 1
+        elif r["type"] == "conversation":
+            totals["Konversation"] += 1
+            # Konversation: kolla om modellen använder rätt svenska ord
+            q = QUESTIONS.get(r["id"], {})
+            resp = (r.get("response") or "").lower()
+            check_for = q.get("check_for", [])
+            avoid = q.get("avoid", [])
+            has_good = any(k.lower() in resp for k in check_for)
+            has_bad = any(k.lower() in resp for k in avoid)
+            if has_good and not has_bad:
+                corrects["Konversation"] += 1
+            elif has_good:
+                corrects["Konversation"] += 0.5
+        elif r["type"] == "false_friend":
+            totals["False friends"] += 1
+            if r.get("is_correct"): corrects["False friends"] += 1
         elif r["type"] == "kultur_mcq":
             totals["Kultur-MCQ"] += 1
             if r.get("is_correct"): corrects["Kultur-MCQ"] += 1
@@ -163,6 +181,7 @@ def main():
         })
         culture = metrics.get("Kultur-MCQ", 0) * 0.5 + metrics.get("Kultur-Sant/Falskt", 0) * 0.5
         print(f"  {model_id}: MCQ={metrics.get('Språk-MCQ',0):.0%} pref={metrics.get('Språk-Preference',0):.0%} "
+              f"conv={metrics.get('Konversation',0):.0%} ff={metrics.get('False friends',0):.0%} "
               f"kultur_mcq={metrics.get('Kultur-MCQ',0):.0%} kultur_tf={metrics.get('Kultur-Sant/Falskt',0):.0%}", file=sys.stderr)
     
     # Spara JSON-sammanfattning
@@ -177,7 +196,8 @@ def main():
         import matplotlib.pyplot as plt
         import numpy as np
         
-        metric_names = ["Språk-MCQ", "Språk-Preference", "Long-form", "Översättning",
+        metric_names = ["Språk-MCQ", "Språk-Preference", "Konversation", "False friends",
+                        "Long-form", "Översättning",
                         "Frengelska-fri", "Kultur-MCQ", "Kultur-Sant/Falskt"]
         metric_keys = metric_names  # nu direkt samma namn
 
@@ -222,7 +242,8 @@ def main():
         f.write(f"Totalt testades **{len(all_models)} modeller** på **{n_q} frågor** var. "
                 "Varje modell testades med temperatur 0 för reproducerbarhet.\n\n")
         f.write("## Resultattabell\n\n")
-        cols = ["Språk-MCQ", "Språk-Preference", "Long-form", "Översättning",
+        cols = ["Språk-MCQ", "Språk-Preference", "Konversation", "False friends",
+                "Long-form", "Översättning",
                 "Frengelska-fri", "Kultur-MCQ", "Kultur-Sant/Falskt"]
         f.write("| Modell | " + " | ".join(cols) + " | Snitt |\n")
         f.write("|---|" + "---:|" * (len(cols) + 1) + "\n")
@@ -235,6 +256,8 @@ def main():
         f.write("## Metriker\n\n")
         f.write("- **Språk-MCQ**: Flervalsfrågor - vilket är rätt svenskt ord för påhittat ord?\n")
         f.write("- **Språk-Preference**: Vilken mening är mest korrekt skriven på svenska?\n")
+        f.write("- **Konversation**: Använder modellen rätt svenska ord i tekniska samtal?\n")
+        f.write("- **False friends**: Kognatfel - undviker modellen direktöversättningar som ger fel betydelse?\n")
         f.write("- **Long-form**: Begreppsförklaringar (användargränssnitt, refaktorisering m.m.)\n")
         f.write("- **Översättning**: Översättning EN→SV - täckning av förväntade svenska nyckelord\n")
         f.write("- **Frengelska-fri**: Hur få påhittade hybridord (eng stam + sv böjning) modellen använder\n")
