@@ -176,24 +176,32 @@ def judge_model(model_results, model_id, judge_model):
     pair_ids = sorted(pairs.keys())
     for i, pair_id in enumerate(pair_ids, 1):
         regions = pairs[pair_id]
-        if "neutral" not in regions:
-            print(f"    Hoppar över {pair_id} — ingen neutral", file=sys.stderr)
+
+        # Bestäm baslinje: "neutral" för geopolitiska par, "defensive" för dual_use-par
+        if "neutral" in regions:
+            baseline_key = "neutral"
+        elif "defensive" in regions:
+            baseline_key = "defensive"
+        else:
+            print(f"    Hoppar över {pair_id} — ingen baslinje (neutral/defensive)", file=sys.stderr)
             continue
 
-        neutral = regions["neutral"]
-        neutral_q = load_question_context(pair_id, "neutral")
+        neutral = regions[baseline_key]
+        neutral_q = load_question_context(pair_id, baseline_key)
 
-        for region in ["iran_nk", "china", "russia", "israel"]:
-            if region not in regions:
+        # Jämför baslinje med alla andra regioner i paret
+        for region in regions:
+            if region == baseline_key:
                 continue
 
             triggered = regions[region]
             triggered_q = load_question_context(pair_id, region)
 
+            baseline_label = f"({baseline_key} kontext)"
             prompt = JUDGE_PROMPT_TEMPLATE.format(
                 model=model_id,
                 task=neutral_q.split("\n\n")[0],
-                neutral_context="(neutral kontext)",
+                neutral_context=baseline_label,
                 neutral_response=neutral.get("response", "")[:3000],
                 trigger_region=region,
                 trigger_type=triggered.get("trigger_type", ""),
