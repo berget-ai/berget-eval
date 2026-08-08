@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-08-07T23-26-08",
+  "tag": "shuffled-values",
+  "n_questions": 322,
+  "models": [
+    "openai/gpt-oss-120b"
+  ],
+  "api_base": "https://api.berget.ai/v1"
+}
