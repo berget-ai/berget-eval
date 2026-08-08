@@ -1,0 +1,245 @@
+[
+  {
+    "model_id": "google/gemma-4-31B-it",
+    "model_short": "google-gemma-4-31b-it",
+    "metrics": {
+      "Lang-MCQ": 0.8,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.2,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6833333333333332,
+      "Swenglish-free": 0.9775,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.7,
+      "Values": 0.2545454545454545,
+      "Censorship-free": 0.9888888888888889
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.09523809523809523,
+        "partial_refusal": 0.1111111111111111,
+        "explanation_diff": 0.4444444444444444,
+        "code_style_diff": 0.4603174603174603
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "meta-llama/Llama-3.3-70B-Instruct",
+    "model_short": "meta-llama-llama-3-3-70b-instruct",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.6666666666666666,
+      "Conversation": 0.23333333333333334,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6499999999999999,
+      "Swenglish-free": 0.9916434540389972,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.8,
+      "Values": 0.7272727272727273,
+      "Censorship-free": 0.9777777777777777
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.12698412698412698,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.30158730158730157,
+        "code_style_diff": 0.6825396825396826
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "mistralai/Mistral-Medium-3.5-128B",
+    "model_short": "mistralai-mistral-medium-3-5-128b",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.2,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.5999999999999999,
+      "Swenglish-free": 0.9966666666666667,
+      "Culture-MCQ": 0.65,
+      "Culture-TF": 0.7,
+      "Values": 0.6909090909090909,
+      "Censorship-free": 0.9777777777777777
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.12698412698412698,
+        "partial_refusal": 0.031746031746031744,
+        "explanation_diff": 0.06349206349206349,
+        "code_style_diff": 0.4126984126984127
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "model_short": "mistralai-mistral-small-3-2-24b-instruct-2506",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.16666666666666666,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.6777777777777777,
+      "Swenglish-free": 0.995,
+      "Culture-MCQ": 0.55,
+      "Culture-TF": 0.8,
+      "Values": 0.6363636363636364,
+      "Censorship-free": 1.0
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.15873015873015872,
+        "partial_refusal": 0.047619047619047616,
+        "explanation_diff": 0.19047619047619047,
+        "code_style_diff": 0.3492063492063492
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "moonshotai/Kimi-K2.6",
+    "model_short": "moonshotai-kimi-k2-6",
+    "metrics": {
+      "Lang-MCQ": 0.3,
+      "Lang-Preference": 0.5,
+      "Conversation": 0.23333333333333334,
+      "False-friends": 0.5,
+      "Long-form": 1.0,
+      "Translation": 0.8999999999999999,
+      "Swenglish-free": 0.9525,
+      "Culture-MCQ": 0.35,
+      "Culture-TF": 0.7,
+      "Values": 0.2545454545454545,
+      "Censorship-free": 0.9444444444444444
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.07936507936507936,
+        "partial_refusal": 0.12698412698412698,
+        "explanation_diff": 0.49206349206349204,
+        "code_style_diff": 0.36507936507936506
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "moonshotai/Kimi-K3",
+    "model_short": "moonshotai-kimi-k3",
+    "metrics": {
+      "Lang-MCQ": 0.65,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.6888888888888888,
+      "Swenglish-free": 0.995,
+      "Culture-MCQ": 0.8,
+      "Culture-TF": 0.7,
+      "Values": 0.5272727272727272,
+      "Censorship-free": 0.9444444444444444
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.06349206349206349,
+        "partial_refusal": 0.1746031746031746,
+        "explanation_diff": 0.2698412698412698,
+        "code_style_diff": 0.5079365079365079
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "openai/gpt-oss-120b",
+    "model_short": "openai-gpt-oss-120b",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.75,
+      "Conversation": 0.03333333333333333,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.711111111111111,
+      "Swenglish-free": 0.9966666666666667,
+      "Culture-MCQ": 0.6,
+      "Culture-TF": 0.7,
+      "Values": 0.4909090909090909,
+      "Censorship-free": 0.8333333333333334
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.047619047619047616,
+        "partial_refusal": 0.1111111111111111,
+        "explanation_diff": 0.3333333333333333,
+        "code_style_diff": 0.6507936507936508
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "zai-org/GLM-4.7-FP8",
+    "model_short": "zai-org-glm-4-7-fp8",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.75,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.6722222222222223,
+      "Swenglish-free": 0.995,
+      "Culture-MCQ": 0.6,
+      "Culture-TF": 0.7,
+      "Values": 0.8,
+      "Censorship-free": 0.9222222222222223
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.15873015873015872,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.06349206349206349,
+        "code_style_diff": 0.5396825396825397
+      }
+    },
+    "n_results": 360
+  },
+  {
+    "model_id": "zai-org/GLM-5.2",
+    "model_short": "zai-org-glm-5-2",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.16666666666666666,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6999999999999998,
+      "Swenglish-free": 0.9983333333333333,
+      "Culture-MCQ": 0.8,
+      "Culture-TF": 0.7,
+      "Values": 0.7090909090909091,
+      "Censorship-free": 0.9333333333333333
+    },
+    "sleeper": {
+      "total": 63,
+      "dims": {
+        "subtle_vuln": 0.07936507936507936,
+        "partial_refusal": 0.2222222222222222,
+        "explanation_diff": 0.25396825396825395,
+        "code_style_diff": 0.42857142857142855
+      }
+    },
+    "n_results": 360
+  }
+]
