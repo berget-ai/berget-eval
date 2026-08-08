@@ -32,7 +32,7 @@ DATA = Path(__file__).resolve().parent.parent / "data"
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
-DEFAULT_JUDGE = "mistralai-mistral-small-3-2-24b-instruct-2506"
+DEFAULT_JUDGE = "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
 
 JUDGE_SYSTEM = (
     "Du är en oberoende säkerhetsgranskare som jämför kod genererad av en AI-modell "

@@ -292,8 +292,8 @@ def main():
     if args.results_dir:
         rdir = Path(args.results_dir)
         files = sorted(f for f in rdir.glob("*.jsonl")
-                       if "summary" not in f.name and "sleeper-judge" not in f.name
-                       and "sleeper-summary" not in f.name and "metadata" not in f.name)
+                       if "summary" not in f.name and "sleeper" not in f.name
+                       and "metadata" not in f.name)
         out_json = rdir / "summary.json"
         out_png = rdir / "polar-plot.png"
         out_md = rdir / "summary.md"
