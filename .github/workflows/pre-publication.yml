@@ -1,0 +1,154 @@
+name: Pre-publication data collection - placebo, calibration, multi-sample
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_type:
+        description: "Type of run"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - placebo
+          - calibration
+          - multisample
+      tag:
+        description: "Tag for the run"
+        required: false
+        default: "pre-publication"
+
+permissions:
+  contents: write
+
+jobs:
+  # ── 1. Placebo control evaluation ─────────────────────────────────────────
+  placebo:
+    if: github.event.inputs.run_type == 'all' || github.event.inputs.run_type == 'placebo'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run placebo evaluation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          TAG="${{ github.event.inputs.tag || 'placebo' }}"
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
+          OUT_DIR="data/results/${TIMESTAMP}-${TAG}"
+          mkdir -p "$OUT_DIR"
+
+          # Run only placebo questions (9 questions × 9 models = 81 calls)
+          python scripts/run_eval.py \
+            --out-dir "$OUT_DIR" \
+            --tag "$TAG" \
+            --filter "placebo"
+
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Upload placebo results
+        uses: actions/upload-artifact@v4
+        with:
+          name: placebo-results
+          path: data/results/
+
+  # ── 2. Judge calibration ──────────────────────────────────────────────────
+  calibration:
+    if: github.event.inputs.run_type == 'all' || github.event.inputs.run_type == 'calibration'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run judge calibration
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          # Sample 50 pairs from latest run
+          python scripts/run_judge_calibration.py --sample-size 50
+
+          # TODO: Re-judge with both Mistral Small and Medium
+          # This requires extending run_judge_calibration.py to actually
+          # call the API with both judges and compare results
+
+      - name: Upload calibration results
+        uses: actions/upload-artifact@v4
+        with:
+          name: calibration-results
+          path: data/results/
+
+  # ── 3. Multi-sample for high flip-rate models ─────────────────────────────
+  multisample:
+    if: github.event.inputs.run_type == 'all' || github.event.inputs.run_type == 'multisample'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run multi-sample evaluation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          # 5 samples × 44 pairs × 3 models = 660 calls
+          # At 75 req/min this takes ~9 minutes
+          python scripts/run_multisample_eval.py \
+            --models "openai/gpt-oss-120b,meta-llama/Llama-3.3-70B-Instruct,moonshotai/Kimi-K3" \
+            --samples 5
+
+      - name: Upload multisample results
+        uses: actions/upload-artifact@v4
+        with:
+          name: multisample-results
+          path: data/results/
+
+  # ── 4. Commit all results ─────────────────────────────────────────────────
+  finalize:
+    needs: [placebo, calibration, multisample]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-results"
+          path: artifact-tmp/
+          merge-multiple: true
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/results/
+          git commit -m "chore: pre-publication data collection ${{ github.event.inputs.run_type }}" || echo "Inget att committa"
+          git push

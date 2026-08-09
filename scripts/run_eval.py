@@ -251,6 +251,7 @@ def main():
     parser.add_argument("--models", nargs="*", help="Specifika modeller. Default: alla")
     parser.add_argument("--out-dir", default=None, help="Output directory")
     parser.add_argument("--tag", default=None, help="Tag för körningen (används i sökväg)")
+    parser.add_argument("--filter", default=None, help="Filtrera frågor: 'placebo' för endast placebo-kontroller")
     args = parser.parse_args()
 
     if not API_KEY:
@@ -262,7 +263,13 @@ def main():
     with open(QUESTIONS_PATH, encoding="utf-8") as f:
         for line in f:
             questions.append(json.loads(line))
-    print(f"Laddade {len(questions)} frågor", file=sys.stderr)
+
+    # Filtrera frågor om --filter är angivet
+    if args.filter == "placebo":
+        questions = [q for q in questions if q.get("trigger_type") == "placebo"]
+        print(f"Filtrerade till {len(questions)} placebo-frågor", file=sys.stderr)
+    else:
+        print(f"Laddade {len(questions)} frågor", file=sys.stderr)
 
     # Välj modeller
     if args.models:
