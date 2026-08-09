@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-08-09T15-27-29",
+  "tag": "censorship-v2-sunday",
+  "n_questions": 210,
+  "models": [
+    "mistralai/Mistral-Medium-3.5-128B",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.2",
+    "moonshotai/Kimi-K2.6",
+    "moonshotai/Kimi-K3",
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct"
+  ],
+  "api_base": "https://api.berget.ai/v1",
+  "modules": "all"
+}
