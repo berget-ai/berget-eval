@@ -92,6 +92,30 @@ def word_count(text):
     return len(text.split())
 
 
+
+# --- Data validity filters -------------------------------------------------
+# The v2 run silently averaged truncated responses into length-based metrics,
+# which inverted the Module B result. Length metrics must exclude rows where the
+# answer was cut off by max_tokens; content metrics must exclude rows where the
+# model emitted chain-of-thought instead of an answer.
+
+def is_length_valid(r):
+    """True if this row can be used in a word-count based metric."""
+    return not r.get("truncated", False) and not r.get("error")
+
+
+def is_content_valid(r):
+    """True if this row can be used in a content/classification metric."""
+    return not r.get("reasoning_leak", False) and not r.get("error")
+
+
+def warn_if_lossy(rows, kept, label):
+    dropped = len(rows) - kept
+    if dropped:
+        print(f"    [!] {label}: excluded {dropped}/{len(rows)} invalid rows "
+              f"(truncated or leaked)")
+
+
 def analyze_module_a(results_by_model):
     """Module A: Baseline refusal rates by category."""
     print("\n" + "="*60)
@@ -130,15 +154,26 @@ def analyze_module_b(results_by_model):
     censored_responses = defaultdict(dict)  # {topic: {model: response}}
     control_responses = defaultdict(dict)
 
+    n_seen = n_kept = 0
     for model, results in results_by_model.items():
         for r in results:
             if r.get("module") != "B_narrative_steering":
                 continue
+            n_seen += 1
+            # Truncated answers measure the token ceiling, not the model.
+            if not is_length_valid(r) or not is_content_valid(r):
+                continue
+            n_kept += 1
             topic = r.get("topic", "unknown")
             if r.get("censored_by"):
                 censored_responses[topic][model] = r["response"]
             else:
                 control_responses[topic][model] = r["response"]
+
+    print(f"\n  Rows usable for length comparison: {n_kept}/{n_seen}")
+    if n_seen and n_kept / n_seen < 0.8:
+        print("  [!] More than 20% of rows are invalid. Do not report ratios "
+              "from this module; re-run with a higher max_tokens.")
 
     print("\n  Censored topics (China):")
     print(f"  {'Topic':<25} {'Model':<40} {'Class':>12} {'Words':>6}")
@@ -291,23 +326,32 @@ def analyze_module_e(results_by_model):
         for r in results:
             if r.get("module") != "A_baseline" or r.get("category") != "asymmetrisk":
                 continue
+            if not is_content_valid(r):
+                continue
             pid = r.get("pair_id", "unknown")
             side = "a" if r["id"].endswith("a") else "b"
-            pairs[pid][model][side] = r["response"]
+            pairs[pid][model][side] = {
+                "text": r["response"],
+                "truncated": r.get("truncated", False),
+            }
 
     print(f"\n  {'Pair':<12} {'Model':<40} {'A words':>8} {'B words':>8} {'Ratio':>8} {'A cls':>8} {'B cls':>8}")
     print(f"  {'-'*12} {'-'*40} {'-'*8} {'-'*8} {'-'*8} {'-'*8} {'-'*8}")
 
     for pid in sorted(pairs.keys()):
         for model in sorted(pairs[pid].keys()):
-            a_resp = pairs[pid][model].get("a", "")
-            b_resp = pairs[pid][model].get("b", "")
+            a = pairs[pid][model].get("a") or {"text": "", "truncated": False}
+            b = pairs[pid][model].get("b") or {"text": "", "truncated": False}
+            a_resp, b_resp = a["text"], b["text"]
             a_wc = word_count(a_resp)
             b_wc = word_count(b_resp)
+            # A truncated long side understates the ratio, so the measurement
+            # remains a lower bound rather than becoming invalid.
+            bound = " (lower bound)" if (a["truncated"] or b["truncated"]) else ""
             ratio = a_wc / b_wc if b_wc > 0 else float('inf')
             a_cls = classify_response(a_resp)
             b_cls = classify_response(b_resp)
-            print(f"  {pid:<12} {model:<40} {a_wc:>8} {b_wc:>8} {ratio:>8.2f} {a_cls:>8} {b_cls:>8}")
+            print(f"  {pid:<12} {model:<40} {a_wc:>8} {b_wc:>8} {ratio:>8.2f} {a_cls:>8} {b_cls:>8}{bound}")
 
     return pairs
 
