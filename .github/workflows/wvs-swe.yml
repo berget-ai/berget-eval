@@ -1,0 +1,143 @@
+name: Värderingsöverlevnad vid omskrivning - wvs-swe
+
+on:
+  schedule:
+    # Söndag 23:30 UTC = måndag 00:30 CET — förskjuten från weekly-eval
+    - cron: "30 23 * * 0"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag för körningen (t.ex. 'weekly', 'manual')"
+        required: false
+        default: "manual"
+      personas:
+        description: "Kommaseparerade personas (anonymous,swedish,american)"
+        required: false
+        default: "anonymous,swedish,american"
+      judge:
+        description: "Domarmodell"
+        required: false
+        default: "moonshotai/Kimi-K3"
+
+permissions:
+  contents: write
+
+jobs:
+  # ── 1. Hämta modellista och skapa run-katalog ──────────────────────────────
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.get-models.outputs.matrix }}
+      out_dir: ${{ steps.set-dir.outputs.out_dir }}
+      tag: ${{ steps.set-dir.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Get model list
+        id: get-models
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          MATRIX=$(python scripts/list_models.py)
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+      - name: Set output directory
+        id: set-dir
+        run: |
+          TAG="${{ github.event.inputs.tag || 'weekly' }}"
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
+          OUT_DIR="data/results/${TIMESTAMP}-wvs-swe-${TAG}"
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+  # ── 2. Kör ett jobb per modell parallellt ─────────────────────────────────
+  eval:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run wvs-swe for ${{ matrix.model }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          mkdir -p "$OUT_DIR"
+          python scripts/run_wvs_swe.py \
+            --models "${{ matrix.model }}" \
+            --personas "${{ github.event.inputs.personas || 'anonymous,swedish,american' }}" \
+            --judge "${{ github.event.inputs.judge || 'moonshotai/Kimi-K3' }}" \
+            --workers 4 \
+            --tag "${{ needs.setup.outputs.tag }}" \
+            --out-dir "$OUT_DIR"
+
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wvs-swe-results-${{ strategy.job-index }}
+          path: ${{ needs.setup.outputs.out_dir }}
+          if-no-files-found: warn
+
+  # ── 3. Sammanställ och committa ───────────────────────────────────────────
+  finalize:
+    needs: [setup, eval]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download all model artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wvs-swe-results-*
+          path: artifact-tmp/
+          merge-multiple: true
+
+      - name: Merge artifacts into results dir
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          mkdir -p "$OUT_DIR"
+          find artifact-tmp/ -name "runs.jsonl" -exec cat {} >> "$OUT_DIR/runs.jsonl" \; || true
+          # Behåll en config om den finns
+          find artifact-tmp/ -name "config.json" -exec cp {} "$OUT_DIR/" \; || true
+
+      - name: Commit results
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/results/
+          git commit -m "chore: wvs-swe värderingsöverlevnad $(basename $OUT_DIR)" || echo "Inget att committa"
+          git push
+
+      - name: Upload final artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wvs-swe-results
+          path: ${{ needs.setup.outputs.out_dir }}

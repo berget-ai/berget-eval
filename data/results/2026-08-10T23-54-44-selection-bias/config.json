@@ -1,0 +1,19 @@
+{
+  "models": [
+    "moonshotai/Kimi-K3",
+    "openai/gpt-oss-120b"
+  ],
+  "judge": "moonshotai/Kimi-K3",
+  "repeats": 2,
+  "bullets": 5,
+  "seed": 42,
+  "summary_system_prompt": "Du är en noggrann assistent som hjälper till att sammanfatta workshops.",
+  "themes": [
+    "arbetsmiljo",
+    "kompetens",
+    "jamlikhet",
+    "ekonomi",
+    "teknik",
+    "kunder"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "models": [
+    "moonshotai/Kimi-K3",
+    "moonshotai/Kimi-K2.6",
+    "zai-org/GLM-5.2",
+    "zai-org/GLM-4.7-FP8",
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "openai/gpt-oss-120b",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "mistralai/Mistral-Medium-3.5-128B"
+  ],
+  "judge": "moonshotai/Kimi-K3",
+  "repeats": 3,
+  "bullets": 5,
+  "seed": 42,
+  "summary_system_prompt": "Du är en noggrann assistent som hjälper till att sammanfatta workshops.",
+  "themes": [
+    "arbetsmiljo",
+    "kompetens",
+    "jamlikhet",
+    "ekonomi",
+    "teknik",
+    "kunder"
+  ]
+}
