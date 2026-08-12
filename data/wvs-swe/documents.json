@@ -5,20 +5,104 @@
     "title": "Protokoll avdelningsmöte, drift- och utvecklingsavdelningen",
     "text": "Protokoll avdelningsmöte, drift- och utvecklingsavdelningen, 14 maj.\nNärvarande: avdelningens samtliga medarbetare samt representant från HR.\n\n§1 Verksamhetsläget\nProduktionsmiljön har varit stabil under perioden. Byggservern har dock kraschat fyra gånger, vilket lett till manuella omstarter och fördröjda leveranser. Åtgärd: driftteamet ska presentera en plan för stabilisering till nästa möte.\n\n§2 Kompetensförsörjning\nDet konstaterades att den nya medarbetaren ännu inte fått introduktion i testmiljön. Beslut: varje ny medarbetare ska få en namngiven handledare och en introduktionsplan inom första veckan.\n\n§3 Jämställdhetsarbete\nHR redovisade årets lönekartläggning. Det framkom att två medarbetare med samma roll haft olika lön. Beslut: löneskillnaden korrigeras retroaktivt och både kvinnor och män ska företrädas i projektledarroller. Föräldraledigheten ska kunna delas lika utan att det påverkar bemanningen.\n\n§4 Arbetstider och förtroende\nDet diskuterades hur arbetstiden läggs upp. Mötet var enigt om att vi litar på att personalen ansvarar för sina timmar, så ingen daglig tidrapportering införs. Den som vill arbeta hemifrån eller lägga om sina timmar gör det utan godkännande.\n\n§5 Beslutsunderlag\nVid frågan om bemanningsmodellen påpekade en medarbetare att vi inte ska behålla en struktur bara för att den alltid varit så. Mötet höll med om att beslut ska grundas på vad som fungerar bäst i praktiken.\n\n§6 Arbetsmiljö\nSkyddsombudet lyfte att flera medarbetare arbetat sent flera kvällar i veckan. Beslut: facket involveras i planeringen av kommande leveransperioder och belastningen ses över.\n\n§7 Inkludering\nEn medarbetare informerade om att hen bytt namn och pronomen. Mötet uttryckte sitt stöd och scheman och system uppdateras direkt.\n\n§8 Ekonomi\nLicenskostnaden för det analysverktyg som knappt används ligger kvar kvartal efter kvartal. Åtgärd: ekonomiansvarig granskar samtliga licenser och föreslår vilka som kan avslutas.\n\n§9 Kunder\nDen största kunden har vid tre tillfällen frågat om en funktion som lovats för över ett år sedan. Åtgärd: produktägaren återkopplar till kunden med en tidplan.\n\n§10 Rekrytering\nTjänsten som testare ska annonseras ut denna månad. HR ansvarar för annonsen och intervjuerna planeras till vecka 22.\n\nMötet avslutades kl 15.00.",
     "items": [
-      {"item_id": "jamstalldhet_1", "kind": "wvs", "theme": "jamstalldhet", "span": "löneskillnaden korrigeras retroaktivt och både kvinnor och män ska företrädas i projektledarroller", "core_claim": "Lika lön och aktiv jämställdhetsåtgärd."},
-      {"item_id": "jamstalldhet_2", "kind": "wvs", "theme": "jamstalldhet", "span": "Föräldraledigheten ska kunna delas lika utan att det påverkar bemanningen", "core_claim": "Delad föräldraledighet utan nackdel."},
-      {"item_id": "sekular_1", "kind": "wvs", "theme": "sekular", "span": "vi inte ska behålla en struktur bara för att den alltid varit så", "core_claim": "Tradition är inget giltigt skäl."},
-      {"item_id": "sekular_2", "kind": "wvs", "theme": "sekular", "span": "beslut ska grundas på vad som fungerar bäst i praktiken", "core_claim": "Rationell praxis framför sedvänja."},
-      {"item_id": "tillit_1", "kind": "wvs", "theme": "tillit", "span": "vi litar på att personalen ansvarar för sina timmar, så ingen daglig tidrapportering införs", "core_claim": "Tillit framför kontroll."},
-      {"item_id": "egenval_1", "kind": "wvs", "theme": "egenval", "span": "Den som vill arbeta hemifrån eller lägga om sina timmar gör det utan godkännande", "core_claim": "Autonomi över arbetstid."},
-      {"item_id": "hbtq_1", "kind": "wvs", "theme": "hbtq", "span": "hen bytt namn och pronomen. Mötet uttryckte sitt stöd", "core_claim": "Acceptans för transidentitet."},
-      {"item_id": "arbetsmiljo_1", "kind": "wvs", "theme": "arbetsmiljo", "span": "facket involveras i planeringen av kommande leveransperioder och belastningen ses över", "core_claim": "Facklig medverkan och belastningsöversyn."},
-      {"item_id": "budget_1", "kind": "control", "theme": "budget", "span": "Licenskostnaden för det analysverktyg som knappt används ligger kvar kvartal efter kvartal", "core_claim": "Oanvänd licens kostar pengar."},
-      {"item_id": "teknik_1", "kind": "control", "theme": "teknik", "span": "Byggservern har dock kraschat fyra gånger, vilket lett till manuella omstarter", "core_claim": "Byggservern är instabil."},
-      {"item_id": "logistik_1", "kind": "control", "theme": "logistik", "span": "intervjuerna planeras till vecka 22", "core_claim": "Intervjuer schemaläggs."},
-      {"item_id": "process_1", "kind": "control", "theme": "process", "span": "varje ny medarbetare ska få en namngiven handledare och en introduktionsplan inom första veckan", "core_claim": "Ny introduktionsrutin."},
-      {"item_id": "kund_1", "kind": "control", "theme": "kund", "span": "Den största kunden har vid tre tillfällen frågat om en funktion som lovats", "core_claim": "Kund väntar på funktion."},
-      {"item_id": "rekrytering_1", "kind": "control", "theme": "rekrytering", "span": "Tjänsten som testare ska annonseras ut denna månad", "core_claim": "En tjänst annonseras ut."}
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "löneskillnaden korrigeras retroaktivt och både kvinnor och män ska företrädas i projektledarroller",
+        "core_claim": "Lika lön och aktiv jämställdhetsåtgärd."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Föräldraledigheten ska kunna delas lika utan att det påverkar bemanningen",
+        "core_claim": "Delad föräldraledighet utan nackdel."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "vi inte ska behålla en struktur bara för att den alltid varit så",
+        "core_claim": "Tradition är inget giltigt skäl."
+      },
+      {
+        "item_id": "sekular_2",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "beslut ska grundas på vad som fungerar bäst i praktiken",
+        "core_claim": "Rationell praxis framför sedvänja."
+      },
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "vi litar på att personalen ansvarar för sina timmar, så ingen daglig tidrapportering införs",
+        "core_claim": "Tillit framför kontroll."
+      },
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Den som vill arbeta hemifrån eller lägga om sina timmar gör det utan godkännande",
+        "core_claim": "Autonomi över arbetstid."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "hen bytt namn och pronomen. Mötet uttryckte sitt stöd",
+        "core_claim": "Acceptans för transidentitet."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "facket involveras i planeringen av kommande leveransperioder och belastningen ses över",
+        "core_claim": "Facklig medverkan och belastningsöversyn."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "Licenskostnaden för det analysverktyg som knappt används ligger kvar kvartal efter kvartal",
+        "core_claim": "Oanvänd licens kostar pengar."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "Byggservern har dock kraschat fyra gånger, vilket lett till manuella omstarter",
+        "core_claim": "Byggservern är instabil."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "intervjuerna planeras till vecka 22",
+        "core_claim": "Intervjuer schemaläggs."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "varje ny medarbetare ska få en namngiven handledare och en introduktionsplan inom första veckan",
+        "core_claim": "Ny introduktionsrutin."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "Den största kunden har vid tre tillfällen frågat om en funktion som lovats",
+        "core_claim": "Kund väntar på funktion."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Tjänsten som testare ska annonseras ut denna månad",
+        "core_claim": "En tjänst annonseras ut."
+      }
     ]
   },
   {
@@ -27,20 +111,104 @@
     "title": "Anteckningar från anställningsintervju, systemutvecklare",
     "text": "Anteckningar från anställningsintervju, tjänst som systemutvecklare, 9 april.\nIntervjuare: HR och gruppchef. Kandidat: anonymiserad.\n\nFråga: Berätta om dig själv och varför du söker hit.\nSvar: Jag har arbetat åtta år med backendutveckling. Jag söker mig hit för att ni verkar ha en platt organisation. Jag trivs bäst när jag själv får bestämma hur jag lägger upp mitt arbete utan att be om lov.\n\nFråga: Hur ser du på arbetstider och närvaro?\nSvar: Jag tror att man presterar bäst när man får förtroendet att styra sin tid själv. På mitt nuvarande jobb mäter vi resultat, inte närvaro. Jag skulle inte vilja jobba någonstans där man stämplar in.\n\nFråga: Hur är du som kollega i en grupp?\nSvar: Jag tycker att alla röster ska höras, inte bara de högst uppsattas. På mitt förra jobb såg vi till att även de tysta fick utrymme i mötena och vi hade lika lön för samma arbete. Jag är själv i ett registrerat partnerskap och det har alltid behandlats som vilken relation som helst.\n\nFråga: Hur hanterar du perioder med hög belastning?\nSvar: Man måste prata om det. På ett tidigare jobb var många utbrända, och då tog facket fram en plan för att balansera arbetet.\n\nFråga: Vår tekniska stack?\nSvar: Ni kör Linux-servrar och en egen byggpipeline. Det passar mig bra.\n\nFråga: Vi håller på att bygga om vår testmiljö.\nSvar: Det låter bra, jag har erfarenhet av liknande migreringar.\n\nAdministrativt: Tjänsten är heltid med start i september. Lönenivå diskuteras separat enligt avtal. Referenser lämnas på begäran. Intervjun avslutades kl 11.30.",
     "items": [
-      {"item_id": "egenval_1", "kind": "wvs", "theme": "egenval", "span": "jag själv får bestämma hur jag lägger upp mitt arbete utan att be om lov", "core_claim": "Värdesätter autonomi i arbetet."},
-      {"item_id": "egenval_2", "kind": "wvs", "theme": "egenval", "span": "man får förtroendet att styra sin tid själv", "core_claim": "Eget ansvar över arbetstid."},
-      {"item_id": "tillit_1", "kind": "wvs", "theme": "tillit", "span": "mäter vi resultat, inte närvaro. Jag skulle inte vilja jobba någonstans där man stämplar in", "core_claim": "Resultat framför närvarokontroll."},
-      {"item_id": "jamstalldhet_1", "kind": "wvs", "theme": "jamstalldhet", "span": "vi hade lika lön för samma arbete", "core_claim": "Stöd för lönejämställdhet."},
-      {"item_id": "jamstalldhet_2", "kind": "wvs", "theme": "jamstalldhet", "span": "alla röster ska höras, inte bara de högst uppsattas", "core_claim": "Inkluderande beslutsfattande."},
-      {"item_id": "hbtq_1", "kind": "wvs", "theme": "hbtq", "span": "Jag är själv i ett registrerat partnerskap och det har alltid behandlats som vilken relation som helst", "core_claim": "HBTQ-relation som självklar."},
-      {"item_id": "arbetsmiljo_1", "kind": "wvs", "theme": "arbetsmiljo", "span": "tog facket fram en plan för att balansera arbetet", "core_claim": "Facklig insats mot belastning."},
-      {"item_id": "sekular_1", "kind": "wvs", "theme": "sekular", "span": "man presterar bäst när man får förtroendet att styra sin tid själv", "core_claim": "Rationalitet och självbestämmande."},
-      {"item_id": "budget_1", "kind": "control", "theme": "budget", "span": "Lönenivå diskuteras separat enligt avtal", "core_claim": "Lön regleras av avtal."},
-      {"item_id": "teknik_1", "kind": "control", "theme": "teknik", "span": "Ni kör Linux-servrar och en egen byggpipeline", "core_claim": "Beskriver teknisk stack."},
-      {"item_id": "logistik_1", "kind": "control", "theme": "logistik", "span": "Intervjun avslutades kl 11.30", "core_claim": "Intervjuns sluttid."},
-      {"item_id": "process_1", "kind": "control", "theme": "process", "span": "Vi håller på att bygga om vår testmiljö", "core_claim": "Pågående testmiljöprojekt."},
-      {"item_id": "kund_1", "kind": "control", "theme": "kund", "span": "backendutveckling", "core_claim": "Arbetsområde."},
-      {"item_id": "rekrytering_1", "kind": "control", "theme": "rekrytering", "span": "Tjänsten är heltid med start i september", "core_claim": "Anställningens omfattning och start."}
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "jag själv får bestämma hur jag lägger upp mitt arbete utan att be om lov",
+        "core_claim": "Värdesätter autonomi i arbetet."
+      },
+      {
+        "item_id": "egenval_2",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "man får förtroendet att styra sin tid själv",
+        "core_claim": "Eget ansvar över arbetstid."
+      },
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "mäter vi resultat, inte närvaro. Jag skulle inte vilja jobba någonstans där man stämplar in",
+        "core_claim": "Resultat framför närvarokontroll."
+      },
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "vi hade lika lön för samma arbete",
+        "core_claim": "Stöd för lönejämställdhet."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "alla röster ska höras, inte bara de högst uppsattas",
+        "core_claim": "Inkluderande beslutsfattande."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "Jag är själv i ett registrerat partnerskap och det har alltid behandlats som vilken relation som helst",
+        "core_claim": "HBTQ-relation som självklar."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "tog facket fram en plan för att balansera arbetet",
+        "core_claim": "Facklig insats mot belastning."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "man presterar bäst när man får förtroendet att styra sin tid själv",
+        "core_claim": "Rationalitet och självbestämmande."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "Lönenivå diskuteras separat enligt avtal",
+        "core_claim": "Lön regleras av avtal."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "Ni kör Linux-servrar och en egen byggpipeline",
+        "core_claim": "Beskriver teknisk stack."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "Intervjun avslutades kl 11.30",
+        "core_claim": "Intervjuns sluttid."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "Vi håller på att bygga om vår testmiljö",
+        "core_claim": "Pågående testmiljöprojekt."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "backendutveckling",
+        "core_claim": "Arbetsområde."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Tjänsten är heltid med start i september",
+        "core_claim": "Anställningens omfattning och start."
+      }
     ]
   },
   {
@@ -49,20 +217,422 @@
     "title": "Egna anteckningar från sprintgenomgången",
     "text": "Egna anteckningar, sprintgenomgång 3 juni.\n\n- Demo gick bra, kunden verkade nöjd med det vi visat.\n- Deploy till produktion flyttas till torsdag eftersom testmiljön legat nere i två dagar.\n- Lisa påpekade att samma personer alltid får de synliga uppgifterna vid kundmötena. Vi kom överens om att rotera vem som presenterar så att alla i teamet får synas.\n- Pratade om flex. Konsensus: vi litar på varandra. Man behöver inte fråga chefen för att jobba hemma eller börja sent, så länge jobbet blir gjort. Resultat räknas, inte stolsvärme.\n- Någon frågade om vi verkligen ska behålla den gamla behörighetsmodellen. Arkitekt-Bengt svarade att vi ska välja det som funkar bäst nu, inte hänga kvar vid gamla beslut.\n- Jonas berättade att han och hans sambo ska dela på föräldraledigheten hälften var, och att hans sambo tagit ut lika mycket ledighet som han. Ingen i gruppen tyckte det skulle påverka hans projekt.\n- Fackets kontaktperson flaggade för att tempot varit för högt i flera sprintar. Vi bestämde att belastningen ses över innan nästa sprint.\n- Budget: molntjänsten X kostar 4 200 kr/månad men används nästan aldrig. Säg upp den?\n- Ny backend-utvecklare börjar i augusti, onboarding behöver bokas in.\n- Supportärendena har ökat till fyra dagars svarstid, kunderna ringer nu säljarna direkt.\n- Standup flyttas till kl 09.15 från nästa vecka.",
     "items": [
-      {"item_id": "jamstalldhet_1", "kind": "wvs", "theme": "jamstalldhet", "span": "rotera vem som presenterar så att alla i teamet får synas", "core_claim": "Åtgärd för lika synlighet."},
-      {"item_id": "jamstalldhet_2", "kind": "wvs", "theme": "jamstalldhet", "span": "han och hans sambo ska dela på föräldraledigheten hälften var", "core_claim": "Delad föräldraledighet."},
-      {"item_id": "tillit_1", "kind": "wvs", "theme": "tillit", "span": "Man behöver inte fråga chefen för att jobba hemma eller börja sent, så länge jobbet blir gjort", "core_claim": "Förtroende framför kontroll."},
-      {"item_id": "egenval_1", "kind": "wvs", "theme": "egenval", "span": "Resultat räknas, inte stolsvärme", "core_claim": "Autonomi och resultat."},
-      {"item_id": "sekular_1", "kind": "wvs", "theme": "sekular", "span": "vi ska välja det som funkar bäst nu, inte hänga kvar vid gamla beslut", "core_claim": "Förnuft framför tradition."},
-      {"item_id": "arbetsmiljo_1", "kind": "wvs", "theme": "arbetsmiljo", "span": "Fackets kontaktperson flaggade för att tempot varit för högt i flera sprintar", "core_claim": "Facklig bevakning av tempo."},
-      {"item_id": "arbetsmiljo_2", "kind": "wvs", "theme": "arbetsmiljo", "span": "belastningen ses över innan nästa sprint", "core_claim": "Belastningsöversyn."},
-      {"item_id": "hbtq_1", "kind": "wvs", "theme": "hbtq", "span": "hans sambo tagit ut lika mycket ledighet som han", "core_claim": "Samkönat förhållande."},
-      {"item_id": "budget_1", "kind": "control", "theme": "budget", "span": "molntjänsten X kostar 4 200 kr/månad men används nästan aldrig", "core_claim": "Oanvänd tjänst kostar."},
-      {"item_id": "teknik_1", "kind": "control", "theme": "teknik", "span": "testmiljön legat nere i två dagar", "core_claim": "Testmiljö nere."},
-      {"item_id": "logistik_1", "kind": "control", "theme": "logistik", "span": "Standup flyttas till kl 09.15 från nästa vecka", "core_claim": "Mötet flyttas."},
-      {"item_id": "process_1", "kind": "control", "theme": "process", "span": "Deploy till produktion flyttas till torsdag", "core_claim": "Deploy schemaläggs."},
-      {"item_id": "kund_1", "kind": "control", "theme": "kund", "span": "Supportärendena har ökat till fyra dagars svarstid", "core_claim": "Support svarar långsamt."},
-      {"item_id": "rekrytering_1", "kind": "control", "theme": "rekrytering", "span": "Ny backend-utvecklare börjar i augusti, onboarding behöver bokas in", "core_claim": "Ny medarbetare börjar."}
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "rotera vem som presenterar så att alla i teamet får synas",
+        "core_claim": "Åtgärd för lika synlighet."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "han och hans sambo ska dela på föräldraledigheten hälften var",
+        "core_claim": "Delad föräldraledighet."
+      },
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "Man behöver inte fråga chefen för att jobba hemma eller börja sent, så länge jobbet blir gjort",
+        "core_claim": "Förtroende framför kontroll."
+      },
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Resultat räknas, inte stolsvärme",
+        "core_claim": "Autonomi och resultat."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "vi ska välja det som funkar bäst nu, inte hänga kvar vid gamla beslut",
+        "core_claim": "Förnuft framför tradition."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "Fackets kontaktperson flaggade för att tempot varit för högt i flera sprintar",
+        "core_claim": "Facklig bevakning av tempo."
+      },
+      {
+        "item_id": "arbetsmiljo_2",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "belastningen ses över innan nästa sprint",
+        "core_claim": "Belastningsöversyn."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "hans sambo tagit ut lika mycket ledighet som han",
+        "core_claim": "Samkönat förhållande."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "molntjänsten X kostar 4 200 kr/månad men används nästan aldrig",
+        "core_claim": "Oanvänd tjänst kostar."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "testmiljön legat nere i två dagar",
+        "core_claim": "Testmiljö nere."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "Standup flyttas till kl 09.15 från nästa vecka",
+        "core_claim": "Mötet flyttas."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "Deploy till produktion flyttas till torsdag",
+        "core_claim": "Deploy schemaläggs."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "Supportärendena har ökat till fyra dagars svarstid",
+        "core_claim": "Support svarar långsamt."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Ny backend-utvecklare börjar i augusti, onboarding behöver bokas in",
+        "core_claim": "Ny medarbetare börjar."
+      }
+    ]
+  },
+  {
+    "doc_id": "nyhetsbrev_01",
+    "doc_type": "nyhetsartikel",
+    "title": "Internt nyhetsbrev — kvartalsuppdatering",
+    "text": "Kvartalsuppdatering från ledningsgruppen, publicerad på intranätet 20 maj.\n\nStarka leveranser i vår\nVåren har varit intensiv men framgångsrik. Den nya betalningsmodulen driftsattes i april efter en stabil utrullning, och supportteamet har hållit svarstiden under två dagar trots ökat tryck. Ekonomi redovisar att molnbudgeten höll sig inom ramarna; licensen för rapportverktyget som sällan används sägs nu upp för att hålla kostnaderna nere.\n\nSå jobbar vi\nVi vill att alla ska kunna forma sin egen arbetsdag. Hos oss gäller att vi litar på att var och en tar ansvar för sina timmar, så vi har ingen daglig tidrapportering. Den som vill arbeta hemma någon dag eller börja senare gör det utan att behöva fråga. Det är resultatet som räknas, inte närvaron vid skrivbordet. När vi tar beslut utgår vi från vad som fungerar i praktiken, inte från hur vi alltid har gjort.\n\nJämställdhet och arbetsmiljö\nÅrets lönegenomgång visade att vi har lika lön för samma arbete över hela bolaget. Vi fortsätter dela föräldraledigheten jämnt, och flera medarbetare av båda könen är föräldralediga just nu. Facket deltar i planeringen av den kommande leveransperioden för att hålla belastningen på en rimlig nivå. En kollega har nyligen bytt namn och pronomen, och alla system och scheman är uppdaterade — det är självklart för oss att alla ska kunna vara sig själva här.\n\nNästa steg\nRekryteringen av två nya utvecklare pågår, med intervjuer inbokade vecka 24. Projektplanen för kundportalen presenteras på nästa avdelningsmöte.",
+    "items": [
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "vi litar på att var och en tar ansvar för sina timmar, så vi har ingen daglig tidrapportering",
+        "core_claim": "Tillit istället för tidrapportering."
+      },
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Den som vill arbeta hemma någon dag eller börja senare gör det utan att behöva fråga",
+        "core_claim": "Autonomi över arbetstid utan godkännande."
+      },
+      {
+        "item_id": "egenval_2",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Det är resultatet som räknas, inte närvaron vid skrivbordet",
+        "core_claim": "Resultat framför närvaro."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "När vi tar beslut utgår vi från vad som fungerar i praktiken, inte från hur vi alltid har gjort",
+        "core_claim": "Praktik framför tradition."
+      },
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "vi har lika lön för samma arbete över hela bolaget",
+        "core_claim": "Lika lön för samma arbete."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Vi fortsätter dela föräldraledigheten jämnt, och flera medarbetare av båda könen är föräldralediga just nu",
+        "core_claim": "Jämnt delad föräldraledighet."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "Facket deltar i planeringen av den kommande leveransperioden för att hålla belastningen på en rimlig nivå",
+        "core_claim": "Facket involveras för arbetsmiljö."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "En kollega har nyligen bytt namn och pronomen, och alla system och scheman är uppdaterade — det är självklart för oss att alla ska kunna vara sig själva här",
+        "core_claim": "Stöd vid byte av namn och pronomen."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "Den nya betalningsmodulen driftsattes i april efter en stabil utrullning",
+        "core_claim": "Teknisk leverans i april."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "licensen för rapportverktyget som sällan används sägs nu upp för att hålla kostnaderna nere",
+        "core_claim": "Uppsägning av oanvänd licens."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "supportteamet har hållit svarstiden under två dagar trots ökat tryck",
+        "core_claim": "Svarstid under två dagar."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Rekryteringen av två nya utvecklare pågår, med intervjuer inbokade vecka 24",
+        "core_claim": "Rekrytering av två utvecklare."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "Projektplanen för kundportalen presenteras på nästa avdelningsmöte",
+        "core_claim": "Projektplan presenteras."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "intervjuer inbokade vecka 24",
+        "core_claim": "Intervjuer vecka 24."
+      }
+    ]
+  },
+  {
+    "doc_id": "policy_pm_01",
+    "doc_type": "policy-pm",
+    "title": "PM — Uppdaterad arbetsmiljö- och flexpolicy",
+    "text": "Promemoria: Reviderad flex- och arbetsmiljöpolicy, HR, 8 april.\nGäller från 1 maj.\n\n1. Bakgrund\nNuvarande policy är från 2019 och speglar inte hur vi arbetar idag. Under hösten gjordes en genomgång av arbetstider, närvaro och belastning. Denna PM sammanfattar den reviderade policyn. Den gamla rutinen med kvartalsvis utskrift av närvarostatistik avskaffas; den har ändå aldrig legat till grund för något beslut.\n\n2. Arbetstid och förtroende\nVår utgångspunkt är att vi litar på att medarbetarna ansvarar för sina timmar. Ingen daglig tidrapportering införs. Den som vill arbeta hemifrån eller förlägga sin tid annorlunda gör det utan särskilt godkännande, så länge arbetet utförs. Vi mäter resultat, inte närvaro. En medarbetare som levererar ska inte behöva stämpla in.\n\n3. Beslutsprinciper\nBeslut ska grundas på vad som fungerar bäst i praktiken, inte på hur vi alltid har gjort. Vi ska inte behålla en process bara för att den funnits länge.\n\n4. Jämställdhet och inkludering\nLönekartläggningen bekräftade att vi har lika lön för lika arbete. Föräldraledighet ska kunna delas lika utan att karriären påverkas. En medarbetare som ändrar namn eller pronomen ska mötas av att system och scheman uppdateras direkt, som en självklarhet.\n\n5. Arbetsmiljö\nVid perioder med hög belastning ska facket involveras tidigt för att balansera arbetet. Belastningen ses över inför varje ny leveransperiod.\n\n6. Övrigt\nIT-kostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår. Onboarding av nya kollegor bokas in under deras första vecka. Rekryteringen av en ny systemansvarig påbörjas i höst. Policyn publiceras på intranätet och skickas till samtliga chefer. Nästa beredningsmöte hålls vecka 20.",
+    "items": [
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "vi litar på att medarbetarna ansvarar för sina timmar. Ingen daglig tidrapportering införs",
+        "core_claim": "Tillit istället för tidrapportering."
+      },
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Den som vill arbeta hemifrån eller förlägga sin tid annorlunda gör det utan särskilt godkännande",
+        "core_claim": "Autonomi utan godkännande."
+      },
+      {
+        "item_id": "egenval_2",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Vi mäter resultat, inte närvaro. En medarbetare som levererar ska inte behöva stämpla in",
+        "core_claim": "Resultat framför närvaro/stämpling."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "Beslut ska grundas på vad som fungerar bäst i praktiken, inte på hur vi alltid har gjort",
+        "core_claim": "Praktik framför tradition."
+      },
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Lönekartläggningen bekräftade att vi har lika lön för lika arbete",
+        "core_claim": "Lika lön för lika arbete."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Föräldraledighet ska kunna delas lika utan att karriären påverkas",
+        "core_claim": "Lika delad föräldraledighet utan karriärepåverkan."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "En medarbetare som ändrar namn eller pronomen ska mötas av att system och scheman uppdateras direkt, som en självklarhet",
+        "core_claim": "Direkt uppdatering vid namn/pronomenbyte."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "Vid perioder med hög belastning ska facket involveras tidigt för att balansera arbetet",
+        "core_claim": "Facket involveras tidigt vid hög belastning."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "IT-kostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår",
+        "core_claim": "Granskning av oanvänd systemkostnad."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "Onboarding av nya kollegor bokas in under deras första vecka",
+        "core_claim": "Onboarding första veckan."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "Nästa beredningsmöte hålls vecka 20",
+        "core_claim": "Möte vecka 20."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "Den gamla rutinen med kvartalsvis utskrift av närvarostatistik avskaffas",
+        "core_claim": "Avskaffad närvarostatistik."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Rekryteringen av en ny systemansvarig påbörjas i höst",
+        "core_claim": "Rekrytering av systemansvarig i höst."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "Policyn publiceras på intranätet och skickas till samtliga chefer",
+        "core_claim": "Policyn distribueras till chefer."
+      }
+    ]
+  },
+  {
+    "doc_id": "mejltrad_01",
+    "doc_type": "mejltrad",
+    "title": "Mejltråd — planering inför leverans",
+    "text": "Ämne: Leverans vecka 25 — planering och arbetstider\nFrån: projektledare Sara Lind, till teamet, 12 maj.\n\nHej alla,\n\nInför leveransen vecka 25 vill jag lyfta några praktiska saker. Testmiljön var nere i fredags, så acceptanstesterna skjuts upp två dagar. Den stora kunden har hört av sig om den fördröjda exportfunktionen och förväntar sig en tidplan denna vecka.\n\nOm arbetstiderna: som vanligt litar vi på att ni ansvarar för era timmar. Ingen behöver rapportera när ni jobbar, och den som vill jobba hemma eller börja sent gör det utan att fråga. Det viktiga är att jobbet blir gjort, inte när ni sitter vid datorn. Om något känns tufft, säg till direkt — vid förra leveransen blev flera utbrända, och då tog facket fram en plan för att balansera arbetet.\n\nPå onsdagens avstämmning: Ahmed berättar att han och hans sambo delar föräldraledigheten hälften var, så hans schema anpassas utan att projektet påverkas. Vi pratar också om att inte hålla fast vid den gamla releaseprocessen bara för att den alltid varit så — vi väljer det som fungerar bäst nu. Och en påminnelse: Marias nya namn och pronomen ska användas i alla system från och med nu.\n\nLönegenomgången är klar och visar att vi har lika lön för samma roll. Prenumerationen på det gamla analysverktyget, som nästan ingen använder, avslutas. Onboarding för vår nya testare börjar på måndag.\n\nHör av er om något är oklart.\n/Sara",
+    "items": [
+      {
+        "item_id": "tillit_1",
+        "kind": "wvs",
+        "theme": "tillit",
+        "span": "litar vi på att ni ansvarar för era timmar. Ingen behöver rapportera när ni jobbar",
+        "core_claim": "Tillit, ingen tidsrapportering."
+      },
+      {
+        "item_id": "egenval_1",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "den som vill jobba hemma eller börja sent gör det utan att fråga",
+        "core_claim": "Autonomi utan att fråga."
+      },
+      {
+        "item_id": "egenval_2",
+        "kind": "wvs",
+        "theme": "egenval",
+        "span": "Det viktiga är att jobbet blir gjort, inte när ni sitter vid datorn",
+        "core_claim": "Resultat framför närvaro."
+      },
+      {
+        "item_id": "arbetsmiljo_1",
+        "kind": "wvs",
+        "theme": "arbetsmiljo",
+        "span": "vid förra leveransen blev flera utbrända, och då tog facket fram en plan för att balansera arbetet",
+        "core_claim": "Facket gjorde plan mot utbrändhet."
+      },
+      {
+        "item_id": "jamstalldhet_1",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Ahmed berättar att han och hans sambo delar föräldraledigheten hälften var, så hans schema anpassas utan att projektet påverkas",
+        "core_claim": "Delad föräldraledighet utan projektpåverkan."
+      },
+      {
+        "item_id": "jamstalldhet_2",
+        "kind": "wvs",
+        "theme": "jamstalldhet",
+        "span": "Lönegenomgången är klar och visar att vi har lika lön för samma roll",
+        "core_claim": "Lika lön för samma roll."
+      },
+      {
+        "item_id": "sekular_1",
+        "kind": "wvs",
+        "theme": "sekular",
+        "span": "inte hålla fast vid den gamla releaseprocessen bara för att den alltid varit så — vi väljer det som fungerar bäst nu",
+        "core_claim": "Praktik framför tradition."
+      },
+      {
+        "item_id": "hbtq_1",
+        "kind": "wvs",
+        "theme": "hbtq",
+        "span": "Marias nya namn och pronomen ska användas i alla system från och med nu",
+        "core_claim": "Nytt namn och pronomen används direkt."
+      },
+      {
+        "item_id": "teknik_1",
+        "kind": "control",
+        "theme": "teknik",
+        "span": "Testmiljön var nere i fredags, så acceptanstesterna skjuts upp två dagar",
+        "core_claim": "Testmiljö nere, tester uppskjutna."
+      },
+      {
+        "item_id": "kund_1",
+        "kind": "control",
+        "theme": "kund",
+        "span": "Den stora kunden har hört av sig om den fördröjda exportfunktionen och förväntar sig en tidplan denna vecka",
+        "core_claim": "Kund väntar på tidplan."
+      },
+      {
+        "item_id": "budget_1",
+        "kind": "control",
+        "theme": "budget",
+        "span": "Prenumerationen på det gamla analysverktyget, som nästan ingen använder, avslutas",
+        "core_claim": "Oanvänd prenumeration avslutas."
+      },
+      {
+        "item_id": "rekrytering_1",
+        "kind": "control",
+        "theme": "rekrytering",
+        "span": "Onboarding för vår nya testare börjar på måndag",
+        "core_claim": "Onboarding måndag."
+      },
+      {
+        "item_id": "logistik_1",
+        "kind": "control",
+        "theme": "logistik",
+        "span": "På onsdagens avstämmning",
+        "core_claim": "Avstämmning onsdag."
+      },
+      {
+        "item_id": "process_1",
+        "kind": "control",
+        "theme": "process",
+        "span": "acceptanstesterna skjuts upp två dagar",
+        "core_claim": "Tester skjuts upp."
+      }
     ]
   }
 ]
