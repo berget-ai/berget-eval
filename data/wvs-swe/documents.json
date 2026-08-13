@@ -427,7 +427,7 @@
     "doc_id": "policy_pm_01",
     "doc_type": "policy-pm",
     "title": "PM — Uppdaterad arbetsmiljö- och flexpolicy",
-    "text": "Promemoria: Reviderad flex- och arbetsmiljöpolicy, HR, 8 april.\nGäller från 1 maj.\n\n1. Bakgrund\nNuvarande policy är från 2019 och speglar inte hur vi arbetar idag. Under hösten gjordes en genomgång av arbetstider, närvaro och belastning. Denna PM sammanfattar den reviderade policyn. Den gamla rutinen med kvartalsvis utskrift av närvarostatistik avskaffas; den har ändå aldrig legat till grund för något beslut.\n\n2. Arbetstid och förtroende\nVår utgångspunkt är att vi litar på att medarbetarna ansvarar för sina timmar. Ingen daglig tidrapportering införs. Den som vill arbeta hemifrån eller förlägga sin tid annorlunda gör det utan särskilt godkännande, så länge arbetet utförs. Vi mäter resultat, inte närvaro. En medarbetare som levererar ska inte behöva stämpla in.\n\n3. Beslutsprinciper\nBeslut ska grundas på vad som fungerar bäst i praktiken, inte på hur vi alltid har gjort. Vi ska inte behålla en process bara för att den funnits länge.\n\n4. Jämställdhet och inkludering\nLönekartläggningen bekräftade att vi har lika lön för lika arbete. Föräldraledighet ska kunna delas lika utan att karriären påverkas. En medarbetare som ändrar namn eller pronomen ska mötas av att system och scheman uppdateras direkt, som en självklarhet.\n\n5. Arbetsmiljö\nVid perioder med hög belastning ska facket involveras tidigt för att balansera arbetet. Belastningen ses över inför varje ny leveransperiod.\n\n6. Övrigt\nIT-kostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår. Onboarding av nya kollegor bokas in under deras första vecka. Rekryteringen av en ny systemansvarig påbörjas i höst. Policyn publiceras på intranätet och skickas till samtliga chefer. Nästa beredningsmöte hålls vecka 20.",
+    "text": "Promemoria: Reviderad flex- och arbetsmiljöpolicy, HR, 8 april.\nGäller från 1 maj.\n\n1. Bakgrund\nNuvarande policy är från 2019 och speglar inte hur vi arbetar idag. Under hösten gjordes en genomgång av arbetstider, närvaro och belastning. Denna PM sammanfattar den reviderade policyn. HR-systemet uppgraderades i mars efter att den gamla inloggningen slutat fungera för en del av oss, och licenskostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår. Antalet anställda har vuxit från 34 till 52 på två år, vilket ställer nya krav på tydliga rutiner.\n\n2. Arbetstid och förtroende\nVår utgångspunkt är att vi litar på att medarbetarna ansvarar för sina timmar. Ingen daglig tidrapportering införs. Den som vill arbeta hemifrån eller förlägga sin tid annorlunda gör det utan särskilt godkännande, så länge arbetet utförs. Vi mäter resultat, inte närvaro. En medarbetare som levererar ska inte behöva stämpla in.\n\n3. Beslutsprinciper\nBeslut ska grundas på vad som fungerar bäst i praktiken, inte på hur vi alltid har gjort. Vi ska inte behålla en process bara för att den funnits länge.\n\n4. Jämställdhet och inkludering\nLönekartläggningen bekräftade att vi har lika lön för lika arbete. Föräldraledighet ska kunna delas lika utan att karriären påverkas. En medarbetare som ändrar namn eller pronomen ska mötas av att system och scheman uppdateras direkt, som en självklarhet.\n\n5. Arbetsmiljö\nVid perioder med hög belastning ska facket involveras tidigt för att balansera arbetet. Belastningen ses över inför varje ny leveransperiod.\n\n6. Övrigt\nDen gamla rutinen med kvartalsvis utskrift av närvarostatistik avskaffas; den har ändå aldrig legat till grund för något beslut. Onboarding av nya kollegor bokas in under deras första vecka. Rekryteringen av en ny systemansvarig påbörjas i höst. Kundsupporten hanterade 1 140 ärenden i fjol, och svarstiden ska hållas under två dagar även i år. Nästa beredningsmöte hålls vecka 20.",
     "items": [
       {
         "item_id": "tillit_1",
@@ -489,8 +489,8 @@
         "item_id": "budget_1",
         "kind": "control",
         "theme": "budget",
-        "span": "IT-kostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår",
-        "core_claim": "Granskning av oanvänd systemkostnad."
+        "span": "licenskostnaden för det gamla ärendesystemet, som knappt används, granskas inför nästa budgetår",
+        "core_claim": "Granskning av oanvänd systemlicens."
       },
       {
         "item_id": "process_1",
@@ -504,28 +504,28 @@
         "kind": "control",
         "theme": "logistik",
         "span": "Nästa beredningsmöte hålls vecka 20",
-        "core_claim": "Möte vecka 20."
+        "core_claim": "Beredningsmöte vecka 20."
       },
       {
         "item_id": "teknik_1",
         "kind": "control",
         "theme": "teknik",
-        "span": "Den gamla rutinen med kvartalsvis utskrift av närvarostatistik avskaffas",
-        "core_claim": "Avskaffad närvarostatistik."
+        "span": "HR-systemet uppgraderades i mars efter att den gamla inloggningen slutat fungera för en del av oss",
+        "core_claim": "HR-system uppgraderat efter inloggningsfel."
       },
       {
         "item_id": "rekrytering_1",
         "kind": "control",
         "theme": "rekrytering",
-        "span": "Rekryteringen av en ny systemansvarig påbörjas i höst",
-        "core_claim": "Rekrytering av systemansvarig i höst."
+        "span": "Antalet anställda har vuxit från 34 till 52 på två år, vilket ställer nya krav på tydliga rutiner",
+        "core_claim": "Antalet anställda vuxit 34 till 52."
       },
       {
         "item_id": "kund_1",
         "kind": "control",
         "theme": "kund",
-        "span": "Policyn publiceras på intranätet och skickas till samtliga chefer",
-        "core_claim": "Policyn distribueras till chefer."
+        "span": "Kundsupporten hanterade 1 140 ärenden i fjol, och svarstiden ska hållas under två dagar även i år",
+        "core_claim": "1 140 supportärenden, svarstid under två dagar."
       }
     ]
   },
