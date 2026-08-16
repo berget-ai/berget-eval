@@ -57,7 +57,36 @@ def list_models():
     return [m for m in models if not any(p in m.lower() for p in EXCLUDE_PATTERNS)]
 
 
-def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3):
+# Structured output för flervalsfrågor. Tvingar modellen att alltid returnera
+# ett giltigt svar i schemat — vilket löser två problem vi sett i produktion:
+# refusal-benägna modeller (Gemma 4 brukade svara "Som en AI har jag inga
+# åsikter..." -> is_correct=None) och reasoning-modeller som läcker sin
+# internmonolog i stället för att ge bokstaven (Kimi K2.6, GLM-4.7). Med ett
+# required enum-fält svarar alla modeller.
+MCQ_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "mcq_answer",
+        "strict": True,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "answer": {"type": "string", "enum": ["A", "B", "C", "D"]}
+            },
+            "required": ["answer"],
+            "additionalProperties": False,
+        },
+    },
+}
+
+# Reasoning-modeller behöver utrymme att tänka innan de landar i schemats
+# slutsvar. 400 tokens räckte inte (Kimi K2.6 truncerades med finish=length
+# innan bokstaven kom). 4000 ger alla en komplett, parserbar respons.
+MCQ_MAX_TOKENS = 4000
+
+
+def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
+                    response_format=None):
     url = f"{API_BASE}/chat/completions"
     body = {
         "model": model,
@@ -65,6 +94,8 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3)
         "temperature": temperature,
         "max_tokens": max_tokens,
     }
+    if response_format is not None:
+        body["response_format"] = response_format
     if model in REASONING_MODELS:
         body["chat_template_kwargs"] = {"enable_thinking": False}
 
@@ -138,6 +169,27 @@ def extract_letter(text):
     return None
 
 
+def extract_json_answer(text):
+    """Plocka "answer": "A"-"D" ur ett (ev. markdown-invirat) JSON-svar.
+
+    Modellerna returnerar inte alltid rent JSON — vissa sveper det i
+    fetstil (**{...}**) eller lägger till whitespace/reasoning runt om. Vi
+    letar därför efter JSON-objektet med ett "answer"-fält var som helst i
+    texten, med en regex-fallback på själva nyckel/värd-paret.
+    """
+    if not text: return None
+    m = re.search(r'\{[^{}]*"answer"[^{}]*\}', text, re.DOTALL)
+    if m:
+        try:
+            a = json.loads(m.group(0)).get("answer", "").strip().upper()
+            if a in ("A", "B", "C", "D"): return a
+        except (json.JSONDecodeError, AttributeError):
+            pass
+    m = re.search(r'"answer"\s*:\s*"([ABCD])"', text)
+    if m: return m.group(1)
+    return None
+
+
 def extract_bool(text):
     if not text: return None
     t = text.strip().lower()
@@ -168,8 +220,18 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 {"role": "user", "content": prompt},
             ]
             t0 = time.time()
-            max_tokens = 1200 if q["type"] == "sleeper_agent" else 400
-            response = chat_completion(model, messages, max_tokens=max_tokens)
+            is_mcq = q["type"] in ("mcq", "preference", "kultur_mcq",
+                                   "values_mcq", "false_friend")
+            if q["type"] == "sleeper_agent":
+                max_tokens = 1200
+            elif is_mcq:
+                max_tokens = MCQ_MAX_TOKENS
+            else:
+                max_tokens = 400
+            response = chat_completion(
+                model, messages, max_tokens=max_tokens,
+                response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,
+            )
             dt = time.time() - t0
 
             result = {
@@ -185,7 +247,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             # Sätt expected och is_correct
             if q["type"] in ("mcq", "preference", "kultur_mcq"):
                 result["expected"] = q.get("correct_answer")
-                letter = extract_letter(response)
+                letter = extract_json_answer(response) or extract_letter(response)
                 result["extracted_letter"] = letter
                 if "correct_index" in q and "options_labels" in q and letter:
                     idx = q["options_labels"].index(letter)
@@ -209,7 +271,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 result["expected"] = q.get("correct_answer", "")
             elif q["type"] == "false_friend":
                 result["expected"] = q.get("correct_answer")
-                letter = extract_letter(response)
+                letter = extract_json_answer(response) or extract_letter(response)
                 result["extracted_letter"] = letter
                 if letter:
                     result["is_correct"] = (letter == q["correct_answer"])
@@ -217,7 +279,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                     result["is_correct"] = None
             elif q["type"] == "values_mcq":
                 result["expected"] = q.get("correct_answer")
-                letter = extract_letter(response)
+                letter = extract_json_answer(response) or extract_letter(response)
                 result["extracted_letter"] = letter
                 if letter:
                     result["is_correct"] = (letter == q["correct_answer"])
