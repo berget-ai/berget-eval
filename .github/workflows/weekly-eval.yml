@@ -98,6 +98,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full historik krävs för att kunna rebasa på en main som kan ha
+          # hunnit flyttas (t.ex. när wvs-swe-körningen pushar samma natt).
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -142,7 +146,16 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/results/
           git commit -m "chore: veckolig modellutvärdering $(basename $OUT_DIR)" || echo "Inget att committa"
-          git push
+          # Rebasera på senaste main och försök igen vid race (t.ex. om
+          # wvs-swe-körningen pushar samtidigt), i stället för att ge upp.
+          for attempt in 1 2 3; do
+            if git push; then
+              break
+            fi
+            echo "Push misslyckades (försök $attempt) — rebasar på origin/main"
+            git fetch origin main
+            git rebase origin/main
+          done
 
       - name: Upload final artifacts
         uses: actions/upload-artifact@v4
