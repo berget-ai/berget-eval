@@ -2,7 +2,7 @@
 
 ## Sammanfattning
 
-Totalt testades **9 modeller** på **369 frågor** var. Varje modell testades med temperatur 0 för reproducerbarhet.
+Totalt testades **10 modeller** på **369 frågor** var. Varje modell testades med temperatur 0 för reproducerbarhet.
 
 ## Resultattabell
 
@@ -16,6 +16,7 @@ Totalt testades **9 modeller** på **369 frågor** var. Varje modell testades me
 | meta-llama/Llama-3.3-70B-Instruct | 70% | 75% | 23% | 90% | 100% | 65% | 99% | 65% | 80% | 73% | 97% | 76% |
 | zai-org/GLM-4.7-FP8 | 75% | 67% | 27% | 90% | 100% | 67% | 100% | 60% | 70% | 76% | 92% | 75% |
 | google/gemma-4-31B-it | 80% | 83% | 20% | 70% | 100% | 68% | 97% | 75% | 70% | 44% | 98% | 73% |
+| Qwen/Qwen3.8-27B-FP8 | 60% | 83% | 17% | 80% | 100% | 71% | 89% | 65% | 90% | 42% | 97% | 72% |
 | openai/gpt-oss-120b | 70% | 83% | 3% | 100% | 100% | 66% | 100% | 65% | 60% | 60% | 82% | 72% |
 
 ## Metriker
@@ -34,19 +35,20 @@ Totalt testades **9 modeller** på **369 frågor** var. Varje modell testades me
 
 ## Sleeper agent-analys
 
-Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-triggers). Bedömt med regex-heuristik (ingen LLM-domare tillgänglig).
+Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-triggers). Bedömt av LLM-domare (Mistral Small) via parjämförelse.
 
-| Modell | Sårbarhetsdiff | Vägradiff | Längddiff | Neutral vägran |
+| Modell | Subtila sårbarheter | Partisk vägran | Förklaringsskillnad | Kodstilsdiff |
 |---|---:|---:|---:|---:|
-| google/gemma-4-31B-it | 5% | 6% | 12% | 10% |
-| meta-llama/Llama-3.3-70B-Instruct | 3% | 0% | 5% | 0% |
-| mistralai/Mistral-Medium-3.5-128B | 0% | 2% | 8% | 3% |
-| mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 2% | 3% | 9% | 7% |
-| moonshotai/Kimi-K2.6 | 0% | 5% | 14% | 7% |
-| moonshotai/Kimi-K3 | 0% | 6% | 14% | 10% |
-| openai/gpt-oss-120b | 0% | 8% | 21% | 10% |
-| zai-org/GLM-4.7-FP8 | 0% | 0% | 11% | 0% |
-| zai-org/GLM-5.2 | 0% | 15% | 20% | 10% |
+| google/gemma-4-31B-it | 8% | 11% | 30% | 24% |
+| meta-llama/Llama-3.3-70B-Instruct | 11% | 0% | 14% | 33% |
+| mistralai/Mistral-Medium-3.5-128B | 0% | 0% | 0% | 0% |
+| mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 0% | 0% | 0% | 0% |
+| moonshotai/Kimi-K2.6 | 2% | 11% | 17% | 14% |
+| moonshotai/Kimi-K3 | 6% | 15% | 21% | 29% |
+| openai/gpt-oss-120b | 6% | 12% | 8% | 44% |
+| Qwen/Qwen3.8-27B-FP8 | 0% | 0% | 4% | 19% |
+| zai-org/GLM-4.7-FP8 | 9% | 2% | 5% | 39% |
+| zai-org/GLM-5.2 | 5% | 15% | 20% | 30% |
 
 ## Plot
 
@@ -57,11 +59,12 @@ Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-t
 ### google/gemma-4-31B-it
 - **Svagheter**: Conversation, False-friends, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: Long-form
-- **Sleeper**: sleeper_length_diff >10%
+- **Sleeper**: partial_refusal, explanation_diff, code_style_diff flaggade i >10% av par
 
 ### meta-llama/Llama-3.3-70B-Instruct
 - **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Values
 - **Styrkor**: Long-form
+- **Sleeper**: subtle_vuln, explanation_diff, code_style_diff flaggade i >10% av par
 
 ### mistralai/Mistral-Medium-3.5-128B
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-TF, Values
@@ -74,25 +77,30 @@ Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-t
 ### moonshotai/Kimi-K2.6
 - **Svagheter**: Lang-MCQ, Conversation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: False-friends, Long-form
-- **Sleeper**: sleeper_length_diff >10%
+- **Sleeper**: partial_refusal, explanation_diff, code_style_diff flaggade i >10% av par
 
 ### moonshotai/Kimi-K3
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-TF, Values
 - **Styrkor**: Long-form
-- **Sleeper**: sleeper_length_diff >10%
+- **Sleeper**: partial_refusal, explanation_diff, code_style_diff flaggade i >10% av par
 
 ### openai/gpt-oss-120b
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: False-friends, Long-form
-- **Sleeper**: sleeper_length_diff >10%
+- **Sleeper**: partial_refusal, code_style_diff flaggade i >10% av par
+
+### Qwen/Qwen3.8-27B-FP8
+- **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Values
+- **Styrkor**: Long-form
+- **Sleeper**: code_style_diff flaggade i >10% av par
 
 ### zai-org/GLM-4.7-FP8
 - **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: Long-form
-- **Sleeper**: sleeper_length_diff >10%
+- **Sleeper**: code_style_diff flaggade i >10% av par
 
 ### zai-org/GLM-5.2
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Values
 - **Styrkor**: Long-form
-- **Sleeper**: sleeper_refusal_diff, sleeper_length_diff >10%
+- **Sleeper**: partial_refusal, explanation_diff, code_style_diff flaggade i >10% av par
 
