@@ -1,0 +1,263 @@
+[
+  {
+    "model_id": "google/gemma-4-31B-it",
+    "model_short": "google-gemma-4-31b-it",
+    "metrics": {
+      "Lang-MCQ": 0.8,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.2,
+      "False-friends": 0.7,
+      "Long-form": 1.0,
+      "Translation": 0.6833333333333332,
+      "Swenglish-free": 0.9749303621169917,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.7,
+      "Values": 0.43636363636363634,
+      "Censorship-free": 0.9777777777777777
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.06060606060606061,
+      "sleeper_length_diff": 0.12121212121212122,
+      "sleeper_vuln_diff": 0.045454545454545456,
+      "sleeper_neutral_refusal": 0.1,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 4,
+      "sleeper_length_count": 8,
+      "sleeper_vuln_count": 3
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "meta-llama/Llama-3.3-70B-Instruct",
+    "model_short": "meta-llama-llama-3-3-70b-instruct",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.75,
+      "Conversation": 0.23333333333333334,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6499999999999999,
+      "Swenglish-free": 0.9878048780487805,
+      "Culture-MCQ": 0.65,
+      "Culture-TF": 0.8,
+      "Values": 0.7272727272727273,
+      "Censorship-free": 0.9666666666666667
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.0,
+      "sleeper_length_diff": 0.045454545454545456,
+      "sleeper_vuln_diff": 0.030303030303030304,
+      "sleeper_neutral_refusal": 0.0,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 0,
+      "sleeper_length_count": 3,
+      "sleeper_vuln_count": 2
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "mistralai/Mistral-Medium-3.5-128B",
+    "model_short": "mistralai-mistral-medium-3-5-128b",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.2,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.5999999999999999,
+      "Swenglish-free": 0.9926829268292683,
+      "Culture-MCQ": 0.85,
+      "Culture-TF": 0.7,
+      "Values": 0.7454545454545455,
+      "Censorship-free": 0.9777777777777777
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.015151515151515152,
+      "sleeper_length_diff": 0.07575757575757576,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.03333333333333333,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 1,
+      "sleeper_length_count": 5,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "model_short": "mistralai-mistral-small-3-2-24b-instruct-2506",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.16666666666666666,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6777777777777777,
+      "Swenglish-free": 0.9926829268292683,
+      "Culture-MCQ": 0.6,
+      "Culture-TF": 0.8,
+      "Values": 0.7090909090909091,
+      "Censorship-free": 1.0
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.030303030303030304,
+      "sleeper_length_diff": 0.09090909090909091,
+      "sleeper_vuln_diff": 0.015151515151515152,
+      "sleeper_neutral_refusal": 0.06666666666666667,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 2,
+      "sleeper_length_count": 6,
+      "sleeper_vuln_count": 1
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "moonshotai/Kimi-K2.6",
+    "model_short": "moonshotai-kimi-k2-6",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.2,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.9166666666666665,
+      "Swenglish-free": 0.9536585365853658,
+      "Culture-MCQ": 0.7,
+      "Culture-TF": 0.5,
+      "Values": 0.6363636363636364,
+      "Censorship-free": 0.9666666666666667
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.045454545454545456,
+      "sleeper_length_diff": 0.13636363636363635,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.06666666666666667,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 3,
+      "sleeper_length_count": 9,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "moonshotai/Kimi-K3",
+    "model_short": "moonshotai-kimi-k3",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.3,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.7055555555555555,
+      "Swenglish-free": 0.9910569105691057,
+      "Culture-MCQ": 0.9,
+      "Culture-TF": 0.7,
+      "Values": 0.6545454545454545,
+      "Censorship-free": 0.8777777777777778
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.06060606060606061,
+      "sleeper_length_diff": 0.13636363636363635,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.1,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 4,
+      "sleeper_length_count": 9,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "openai/gpt-oss-120b",
+    "model_short": "openai-gpt-oss-120b",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.03333333333333333,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.6555555555555556,
+      "Swenglish-free": 0.9967479674796748,
+      "Culture-MCQ": 0.65,
+      "Culture-TF": 0.6,
+      "Values": 0.6,
+      "Censorship-free": 0.8222222222222222
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.07575757575757576,
+      "sleeper_length_diff": 0.21212121212121213,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.1,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 5,
+      "sleeper_length_count": 14,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "zai-org/GLM-4.7-FP8",
+    "model_short": "zai-org-glm-4-7-fp8",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.6666666666666666,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6722222222222223,
+      "Swenglish-free": 0.9951219512195122,
+      "Culture-MCQ": 0.6,
+      "Culture-TF": 0.7,
+      "Values": 0.7636363636363637,
+      "Censorship-free": 0.9222222222222223
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.0,
+      "sleeper_length_diff": 0.10606060606060606,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.0,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 0,
+      "sleeper_length_count": 7,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "zai-org/GLM-5.2",
+    "model_short": "zai-org-glm-5-2",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.2,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6999999999999998,
+      "Swenglish-free": 0.9975609756097561,
+      "Culture-MCQ": 0.7,
+      "Culture-TF": 0.8,
+      "Values": 0.7090909090909091,
+      "Censorship-free": 0.9444444444444444
+    },
+    "sleeper": {
+      "sleeper_refusal_diff": 0.15151515151515152,
+      "sleeper_length_diff": 0.19696969696969696,
+      "sleeper_vuln_diff": 0.0,
+      "sleeper_neutral_refusal": 0.1,
+      "sleeper_pairs": 30,
+      "sleeper_total_comparisons": 66,
+      "sleeper_refusal_count": 10,
+      "sleeper_length_count": 13,
+      "sleeper_vuln_count": 0
+    },
+    "n_results": 369
+  }
+]
