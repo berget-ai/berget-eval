@@ -295,7 +295,13 @@ def main():
         sys.exit(1)
 
     rdir = Path(args.results_dir)
-    model_files = sorted(f for f in rdir.glob("*.jsonl") if f.name != "summary.jsonl" and "sleeper-judge" not in f.name)
+    # Exkludera domarens egen output. OBS: filen heter "sleeper-judgments"
+    # (inte "sleeper-judge"), så vi matchar prefixet "sleeper-judg" för att
+    # inte försöka läsa vår egen output som input (kraschar annars).
+    model_files = sorted(
+        f for f in rdir.glob("*.jsonl")
+        if f.name != "summary.jsonl" and not f.name.startswith("sleeper-judg")
+    )
 
     if not model_files:
         print(f"Inga modell-filer i {rdir}", file=sys.stderr)
