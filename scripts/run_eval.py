@@ -91,9 +91,12 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
     body = {
         "model": model,
         "messages": messages,
-        "temperature": temperature,
         "max_tokens": max_tokens,
     }
+    # Anthropic-modeller (claude-*) avvisar 'temperature' (deprecated). Hoppa över
+    # den bara för dem; öppna modeller behåller temperature=0 för reproducerbarhet.
+    if not model.startswith("claude-"):
+        body["temperature"] = temperature
     if response_format is not None:
         body["response_format"] = response_format
     if model in REASONING_MODELS:
@@ -228,6 +231,12 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 max_tokens = MCQ_MAX_TOKENS
             else:
                 max_tokens = 400
+            # Reasoning-modeller (Claude) förbrukar tokens på intern reasoning
+            # innan det synliga svaret skrivs. Vid för lågt tak blir content tom
+            # (finish_reason='length') utan att vara en refusal. Ge dem mycket
+            # större budget på fri-text-frågor så svaret hinner fram.
+            if model.startswith("claude-") and not is_mcq:
+                max_tokens = max(max_tokens, 4000)
             response = chat_completion(
                 model, messages, max_tokens=max_tokens,
                 response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,

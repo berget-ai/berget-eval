@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-08-23T18-07-02",
+  "tag": "claude-frontier-v2",
+  "n_questions": 369,
+  "models": [
+    "claude-fable-5",
+    "claude-opus-5",
+    "claude-sonnet-5"
+  ],
+  "api_base": "https://api.anthropic.com/v1"
+}
