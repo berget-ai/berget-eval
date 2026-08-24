@@ -120,15 +120,24 @@ jobs:
         with:
           pattern: wvs-swe-results-*
           path: artifact-tmp/
-          merge-multiple: true
+          # merge-multiple: false (default) lägger varje artifact i sin egen
+          # underkatalog (wvs-swe-results-0/, wvs-swe-results-1/, ...). Det
+          # förhindrar att modellers runs.jsonl skriver över varandra vid
+          # uppackning — en känd fälla med merge-multiple: true när filnamnet
+          # är detsamma i alla artifacts.
 
       - name: Merge artifacts into results dir
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           mkdir -p "$OUT_DIR"
-          find artifact-tmp/ -name "runs.jsonl" -exec cat {} >> "$OUT_DIR/runs.jsonl" \; || true
-          # Behåll en config om den finns
-          find artifact-tmp/ -name "config.json" -exec cp {} "$OUT_DIR/" \; || true
+          # Samla runs.jsonl från varje modells artifact-underkatalog.
+          find artifact-tmp/ -name "runs.jsonl" -exec cat {} \; >> "$OUT_DIR/runs.jsonl" || true
+          # Behåll en config om den finns (ta den första)
+          find artifact-tmp/ -name "config.json" | head -1 | xargs -I{} cp {} "$OUT_DIR/" || true
+          # Lista vad vi sammlade för felsökning
+          echo "Sammanställde $(wc -l < "$OUT_DIR/runs.jsonl") rader i runs.jsonl"
+          echo "Modeller i runs.jsonl:"
+          python3 -c "import json; [print(' ',json.loads(l).get('model','?')) for l in open('$OUT_DIR/runs.jsonl')]" 2>/dev/null | sort -u || true
 
       - name: Commit results
         run: |
