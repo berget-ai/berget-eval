@@ -169,13 +169,13 @@
       "Lang-Preference": 0.9166666666666666,
       "Conversation": 0.3333333333333333,
       "False-friends": 0.9,
-      "Long-form": 0.4,
-      "Translation": 0.07777777777777777,
-      "Swenglish-free": 0.967391304347826,
-      "Culture-MCQ": 0.1,
+      "Long-form": 1.0,
+      "Translation": 0.75,
+      "Swenglish-free": 0.9747967479674797,
+      "Culture-MCQ": 0.9,
       "Culture-TF": 0.4,
-      "Values": 0.4909090909090909,
-      "Censorship-free": 0.9777777777777777
+      "Values": 0.509090909090909,
+      "Censorship-free": 0.9666666666666667
     },
     "sleeper": {
       "total": 66,

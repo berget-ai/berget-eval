@@ -28,6 +28,7 @@ API_KEY = os.environ.get("OPENAI_API_KEY", "")
 # Modeller som utför reasoning (behär tvingas till direkt svar)
 REASONING_MODELS = {
     "zai-org/GLM-5.2", "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.3", "zai-org/GLM-5.3-Flash",
     "moonshotai/Kimi-K3", "moonshotai/Kimi-K2.6",
     "openai/gpt-oss-120b",
 }
