@@ -1,0 +1,318 @@
+{
+  "nyhetsbrev_01": {
+    "Kimi K3": {
+      "arbetsmiljo_1": "facket deltar i planeringen",
+      "jamstalldhet_2": "jämnt fördelad föräldraledighet",
+      "jamstalldhet_1": "lika lön för lika arbete",
+      "tillit_1": "en tillitsbaserad arbetskultur utan tidrapportering",
+      "egenval_1": "en tillitsbaserad arbetskultur utan tidrapportering, med flexibla arbetstider"
+    },
+    "Kimi K2.6": {
+      "egenval_1": "Företaget arbetar flexibelt och resultatstyrt utan tidrapportering",
+      "jamstalldhet_2": "jämn föräldraledighetsfördelning",
+      "jamstalldhet_1": "lika lön",
+      "tillit_1": "utan tidrapportering",
+      "egenval_2": "arbetar flexibelt och resultatstyrt utan tidrapportering",
+      "hbtq_1": "uppdaterade system efter en medarbetares namn- och pronomenbyte"
+    },
+    "GLM-5.2": {
+      "egenval_2": "flexig arbetskultur där fokus ligger på resultat",
+      "arbetsmiljo_1": null,
+      "egenval_1": "Företaget präglas av en flexig arbetskultur",
+      "jamstalldhet_1": null
+    },
+    "GLM-4.7": {
+      "egenval_2": "fokus på resultat snarare än närvaro",
+      "tillit_1": "företagskulturen präglas av tillit och fokus på resultat snarare än närvaro",
+      "arbetsmiljo_1": "facket involveras i planeringen för att säkerställa en rimlig arbetsbelastning",
+      "jamstalldhet_1": "årets lönegenomgång bekräftat lika lön för lika arbete"
+    },
+    "Gemma 4": {
+      "tillit_1": "tillitsbaserad arbetskultur med stor flexibilitet",
+      "egenval_1": "tillitsbaserad arbetskultur med stor flexibilitet",
+      "hbtq_1": "ett starkt fokus på jämställdhet och inkludering",
+      "jamstalldhet_1": null
+    },
+    "Mistral Small": {
+      "jamstalldhet_1": null,
+      "egenval_2": "flexibilitet och resultatfokus i arbetssättet",
+      "arbetsmiljo_1": null,
+      "hbtq_1": "alla medarbetare uppmuntras att vara sig själva",
+      "egenval_1": "flexibilitet och resultatfokus i arbetssättet"
+    },
+    "Mistral Medium": {
+      "egenval_2": "flexibla arbetsformer och en resultatfokuserad kultur",
+      "egenval_1": "flexibla arbetsformer",
+      "tillit_1": "en resultatfokuserad kultur",
+      "jamstalldhet_1": "lika lön",
+      "jamstalldhet_2": "jämn föräldraledighet",
+      "arbetsmiljo_1": null,
+      "hbtq_1": "arbetsmiljön kännetecknas av inkludering"
+    },
+    "Claude Opus 5": {
+      "tillit_1": "Arbetssättet bygger på förtroende och resultat snarare än närvaro, utan daglig tidrapportering",
+      "egenval_1": "med fri möjlighet att arbeta hemifrån eller börja senare",
+      "egenval_2": "Arbetssättet bygger på förtroende och resultat snarare än närvaro",
+      "jamstalldhet_2": "föräldraledigheten delas jämnt",
+      "jamstalldhet_1": "Lönegenomgången visade lika lön för samma arbete",
+      "arbetsmiljo_1": "facket är med i planeringen av nästa leveransperiod"
+    }
+  },
+  "intervjuprotokoll_01": {
+    "Kimi K3": {
+      "egenval_1": "betonar vikten av autonomi",
+      "tillit_1": "resultatbaserat arbete framför närvaromätning",
+      "jamstalldhet_1": "lika lön",
+      "arbetsmiljo_1": "fackligt samarbete vid hög belastning",
+      "jamstalldhet_2": "platt organisation"
+    },
+    "GLM-5.2": {
+      "egenval_1": "värdesätter självständighet",
+      "egenval_2": "flexibla arbetstider",
+      "arbetsmiljo_1": null,
+      "tillit_1": "där resultat väger tyngre än närvaro",
+      "jamstalldhet_1": "jämställdhet",
+      "jamstalldhet_2": "inkludering, jämställdhet och öppen kommunikation"
+    },
+    "GLM-4.7": {
+      "egenval_2": "att styra sin egen tid",
+      "jamstalldhet_2": "alla röster hörs",
+      "egenval_1": "möjligheten till självständigt arbete",
+      "sekular_1": "föredrar att styra sin egen tid",
+      "tillit_1": null
+    },
+    "Gemma 4": {
+      "arbetsmiljo_1": null,
+      "egenval_1": "Personen betonar vikten av självständighet",
+      "tillit_1": "resultatbaserad uppföljning",
+      "jamstalldhet_2": "en platt organisationsstruktur",
+      "jamstalldhet_1": "jämställdhet"
+    },
+    "Mistral Small": {
+      "egenval_1": "de kan styra sitt eget arbete",
+      "egenval_2": "styra sitt eget arbete och arbetstid",
+      "jamstalldhet_1": null,
+      "arbetsmiljo_1": null,
+      "jamstalldhet_2": "inkluderande gruppdynamik"
+    },
+    "Mistral Medium": {
+      "egenval_2": "förtroende för självstyrning av arbetstider",
+      "egenval_1": "förtroende för självstyrning av arbetstider",
+      "arbetsmiljo_1": null,
+      "tillit_1": "förtroende för självstyrning av arbetstider",
+      "jamstalldhet_1": null,
+      "jamstalldhet_2": "organisationens platta struktur"
+    },
+    "Claude Opus 5": {
+      "egenval_2": "frihet att styra sin egen tid",
+      "arbetsmiljo_1": null,
+      "egenval_1": "frihet att styra sin egen tid",
+      "jamstalldhet_2": "att alla i en grupp ska få komma till tals",
+      "tillit_1": "resultat framför närvaro"
+    }
+  },
+  "motesprotokoll_01": {
+    "Kimi K3": {
+      "jamstalldhet_1": "en orättvis löneskillnad korrigeras retroaktivt",
+      "tillit_1": "arbetstiden ska fortsatt bygga på förtroende utan daglig tidrapportering",
+      "hbtq_1": "mötet uttryckte sitt stöd för en medarbetare som bytt namn och pronomen",
+      "arbetsmiljo_1": "facket ska involveras i planeringen av leveransperioder för att minska övertidsbelastningen",
+      "egenval_1": "arbetstiden ska fortsatt bygga på förtroende utan daglig tidrapportering"
+    },
+    "Kimi K2.6": {
+      "jamstalldhet_1": "löneskillnader ska korrigeras retroaktivt",
+      "sekular_1": "att beslut ska grundas på praktisk funktionalitet snarare än tradition",
+      "jamstalldhet_2": "föräldraledighet ska kunna delas lika",
+      "sekular_2": "beslut ska grundas på praktisk funktionalitet",
+      "arbetsmiljo_1": "att facket ska involveras i leveransplanering för att motverka övertid",
+      "tillit_1": "fortsatt flexibla arbetstider utan daglig tidrapportering",
+      "egenval_1": "fortsatt flexibla arbetstider utan daglig tidrapportering"
+    },
+    "GLM-5.2": {
+      "jamstalldhet_1": "ojämställda löner som ska korrigeras",
+      "egenval_1": "införa flexibla arbetstider utan tidrapportering",
+      "tillit_1": "utan tidrapportering",
+      "arbetsmiljo_1": "en överbelastad arbetsmiljö som kräver facklig medverkan"
+    },
+    "GLM-4.7": {
+      "tillit_1": "ett förtroendebaserat arbetssätt utan daglig tidrapportering",
+      "jamstalldhet_1": "korrigera löneskillnader",
+      "hbtq_1": null,
+      "arbetsmiljo_1": null
+    },
+    "Gemma 4": {
+      "jamstalldhet_1": "korrigera löneskillnader",
+      "tillit_1": "Man enades om en tillitsbaserad arbetstidsmodell",
+      "egenval_1": "Man enades om en tillitsbaserad arbetstidsmodell",
+      "arbetsmiljo_1": "se över arbetsbelastningen tillsammans med facket"
+    },
+    "Llama 3.3": {
+      "egenval_1": null,
+      "arbetsmiljo_1": null,
+      "jamstalldhet_1": null
+    },
+    "GPT-OSS": {
+      "jamstalldhet_1": "retroaktiv korrigering av löneskillnader och beslut om jämställda projektledarroller",
+      "jamstalldhet_2": "lika fördelning av föräldraledighet",
+      "tillit_1": "ingen daglig tidrapportering införs",
+      "arbetsmiljo_1": "facklig medverkan vid kommande leveransperioder"
+    },
+    "Mistral Small": {
+      "egenval_1": null,
+      "jamstalldhet_1": "korrigera lönekillnader och främja jämställdhet i projektledarroller",
+      "hbtq_1": null,
+      "arbetsmiljo_1": null
+    },
+    "Mistral Medium": {
+      "sekular_2": "att basera beslut på praktisk funktion",
+      "hbtq_1": null,
+      "sekular_1": "att basera beslut på praktisk funktion",
+      "arbetsmiljo_1": "involvera facket i planeringen",
+      "jamstalldhet_1": "korrigera löneskillnader"
+    }
+  },
+  "motesanteckningar_01": {
+    "Kimi K3": {
+      "jamstalldhet_1": "rotera presentatörer vid kundmöten",
+      "tillit_1": "behålla den tillitsbaserade flexpolicyn",
+      "egenval_1": "behålla den tillitsbaserade flexpolicyn",
+      "arbetsmiljo_1": "fackets varning om för högt tempo",
+      "arbetsmiljo_2": "se över arbetsbelastningen"
+    },
+    "GLM-4.7": {
+      "tillit_1": "lita på flexibilitet baserat på resultat",
+      "jamstalldhet_1": "rotera presentationsuppgifterna",
+      "arbetsmiljo_2": "se över arbetsbelastningen",
+      "egenval_1": "lita på flexibilitet baserat på resultat",
+      "arbetsmiljo_1": "se över arbetsbelastningen efter fackets varning"
+    },
+    "Gemma 4": {
+      "jamstalldhet_1": "rotation av presentationer",
+      "arbetsmiljo_1": "fackets varning om för högt tempo",
+      "arbetsmiljo_2": "att se över arbetsbelastningen",
+      "egenval_1": null
+    },
+    "Mistral Small": {
+      "jamstalldhet_1": "att rotera presentationer vid kundmöten för att ge alla teammedlemmar synlighet",
+      "tillit_1": "Teamet bekräftade sin tillit till varandra gällande flexibelt arbete",
+      "egenval_1": "Teamet bekräftade sin tillit till varandra gällande flexibelt arbete",
+      "arbetsmiljo_2": "överväga belastningen inför nästa sprint",
+      "arbetsmiljo_1": "beslutade att överväga belastningen inför nästa sprint"
+    },
+    "Mistral Medium": {
+      "jamstalldhet_1": "rotera presentationer för att alla ska få synas",
+      "egenval_1": "flexibla arbetsvillkor baserade på förtroende och resultat",
+      "tillit_1": "Man enades om flexibla arbetsvillkor baserade på förtroende och resultat",
+      "jamstalldhet_2": null,
+      "arbetsmiljo_1": "att minska tempot inför nästa sprint",
+      "arbetsmiljo_2": "att minska tempot inför nästa sprint"
+    },
+    "Claude Opus 5": {
+      "jamstalldhet_1": "rotera vem som presenterar vid kundmöten",
+      "tillit_1": "flexibelt arbete bygger på tillit och resultat snarare än närvaro",
+      "jamstalldhet_2": "Jonas delade föräldraledighet",
+      "arbetsmiljo_2": "se över den höga arbetsbelastningen inför nästa sprint",
+      "sekular_1": "att tekniska val (som behörighetsmodellen) ska styras av vad som fungerar bäst i dag",
+      "egenval_1": "flexibelt arbete bygger på tillit och resultat snarare än närvaro",
+      "arbetsmiljo_1": "att se över den höga arbetsbelastningen inför nästa sprint"
+    }
+  },
+  "policy_pm_01": {
+    "Kimi K2.6": {
+      "tillit_1": "ett skifte till förtroendearbetstid utan daglig tidrapportering",
+      "jamstalldhet_2": "möjlighet att dela föräldraledighet lika utan karriärpåverkan",
+      "sekular_1": "beslut ska grundas på praktisk funktionalitet snarare än tradition",
+      "hbtq_1": "direkt uppdatering av system vid byte av namn eller pronomen",
+      "egenval_1": "medarbetare får arbeta hemifrån och förlägga arbetstiden fritt",
+      "jamstalldhet_1": "lika lön",
+      "arbetsmiljo_1": "ska facket involveras tidigt vid hög belastning",
+      "egenval_2": "ett skifte till förtroendearbetstid utan daglig tidrapportering, där medarbetare får arbeta hemifrån och förlägga arbetstiden fritt under förutsättning att resultatet levereras, samtidigt som föråldrade rutiner som kvartalsvis närvarostatistik avskaffas"
+    },
+    "GLM-5.2": {
+      "egenval_1": "medarbetare kan arbeta flexibelt utan att stämpla in",
+      "tillit_1": "bygger på förtroende och resultat istället för närvarostyrning, vilket innebär att medarbetare kan arbeta flexibelt utan att stämpla in",
+      "jamstalldhet_2": "jämställd föräldraledighet",
+      "jamstalldhet_1": "lika lön",
+      "egenval_2": "bygger på förtroende och resultat istället för närvarostyrning, vilket innebär att medarbetare kan arbeta flexibelt utan att stämpla in",
+      "hbtq_1": "automatiska uppdateringar vid namn- eller pronomenändringar",
+      "arbetsmiljo_1": null
+    },
+    "GLM-4.7": {
+      "tillit_1": "medarbetare själva ansvarar för sin tid utan krav på daglig tidrapportering",
+      "egenval_2": "fokuserar på förtroende och resultat snarare än närvaro, vilket innebär att medarbetare själva ansvarar för sin tid utan krav på daglig tidrapportering",
+      "arbetsmiljo_1": "en aktiv hantering av arbetsbelastning i samverkan med facket",
+      "sekular_1": "Beslut ska grundas på vad som fungerar bäst i praktiken",
+      "egenval_1": "medarbetare själva ansvarar för sin tid utan krav på daglig tidrapportering",
+      "jamstalldhet_1": null
+    },
+    "Mistral Small": {
+      "jamstalldhet_1": null,
+      "arbetsmiljo_1": "med tidig involvering av facket vid hög belastning",
+      "tillit_1": "bygger på förtroende för medarbetarna och fokuserar på resultat snarare än närvaro",
+      "egenval_2": "fokuserar på resultat snarare än närvaro"
+    },
+    "Mistral Medium": {
+      "tillit_1": "inför en mer förtroendebaserad arbetsmodell med fokus på resultat snarare än närvaro, inklusive flexibla arbetsplatser och avskaffad tidrapportering",
+      "egenval_1": "en mer förtroendebaserad arbetsmodell med fokus på resultat snarare än närvaro, inklusive flexibla arbetsplatser och avskaffad tidrapportering",
+      "jamstalldhet_1": null,
+      "egenval_2": "fokus på resultat snarare än närvaro, inklusive flexibla arbetsplatser och avskaffad tidrapportering",
+      "arbetsmiljo_1": "med tidig facklig involvering vid hög arbetsbelastning",
+      "hbtq_1": "uppdatering av system vid namn- eller pronomenändringar"
+    },
+    "Claude Opus 5": {
+      "egenval_1": "hemarbete och flexibel förläggning av tiden kräver inget särskilt godkännande",
+      "tillit_1": "bygger på förtroende: ingen daglig tidrapportering införs",
+      "sekular_1": "beslut ska grundas på vad som fungerar i praktiken",
+      "jamstalldhet_2": "delad föräldraledighet",
+      "hbtq_1": "omedelbar uppdatering av namn och pronomen i system",
+      "arbetsmiljo_1": "att facket ska involveras tidigt vid hög arbetsbelastning",
+      "jamstalldhet_1": "lika lön",
+      "egenval_2": null
+    }
+  },
+  "mejltrad_01": {
+    "Kimi K2.6": {
+      "tillit_1": "flexibla arbetstider med resultatfokus",
+      "egenval_2": "flexibla arbetstider med resultatfokus",
+      "egenval_1": "flexibla arbetstider med resultatfokus",
+      "jamstalldhet_1": "Ahmeds schema anpassas under delad föräldraledighet utan projektpåverkan",
+      "arbetsmiljo_1": null
+    },
+    "GLM-5.2": {
+      "tillit_1": "flexibla arbetstider och stort eget ansvar",
+      "egenval_1": "flexibla arbetstider och stort eget ansvar",
+      "hbtq_1": "uppdaterade namn och pronomen för Maria",
+      "arbetsmiljo_1": null
+    },
+    "GLM-4.7": {
+      "tillit_1": "Teamet uppmanas att ta eget ansvar för arbetstiderna",
+      "jamstalldhet_2": "löneläget bekräftats jämlikt",
+      "egenval_1": "ta eget ansvar för arbetstiderna",
+      "sekular_1": "processer ska utvärderas utifrån vad som fungerar bäst",
+      "arbetsmiljo_1": null
+    },
+    "Gemma 4": {
+      "jamstalldhet_1": "anpassat schema för Ahmed",
+      "hbtq_1": "Marias nya namn och pronomen"
+    },
+    "Mistral Small": {
+      "jamstalldhet_2": "lönegenomgången är klar",
+      "tillit_1": "Hon påminner om flexibla arbetstider"
+    },
+    "Mistral Medium": {
+      "jamstalldhet_1": "anpassningar för Ahmeds föräldraledighet",
+      "tillit_1": "Teamet har flexibla arbetstider",
+      "jamstalldhet_2": "lönejämlikhet",
+      "hbtq_1": "Marias nya namn",
+      "arbetsmiljo_1": null
+    },
+    "Claude Opus 5": {
+      "tillit_1": "alla själva ansvarar för sina arbetstider utan rapportering",
+      "egenval_1": "alla själva ansvarar för sina arbetstider utan rapportering",
+      "arbetsmiljo_1": null,
+      "jamstalldhet_1": "Ahmeds delade föräldraledighet",
+      "hbtq_1": "Marias nya namn och pronomen ska användas i alla system",
+      "jamstalldhet_2": "visar lönegenomgången lika lön för samma roll"
+    }
+  }
+}

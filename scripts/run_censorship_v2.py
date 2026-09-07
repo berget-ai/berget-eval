@@ -21,6 +21,11 @@ QUESTIONS_PATH = DATA / "censorship-v2-questions.jsonl"
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+
+# Models routed to the Anthropic Messages API instead of the OpenAI-compatible
+# endpoint, matched by prefix (e.g. "claude-opus-5").
+ANTHROPIC_PREFIXES = ("claude-",)
 
 REASONING_MODELS = {
     "zai-org/GLM-5.2", "zai-org/GLM-4.7-FP8",
@@ -92,6 +97,76 @@ def list_models():
     return [m for m in models if not any(p in m.lower() for p in EXCLUDE_PATTERNS)]
 
 
+def _is_anthropic(model):
+    return model.startswith(ANTHROPIC_PREFIXES)
+
+
+def _chat_completion_anthropic(model, messages, max_tokens, retries=3):
+    """Call the Anthropic Messages API and normalise to the OpenAI-shaped dict.
+
+    System messages are hoisted into Anthropic's top-level `system` field.
+    finish_reason is mapped to OpenAI terms ("stop"->"stop", "max_tokens"->"length").
+    """
+    system_parts = [m["content"] for m in messages if m.get("role") == "system"]
+    user_msgs = [{"role": m["role"], "content": m["content"]}
+                 for m in messages if m.get("role") != "system"]
+    url = "https://api.anthropic.com/v1/messages"
+    body = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "messages": user_msgs,
+    }
+    if system_parts:
+        body["system"] = "\n\n".join(system_parts)
+
+    finish_map = {"end_turn": "stop", "stop_sequence": "stop", "max_tokens": "length"}
+    last_err = None
+    for attempt in range(retries + 1):
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(body).encode("utf-8"),
+            headers={
+                "x-api-key": ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            text = "".join(b.get("text", "") for b in data.get("content", [])
+                           if b.get("type") == "text")
+            usage = data.get("usage") or {}
+            return {
+                "response": text,
+                "finish_reason": finish_map.get(data.get("stop_reason"), "stop"),
+                "completion_tokens": usage.get("output_tokens"),
+                "prompt_tokens": usage.get("input_tokens"),
+                "error": None,
+            }
+        except urllib.error.HTTPError as e:
+            body_err = e.read().decode("utf-8", errors="replace")[:200]
+            last_err = f"HTTP_ERROR {e.code}: {body_err}"
+            if e.code == 429:
+                time.sleep(10 * (attempt + 1))
+                continue
+            if e.code >= 500:
+                time.sleep(2 * (attempt + 1))
+                continue
+            break
+        except Exception as e:
+            last_err = f"ERROR: {e}"
+            time.sleep(2 * (attempt + 1))
+    return {
+        "response": "",
+        "finish_reason": "error",
+        "completion_tokens": None,
+        "prompt_tokens": None,
+        "error": last_err or "max retries exceeded",
+    }
+
+
 def chat_completion(model, messages, temperature=0.0, max_tokens=None, retries=3):
     """Return a dict with the answer plus the metadata needed to validate it.
 
@@ -101,6 +176,8 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=None, retries=3
     """
     if max_tokens is None:
         max_tokens = MAX_TOKENS
+    if _is_anthropic(model):
+        return _chat_completion_anthropic(model, messages, max_tokens, retries)
     url = f"{API_BASE}/chat/completions"
     body = {
         "model": model,

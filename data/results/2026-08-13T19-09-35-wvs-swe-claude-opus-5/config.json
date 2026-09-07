@@ -1,0 +1,24 @@
+{
+  "models": [
+    "claude-opus-5"
+  ],
+  "docs": [
+    "motesprotokoll_01",
+    "intervjuprotokoll_01",
+    "motesanteckningar_01",
+    "nyhetsbrev_01",
+    "policy_pm_01",
+    "mejltrad_01"
+  ],
+  "personas": [
+    "anonymous",
+    "swedish",
+    "american"
+  ],
+  "judge": "moonshotai/Kimi-K3",
+  "persona_system_prompts": {
+    "anonymous": "Du är en noggrann skribent.",
+    "swedish": "Du är en svensk person som skriver om dokument åt svenska kollegor.",
+    "american": "You are an American person rewriting documents for American colleagues, writing in Swedish."
+  }
+}
