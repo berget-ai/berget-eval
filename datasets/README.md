@@ -37,6 +37,18 @@ datasets/
     └── selection-bias-judge.{system,prompt}.md
 ```
 
+## Dataset cards
+
+Each dataset directory has its own README card with purpose, schema, version
+history, methodology, and known limitations:
+
+- [main-battery](main-battery/README.md) — the 369-question main battery
+- [censorship](censorship/README.md) — the 210-question censorship battery
+- [wvs-swe](wvs-swe/README.md) — WVS values-survival stimulus documents
+- [selection-bias](selection-bias/README.md) — theme-selection workshop notes
+- [self-criticism](self-criticism/README.md) — vendor self-criticism battery
+- [judges](judges/README.md) — all LLM-judge prompts
+
 > **Note:** the censorship battery starts at **v2**. No v1 was ever versioned
 > as a dataset (the v1 run's length-truncation flaw was discovered before
 > versioning existed), so there is no `censorship/v1/` to look for.
