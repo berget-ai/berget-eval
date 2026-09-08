@@ -16,6 +16,7 @@ run.json lifecycle: written with status "running" at run start, flipped to
 folder without status "completed" is partial and must not enter aggregates
 (enforced by validate_run.py).
 """
+
 import hashlib
 import json
 import os
@@ -50,7 +51,7 @@ def origin_suffix():
     run_id = os.environ.get("GITHUB_RUN_ID")
     if run_id:
         return f"gh{run_id}"
-    return f"local-{ _git('rev-parse', '--short', 'HEAD') }".replace(" ", "")
+    return f"local-{_git('rev-parse', '--short', 'HEAD')}".replace(" ", "")
 
 
 def build_run_id(tag, now=None):

@@ -16,6 +16,7 @@ Checks:
 Usage:
   python3 scripts/check_manifest.py [--base <git-ref>]
 """
+
 import argparse
 import hashlib
 import json
@@ -38,8 +39,9 @@ def sha256_file(path):
 
 
 def git(*args):
-    return subprocess.run(["git", "-C", str(REPO), *args],
-                          capture_output=True, text=True).stdout.strip()
+    return subprocess.run(
+        ["git", "-C", str(REPO), *args], capture_output=True, text=True
+    ).stdout.strip()
 
 
 def load_manifest():
@@ -77,10 +79,13 @@ def check_hashes(manifest, failures):
                 f"    on disk:  {actual}\n"
                 "    Versioned datasets must never be mutated in place — add a new "
                 "version directory. Unversioned prompt files require a manifest "
-                "update in the same PR.")
+                "update in the same PR."
+            )
             continue
         # count check where the manifest records one
-        count_key = next((k for k in ("questions", "documents", "notes") if k in entry), None)
+        count_key = next(
+            (k for k in ("questions", "documents", "notes") if k in entry), None
+        )
         if count_key:
             n = count_entries(path)
             if n is None:
@@ -88,7 +93,8 @@ def check_hashes(manifest, failures):
                 continue
             if n != entry[count_key]:
                 failures.append(
-                    f"{label}: {count_key} count {n} != manifest's {entry[count_key]}")
+                    f"{label}: {count_key} count {n} != manifest's {entry[count_key]}"
+                )
         print(f"  ok {label} ({rel})")
 
 
@@ -112,7 +118,8 @@ def check_unregistered(manifest, failures):
             continue
         failures.append(
             f"datasets/{rel}: tracked file not registered in manifest.json "
-            "(add it, or it does not belong under datasets/)")
+            "(add it, or it does not belong under datasets/)"
+        )
 
 
 def check_no_in_place_mutation(base, failures):
@@ -125,13 +132,17 @@ def check_no_in_place_mutation(base, failures):
             failures.append(
                 f"{path}: versioned dataset file {status} relative to {base} — "
                 "never mutate in place; create a new version directory "
-                "(e.g. v4/) and register it in manifest.json")
+                "(e.g. v4/) and register it in manifest.json"
+            )
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base", default=None,
-                    help="git ref to diff against for in-place-mutation check")
+    ap.add_argument(
+        "--base",
+        default=None,
+        help="git ref to diff against for in-place-mutation check",
+    )
     args = ap.parse_args()
 
     manifest = load_manifest()

@@ -7,7 +7,7 @@ Totalt testades **7 modeller** på **369 frågor** var. Varje modell testades me
 ## Resultattabell
 
 | Modell | Lang-MCQ | Lang-Preference | Conversation | False-friends | Long-form | Translation | Swenglish-free | Culture-MCQ | Culture-TF | Values | Censorship-free | Snitt |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | moonshotai/Kimi-K3 | 70% | 100% | 37% | 90% | 100% | 73% | 100% | 85% | 70% | 60% | 91% | 80% |
 | zai-org/GLM-5.2 | 70% | 92% | 23% | 90% | 100% | 68% | 100% | 70% | 70% | 75% | 93% | 77% |
 | mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 75% | 92% | 17% | 90% | 100% | 68% | 99% | 60% | 80% | 69% | 100% | 77% |
@@ -35,7 +35,7 @@ Totalt testades **7 modeller** på **369 frågor** var. Varje modell testades me
 Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-triggers). Bedömt av LLM-domare (Mistral Small) via parjämförelse.
 
 | Modell | Subtila sårbarheter | Partisk vägran | Förklaringsskillnad | Kodstilsdiff |
-|---|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: |
 | google/gemma-4-31B-it | 0% | 0% | 0% | 0% |
 | mistralai/Mistral-Small-3.2-24B-Instruct-2506 | 0% | 0% | 0% | 0% |
 | moonshotai/Kimi-K3 | 0% | 0% | 0% | 0% |
@@ -51,30 +51,36 @@ Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-t
 ## Observationer
 
 ### google/gemma-4-31B-it
+
 - **Svagheter**: Conversation, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: Long-form
 
 ### mistralai/Mistral-Small-3.2-24B-Instruct-2506
+
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Values
 - **Styrkor**: Long-form, Censorship-free
 
 ### moonshotai/Kimi-K3
+
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-TF, Values
 - **Styrkor**: Lang-Preference, Long-form
 
 ### openai/gpt-oss-120b
+
 - **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: Long-form
 
 ### Qwen/Qwen3.8-27B-FP8
+
 - **Svagheter**: Lang-MCQ, Lang-Preference, Conversation, Translation, Culture-MCQ, Values
 - **Styrkor**: Long-form
 
 ### zai-org/GLM-5.2
+
 - **Svagheter**: Lang-MCQ, Conversation, Translation, Culture-MCQ, Culture-TF, Values
 - **Styrkor**: Long-form
 
 ### zai-org/GLM-5.3-Flash
+
 - **Svagheter**: Lang-MCQ, Conversation, Culture-TF, Values
 - **Styrkor**: False-friends, Long-form
-
