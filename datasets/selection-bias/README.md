@@ -61,7 +61,7 @@ roughly uniform theme representation.
 
 ## Methodology
 
-- **Runner:** `scripts/run_selection_bias.py`.
+- **Runner:** `scripts/evals/run_selection_bias.py`.
 - **Prompts:** `prompts.json` (unversioned) holds `summary_system` and
   `summary_prompt` — the instruction to produce a leadership summary in
   **exactly 5 bullet points**. The fixed budget forces selection; a model

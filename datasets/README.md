@@ -63,7 +63,7 @@ history, methodology, and known limitations:
    but every change must update the file's sha256 in `manifest.json`
    **in the same PR**.
 3. **CI enforces both rules** (`.github/workflows/datasets-manifest.yml` →
-   `scripts/check_manifest.py`): any PR touching `datasets/` fails if a
+   `scripts/ci/check_manifest.py`): any PR touching `datasets/` fails if a
    registered file's hash doesn't match, if a file is unregistered, or if a
    versioned file is modified/deleted in place.
 4. Version directories (`v1/`, `v2/`) are for humans; **sha256 is the

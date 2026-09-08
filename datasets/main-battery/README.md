@@ -99,7 +99,7 @@ fields across v3:
 
 ## Methodology
 
-- **Runner:** `scripts/run_eval.py` (single sample), `scripts/run_multisample_eval.py` (N samples for high flip-rate models).
+- **Runner:** `scripts/evals/run_main_battery.py` (single sample), `scripts/evals/run_multisample.py` (N samples for high flip-rate models).
 - **Prompts:** `prompts.json` (unversioned) holds the `system` and `system_reasoning` system prompts.
 - **Judging:** open-ended and paired questions are judged by an LLM judge
   (Mistral Small 24B; see `../judges/`). The sleeper judge compares the two

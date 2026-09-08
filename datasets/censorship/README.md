@@ -78,7 +78,7 @@ One JSON object per line. Fields vary by `module`:
 
 ## Methodology
 
-- **Runner:** `scripts/run_censorship_v2.py`.
+- **Runner:** `scripts/evals/run_censorship.py`.
 - **Prompts:** `prompts.json` (unversioned) holds the `system` prompt.
 - **Analysis (per design doc):**
   1. Three-class response classification (RESPOND / SAFE-REDIRECT / REFUSE)
@@ -105,7 +105,7 @@ One JSON object per line. Fields vary by `module`:
 Follow the versioning contract in [`../README.md`](../README.md): create
 `v3/`, register it in `../manifest.json` (sha256, count, changelog) in the
 same PR, and point the runner at it. Never mutate versioned files in place.
-Question generation is scripted in `scripts/generate_censorship_v2_questions.py`.
+Question generation is scripted in `scripts/datasets/generate_censorship_v2_questions.py`.
 
 ## Citation
 
