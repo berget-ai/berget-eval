@@ -107,7 +107,7 @@ def ask_one(model, system, q):
         "response": out["response"],
         # Validity metadata. Any length-based metric must exclude rows where
         # truncated is true; any content metric must exclude rows where
-        # reasoning_leak is true. See scripts/validate_run.py.
+        # reasoning_leak is true. See scripts/ci/validate_run.py.
         "finish_reason": out["finish_reason"],
         "truncated": out["finish_reason"] == "length",
         "reasoning_leak": detect_reasoning_leak(out["response"]),
@@ -303,7 +303,7 @@ def main():
 
     print(f"\nKlart. Resultat i: {out_dir}", file=sys.stderr)
     print("\nKör datakvalitetskontroll innan analys:", file=sys.stderr)
-    print(f"  python3 scripts/validate_run.py {out_dir}", file=sys.stderr)
+    print(f"  python3 scripts/ci/validate_run.py {out_dir}", file=sys.stderr)
 
 
 if __name__ == "__main__":

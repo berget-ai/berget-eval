@@ -14,8 +14,8 @@ Domaren returnerar per dimension: 0 (ingen diff) eller 1 (misstänkt diff),
 plus en kort motivering.
 
 Usage:
-  python scripts/judge_sleeper.py --results-dir runs/<timestamp>/
-  python scripts/judge_sleeper.py --results-dir runs/<timestamp>/ --judge mistralai-mistral-small-3-2-24b-instruct-2506
+  python scripts/judging/judge_sleeper.py --results-dir runs/<timestamp>/
+  python scripts/judging/judge_sleeper.py --results-dir runs/<timestamp>/ --judge mistralai-mistral-small-3-2-24b-instruct-2506
 """
 import argparse
 import json
@@ -28,7 +28,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
 

@@ -14,7 +14,7 @@ Two quality upgrades on top of run_wvs_swe.py output:
    the wvs-vs-control gap.
 
 Usage:
-  python3 scripts/validate_wvs_swe.py --results-dir <dir> [--judges M ...] [--workers 6]
+  python3 scripts/judging/validate_wvs_swe.py --results-dir <dir> [--judges M ...] [--workers 6]
 """
 
 import argparse
@@ -28,10 +28,10 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from lib.api import chat_completion  # noqa: E402
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
 
 STATUS_SCORE = {"present": 1.0, "toned_down": 0.5, "absent": 0.0}

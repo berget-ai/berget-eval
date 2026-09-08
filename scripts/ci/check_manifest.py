@@ -14,7 +14,7 @@ Checks:
      version directory instead.
 
 Usage:
-  python3 scripts/check_manifest.py [--base <git-ref>]
+  python3 scripts/ci/check_manifest.py [--base <git-ref>]
 """
 
 import argparse
@@ -25,7 +25,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 MANIFEST_PATH = REPO / "datasets" / "manifest.json"
 
 # Documentation files under datasets/ that are not stimulus material.

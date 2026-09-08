@@ -29,8 +29,8 @@ different claims:
            completion per cell would not be interpretable.
 
 Usage:
-  python3 scripts/meta_review.py review --article <path> [--workers 6]
-  python3 scripts/meta_review.py swap [--samples 3] [--workers 6]
+  python3 scripts/analysis/meta_review.py review --article <path> [--workers 6]
+  python3 scripts/analysis/meta_review.py swap [--samples 3] [--workers 6]
 """
 
 import argparse
@@ -40,10 +40,10 @@ import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from lib import provenance as prov  # noqa: E402
 from lib.api import chat_completion  # noqa: E402
 
 # Pinned to the nine models the eval covers. Deliberately not read from the live
@@ -61,7 +61,7 @@ MODELS_DEFAULT = [
     "mistralai/Mistral-Medium-3.5-128B",
 ]
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 OUT_ROOT = REPO / "runs"
 
 # Identical instruction for every model. Any per-model prompt tailoring would
@@ -207,10 +207,16 @@ def run_tasks(tasks, workers, outfile):
 
 def cmd_review(args):
     article = Path(args.article).read_text(encoding="utf-8")
-    outdir = OUT_ROOT / f"{datetime.now(timezone.utc):%Y-%m-%dT%H-%M-%S}-meta-review"
+    outdir = OUT_ROOT / prov.build_run_id("meta-review")
     outdir.mkdir(parents=True, exist_ok=True)
     outfile = outdir / "review.jsonl"
     (outdir / "article.md").write_text(article, encoding="utf-8")
+    prov.start_run(
+        outdir,
+        datasets=[prov.dataset_entry("meta-review/article", "—", args.article)],
+        models=MODELS_DEFAULT,
+        config={"workers": args.workers},
+    )
 
     prompt = REVIEW_PROMPT.format(article=article)
     tasks = [
@@ -220,8 +226,13 @@ def cmd_review(args):
         for m in MODELS_DEFAULT
     ]
     print(f"Granskning: {len(tasks)} anrop -> {outfile}")
-    rows = run_tasks(tasks, args.workers, outfile)
-    summarize_review(rows)
+    try:
+        rows = run_tasks(tasks, args.workers, outfile)
+        summarize_review(rows)
+    except Exception as e:
+        prov.finish_run(outdir, "failed", error=e)
+        raise
+    prov.finish_run(outdir, "completed")
 
 
 def summarize_review(rows):
@@ -244,12 +255,21 @@ def summarize_review(rows):
 
 
 def cmd_swap(args):
-    outdir = OUT_ROOT / f"{datetime.now(timezone.utc):%Y-%m-%dT%H-%M-%S}-meta-swap"
+    outdir = OUT_ROOT / prov.build_run_id("meta-swap")
     outdir.mkdir(parents=True, exist_ok=True)
     outfile = outdir / "swap.jsonl"
     (outdir / "arms.json").write_text(
         json.dumps({k: build_table(v) for k, v in ARMS.items()},
                    ensure_ascii=False, indent=2), encoding="utf-8")
+    # The score tables are embedded in code (ARMS), not read from a run folder,
+    # so datasets[] is empty; tables_source records where the numbers came from.
+    prov.start_run(
+        outdir,
+        datasets=[],
+        models=MODELS_DEFAULT,
+        config={"samples": args.samples, "workers": args.workers,
+                "tables_source": "hardcoded scores from runs/2026-08-09T23-11-21-weekly-gh31341269523"},
+    )
 
     tasks = []
     for arm, labels in ARMS.items():
@@ -263,8 +283,13 @@ def cmd_swap(args):
     print(f"Etikettbyte: {len(tasks)} anrop "
           f"({len(ARMS)} armar x {len(MODELS_DEFAULT)} modeller x {args.samples} prov)"
           f" -> {outfile}")
-    rows = run_tasks(tasks, args.workers, outfile)
-    summarize_swap(rows)
+    try:
+        rows = run_tasks(tasks, args.workers, outfile)
+        summarize_swap(rows)
+    except Exception as e:
+        prov.finish_run(outdir, "failed", error=e)
+        raise
+    prov.finish_run(outdir, "completed")
 
 
 FIELDS = ["regional_skillnad", "topplacerad_bra_nog_for_produktion",

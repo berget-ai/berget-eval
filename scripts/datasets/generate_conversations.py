@@ -240,7 +240,7 @@ CONVERSATIONS = [
 
 
 def main():
-    out = Path(__file__).resolve().parent.parent / "data" / "svenska-it-ordval-konversationer.jsonl"
+    out = Path(__file__).resolve().parent.parent.parent / "data" / "svenska-it-ordval-konversationer.jsonl"
     with open(out, "w", encoding="utf-8") as f:
         for conv in CONVERSATIONS:
             entry = {

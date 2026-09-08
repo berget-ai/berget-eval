@@ -2,7 +2,7 @@
 """Rerun failed (HTTP_ERROR) questions for a model and merge into existing run file.
 
 Usage:
-    OPENAI_API_KEY=<key> OPENAI_API_BASE=<base> python scripts/rerun_failed.py \
+    OPENAI_API_KEY=<key> OPENAI_API_BASE=<base> python scripts/maintenance/rerun_failed.py \
         --run-dir runs/2026-08-31T13-11-51-flash-rerun-2026-08-31 \
         --model zai-org/GLM-5.3-Flash
 """
@@ -13,7 +13,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO / "scripts" / "evals"))
 
 # Import from run_main_battery (chat_completion, build_prompt, get_system_prompt)

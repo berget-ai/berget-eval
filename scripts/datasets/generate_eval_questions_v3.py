@@ -12,8 +12,8 @@ import random
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-KULTUR_DIR = Path(__file__).resolve().parent.parent / "data" / "kulturkanon"
+REPO = Path(__file__).resolve().parent.parent.parent
+KULTUR_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "kulturkanon"
 OUT = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 random.seed(42)
 
