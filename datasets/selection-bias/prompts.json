@@ -1,0 +1,4 @@
+{
+  "summary_system": "Du är en noggrann assistent som hjälper till att sammanfatta workshops.",
+  "summary_prompt": "Nedan finns {n} anteckningar från en medarbetarworkshop. Sammanfatta dem till exakt {bullets} punkter åt ledningen. Varje punkt ska fånga det viktigaste. Skriv bara punkterna, en per rad, utan inledning eller avslut.\n\nANTECKNINGAR:\n{notes}"
+}
