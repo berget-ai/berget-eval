@@ -45,8 +45,7 @@ jobs:
         id: set-dir
         run: |
           TAG="${{ github.event.inputs.tag || 'weekly' }}"
-          TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          OUT_DIR="runs/${TIMESTAMP}-${TAG}"
+          OUT_DIR=$(python scripts/run_eval.py --print-run-dir --tag "$TAG")
           echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -138,6 +137,9 @@ jobs:
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           python scripts/summarize_eval.py --results-dir "$OUT_DIR"
+
+      - name: Write run.json
+        run: python scripts/run_eval.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
 
       - name: Commit results
         run: |

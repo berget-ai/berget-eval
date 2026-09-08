@@ -19,10 +19,20 @@ from pathlib import Path
 import urllib.request
 import urllib.error
 
+import run_provenance as prov
+
 REPO = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 RUNS_DIR = REPO / "runs"
 PROMPTS = json.loads((REPO / "datasets" / "main-battery" / "prompts.json").read_text(encoding="utf-8"))
+
+# Every file sent to any model in this pipeline (hashed into run.json).
+DATASETS_USED = [
+    ("main-battery", "v3", "datasets/main-battery/v3/eval-questions.jsonl"),
+    ("main-battery/prompts", "—", "datasets/main-battery/prompts.json"),
+    ("judges/sleeper.system", "—", "datasets/judges/sleeper-judge.system.md"),
+    ("judges/sleeper.prompt", "—", "datasets/judges/sleeper-judge.prompt.md"),
+]
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -322,7 +332,29 @@ def main():
     parser.add_argument("--out-dir", default=None, help="Output directory")
     parser.add_argument("--tag", default=None, help="Tag för körningen (används i sökväg)")
     parser.add_argument("--filter", default=None, help="Filtrera frågor: 'placebo' för endast placebo-kontroller")
+    parser.add_argument("--print-run-dir", action="store_true",
+                        help="Skriv ut run-katalogens sökväg och avsluta (för CI-setup)")
+    parser.add_argument("--finalize-run", action="store_true",
+                        help="Skriv auktoritativ run.json för en ihopslagen körning (CI-finalize)")
     args = parser.parse_args()
+
+    if args.print_run_dir:
+        tag = args.tag or "run"
+        print(args.out_dir if args.out_dir else Path("runs") / prov.build_run_id(tag))
+        return
+
+    if args.finalize_run:
+        if not args.out_dir:
+            parser.error("--finalize-run kräver --out-dir")
+        import judge_sleeper
+        prov.finalize_run(
+            Path(args.out_dir),
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            judge={"model": judge_sleeper.DEFAULT_JUDGE},
+            config={"temperature": 0},
+        )
+        print(f"run.json skriven för {args.out_dir}", file=sys.stderr)
+        return
 
     if not API_KEY:
         print("ERROR: OPENAI_API_KEY måste vara satt", file=sys.stderr)
@@ -354,29 +386,46 @@ def main():
     # Skapa output-dir
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
     tag = args.tag or "run"
-    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / prov.build_run_id(tag)
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 
-    # Kör varje modell
-    for i, model in enumerate(models, 1):
-        print(f"\n{'='*60}", file=sys.stderr)
-        print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
-        print(f"{'='*60}", file=sys.stderr)
-        model_slug = model.replace("/", "-").replace(".", "-").lower()
-        out_path = out_dir / f"{model_slug}.jsonl"
-        run_model(model, questions, out_path)
+    owner = prov.is_owner(out_dir)
+    if owner:
+        prov.start_run(
+            out_dir,
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            models=models,
+            config={"temperature": 0, "filter": args.filter} if args.filter else {"temperature": 0},
+            n_questions=len(questions),
+        )
+    try:
+        # Kör varje modell
+        for i, model in enumerate(models, 1):
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            model_slug = model.replace("/", "-").replace(".", "-").lower()
+            out_path = out_dir / f"{model_slug}.jsonl"
+            run_model(model, questions, out_path)
 
-    # Spara metadata
-    meta = {
-        "timestamp": timestamp,
-        "tag": tag,
-        "n_questions": len(questions),
-        "models": models,
-        "api_base": API_BASE,
-    }
-    with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
-        json.dump(meta, f, ensure_ascii=False, indent=2)
+        # Spara metadata
+        meta = {
+            "timestamp": timestamp,
+            "tag": tag,
+            "n_questions": len(questions),
+            "models": models,
+            "api_base": API_BASE,
+        }
+        with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        if owner:
+            prov.finish_run(out_dir, "failed", error=e)
+        raise
+    if owner:
+        prov.finish_run(out_dir, "completed")
 
     print(f"\nKlart. Resultat i: {out_dir}", file=sys.stderr)
 

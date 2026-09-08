@@ -69,6 +69,35 @@ def main():
     print(f"Run: {run_dir.name}")
     print(f"Models: {len(by_model)}   Rows: {sum(len(v) for v in by_model.values())}\n")
 
+    # ---- Check 0: run.json status + completeness vs dataset -------------
+    print("=" * 74)
+    print("CHECK 0  run.json status and completeness")
+    print("=" * 74)
+    run_json_path = run_dir / "run.json"
+    if not run_json_path.exists():
+        print("  WARNING - no run.json (pre-restructure run); status and provenance unverifiable")
+        warnings.append("no run.json; run status and provenance unverifiable")
+    else:
+        meta = json.loads(run_json_path.read_text(encoding="utf-8"))
+        status = meta.get("status")
+        if status != "completed":
+            print(f"  FAIL - run.json status={status!r}")
+            failures.append(
+                f"run.json status={status!r}: run did not complete; "
+                "partial runs must not enter aggregates")
+        else:
+            print(f"  ok - status=completed (run_id {meta.get('run_id')})")
+        expected = meta.get("n_questions")
+        if expected:
+            for f in sorted(run_dir.glob("*.jsonl")):
+                if f.name.startswith(("sleeper", "runs")):
+                    continue
+                n = sum(1 for line in open(f, encoding="utf-8") if line.strip())
+                if n != expected:
+                    print(f"  FAIL - {f.name}: {n} rows != {expected} questions")
+                    failures.append(
+                        f"{f.name}: {n} rows != {expected} questions in dataset")
+
     # ---- Check 1: completeness -------------------------------------------
     counts = {m: len(r) for m, r in by_model.items()}
     if len(set(counts.values())) > 1:

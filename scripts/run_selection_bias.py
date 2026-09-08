@@ -30,9 +30,19 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from run_censorship_v2 import chat_completion  # noqa: E402
+import run_provenance as prov  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 NOTES_PATH = REPO / "datasets" / "selection-bias" / "v1" / "notes.json"
+RUNS_DIR = REPO / "runs"
+
+# Every file sent to any model in this pipeline (hashed into run.json).
+DATASETS_USED = [
+    ("selection-bias", "v1", "datasets/selection-bias/v1/notes.json"),
+    ("selection-bias/prompts", "—", "datasets/selection-bias/prompts.json"),
+    ("judges/selection-bias.system", "—", "datasets/judges/selection-bias-judge.system.md"),
+    ("judges/selection-bias.prompt", "—", "datasets/judges/selection-bias-judge.prompt.md"),
+]
 
 MODELS_DEFAULT = [
     "moonshotai/Kimi-K3",
@@ -142,7 +152,27 @@ def main():
     ap.add_argument("--bullets", type=int, default=5)
     ap.add_argument("--seed", type=int, default=42, help="fast ordföljd för lapparna")
     ap.add_argument("--workers", type=int, default=6)
+    ap.add_argument("--tag", default="selection-bias")
+    ap.add_argument("--out-dir", default=None, help="skriv hit istället för ny tidsstämplad katalog")
+    ap.add_argument("--print-run-dir", action="store_true",
+                    help="skriv ut run-katalogens sökväg och avsluta (för CI-setup)")
+    ap.add_argument("--finalize-run", action="store_true",
+                    help="skriv auktoritativ run.json för en ihopslagen körning (CI-finalize)")
     args = ap.parse_args()
+
+    if args.print_run_dir:
+        print(args.out_dir if args.out_dir else RUNS_DIR / prov.build_run_id(args.tag))
+        return
+
+    if args.finalize_run:
+        if not args.out_dir:
+            ap.error("--finalize-run kräver --out-dir")
+        prov.finalize_run(
+            Path(args.out_dir),
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+        )
+        print(f"run.json skriven för {args.out_dir}", file=sys.stderr)
+        return
 
     if not os.environ.get("OPENAI_API_KEY"):
         sys.exit("Sätt OPENAI_API_KEY (eller exportera från BERGET_API_KEY)")
@@ -150,70 +180,86 @@ def main():
     notes = json.loads(NOTES_PATH.read_text(encoding="utf-8"))
     ordered = shuffled_notes(notes, args.seed)
 
-    ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    outdir = REPO / "runs" / f"{ts}-selection-bias"
+    outdir = Path(args.out_dir) if args.out_dir else RUNS_DIR / prov.build_run_id(args.tag)
     outdir.mkdir(parents=True, exist_ok=True)
-    (outdir / "notes-used.json").write_text(
-        json.dumps(ordered, ensure_ascii=False, indent=2), encoding="utf-8")
-    (outdir / "config.json").write_text(json.dumps({
-        "models": args.models, "judge": args.judge, "repeats": args.repeats,
-        "bullets": args.bullets, "seed": args.seed,
-        "summary_system_prompt": SUMMARY_SYSTEM, "themes": THEMES,
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    owner = prov.is_owner(outdir)
+    if owner:
+        prov.start_run(
+            outdir,
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            models=args.models,
+            judge={"model": args.judge},
+            config={"repeats": args.repeats, "bullets": args.bullets, "seed": args.seed},
+        )
+    try:
+        (outdir / "notes-used.json").write_text(
+            json.dumps(ordered, ensure_ascii=False, indent=2), encoding="utf-8")
+        (outdir / "config.json").write_text(json.dumps({
+            "models": args.models, "judge": args.judge, "repeats": args.repeats,
+            "bullets": args.bullets, "seed": args.seed,
+            "summary_system_prompt": SUMMARY_SYSTEM, "themes": THEMES,
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    outfile = outdir / "runs.jsonl"
-    tasks = [(m, r) for m in args.models for r in range(args.repeats)]
-    print(f"Selection-bias: {len(tasks)} körningar "
-          f"({len(args.models)} modeller x {args.repeats} reps, {args.bullets} punkter)")
-    print(f"Domare: {args.judge}   Utdata: {outfile}\n")
+        outfile = outdir / "runs.jsonl"
+        tasks = [(m, r) for m in args.models for r in range(args.repeats)]
+        print(f"Selection-bias: {len(tasks)} körningar "
+              f"({len(args.models)} modeller x {args.repeats} reps, {args.bullets} punkter)")
+        print(f"Domare: {args.judge}   Utdata: {outfile}\n")
 
-    results = []
+        results = []
 
-    def one(model, rep):
-        res = run_summary(model, ordered, args.bullets, SUMMARY_SYSTEM)
-        raw = res.get("response") or ""
-        bullets = extract_bullets(raw)
-        leak = res.get("reasoning_leak", False)
-        judged, judge_raw = (None, "")
-        # Skip judging rows that leaked reasoning or have the wrong shape: a
-        # leaked row has no clean 5-bullet summary to classify.
-        usable = (not res.get("error")) and (not leak) and len(bullets) == args.bullets
-        if usable:
-            judged, judge_raw = judge_bullets(args.judge, bullets)
-        return {
-            "model": model, "rep": rep, "bullets": bullets,
-            "n_bullets": len(bullets), "judged_themes": judged,
-            "raw_response": raw, "judge_raw": judge_raw,
-            "finish_reason": res.get("finish_reason"),
-            "completion_tokens": res.get("completion_tokens"),
-            "reasoning_leak": leak, "usable": usable,
-            "error": res.get("error"),
-            "system_prompt": SUMMARY_SYSTEM,
-        }
+        def one(model, rep):
+            res = run_summary(model, ordered, args.bullets, SUMMARY_SYSTEM)
+            raw = res.get("response") or ""
+            bullets = extract_bullets(raw)
+            leak = res.get("reasoning_leak", False)
+            judged, judge_raw = (None, "")
+            # Skip judging rows that leaked reasoning or have the wrong shape: a
+            # leaked row has no clean 5-bullet summary to classify.
+            usable = (not res.get("error")) and (not leak) and len(bullets) == args.bullets
+            if usable:
+                judged, judge_raw = judge_bullets(args.judge, bullets)
+            return {
+                "model": model, "rep": rep, "bullets": bullets,
+                "n_bullets": len(bullets), "judged_themes": judged,
+                "raw_response": raw, "judge_raw": judge_raw,
+                "finish_reason": res.get("finish_reason"),
+                "completion_tokens": res.get("completion_tokens"),
+                "reasoning_leak": leak, "usable": usable,
+                "error": res.get("error"),
+                "system_prompt": SUMMARY_SYSTEM,
+            }
 
-    with open(outfile, "a", encoding="utf-8") as fh:
-        with ThreadPoolExecutor(max_workers=args.workers) as pool:
-            futs = {pool.submit(one, m, r): (m, r) for m, r in tasks}
-            done = 0
-            for fut in as_completed(futs):
-                row = fut.result()
-                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
-                fh.flush()
-                results.append(row)
-                done += 1
-                flag = ""
-                if row["error"]:
-                    flag = " ERROR"
-                elif row["reasoning_leak"]:
-                    flag = " [reasoning-läck]"
-                elif row["n_bullets"] != args.bullets:
-                    flag = f" [{row['n_bullets']} punkter]"
-                elif row["judged_themes"] is None:
-                    flag = " [domar-fel]"
-                print(f"  [{done}/{len(tasks)}] {row['model']} rep{row['rep']}{flag}",
-                      flush=True)
+        with open(outfile, "a", encoding="utf-8") as fh:
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:
+                futs = {pool.submit(one, m, r): (m, r) for m, r in tasks}
+                done = 0
+                for fut in as_completed(futs):
+                    row = fut.result()
+                    fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    fh.flush()
+                    results.append(row)
+                    done += 1
+                    flag = ""
+                    if row["error"]:
+                        flag = " ERROR"
+                    elif row["reasoning_leak"]:
+                        flag = " [reasoning-läck]"
+                    elif row["n_bullets"] != args.bullets:
+                        flag = f" [{row['n_bullets']} punkter]"
+                    elif row["judged_themes"] is None:
+                        flag = " [domar-fel]"
+                    print(f"  [{done}/{len(tasks)}] {row['model']} rep{row['rep']}{flag}",
+                          flush=True)
 
-    summarize(results, args)
+        summarize(results, args)
+    except Exception as e:
+        if owner:
+            prov.finish_run(outdir, "failed", error=e)
+        raise
+    if owner:
+        prov.finish_run(outdir, "completed")
+
     print(f"\nKlart. Rader: {len(results)} -> {outfile}")
 
 

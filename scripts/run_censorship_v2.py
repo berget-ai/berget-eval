@@ -16,9 +16,17 @@ import urllib.request
 import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+import run_provenance as prov
+
 REPO = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "censorship" / "v2" / "questions.jsonl"
 RUNS_DIR = REPO / "runs"
+
+# Every file sent to any model in this pipeline (hashed into run.json).
+DATASETS_USED = [
+    ("censorship", "v2", "datasets/censorship/v2/questions.jsonl"),
+    ("censorship/prompts", "—", "datasets/censorship/prompts.json"),
+]
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -277,7 +285,26 @@ def main():
     parser.add_argument("--workers", type=int, default=DEFAULT_WORKERS,
                         help=f"Parallella requests per modell (default {DEFAULT_WORKERS})")
     parser.add_argument("--modules", default=None, help="Komma-separerade moduler (A,B,C,D,F). Default: alla")
+    parser.add_argument("--print-run-dir", action="store_true",
+                        help="Skriv ut run-katalogens sökväg och avsluta (för CI-setup)")
+    parser.add_argument("--finalize-run", action="store_true",
+                        help="Skriv auktoritativ run.json för en ihopslagen körning (CI-finalize)")
     args = parser.parse_args()
+
+    if args.print_run_dir:
+        print(args.out_dir if args.out_dir else Path("runs") / prov.build_run_id(args.tag))
+        return
+
+    if args.finalize_run:
+        if not args.out_dir:
+            parser.error("--finalize-run kräver --out-dir")
+        prov.finalize_run(
+            Path(args.out_dir),
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            config={"temperature": 0, "max_tokens": MAX_TOKENS},
+        )
+        print(f"run.json skriven för {args.out_dir}", file=sys.stderr)
+        return
 
     if not API_KEY:
         print("ERROR: OPENAI_API_KEY måste vara satt", file=sys.stderr)
@@ -309,34 +336,52 @@ def main():
 
     # Skapa output-dir
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{args.tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / prov.build_run_id(args.tag)
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 
-    # Kör varje modell
-    for i, model in enumerate(models, 1):
-        print(f"\n{'='*60}", file=sys.stderr)
-        print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
-        print(f"{'='*60}", file=sys.stderr)
-        model_slug = model.replace("/", "-").replace(".", "-").lower()
-        out_path = out_dir / f"{model_slug}.jsonl"
-        run_model(model, questions, out_path, workers=args.workers)
+    owner = prov.is_owner(out_dir)
+    if owner:
+        prov.start_run(
+            out_dir,
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            models=models,
+            config={"temperature": 0, "max_tokens": MAX_TOKENS,
+                    "modules": args.modules or "all"},
+            n_questions=len(questions),
+        )
+    try:
+        # Kör varje modell
+        for i, model in enumerate(models, 1):
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            model_slug = model.replace("/", "-").replace(".", "-").lower()
+            out_path = out_dir / f"{model_slug}.jsonl"
+            run_model(model, questions, out_path, workers=args.workers)
 
-    # Spara metadata
-    meta = {
-        "timestamp": timestamp,
-        "tag": args.tag,
-        "n_questions": len(questions),
-        "models": models,
-        "api_base": API_BASE,
-        "max_tokens": MAX_TOKENS,
-        "system_prompt": SYSTEM_PROMPT,
-        "system_prompt_is_uniform": True,
-        "modules": args.modules or "all",
-        "workers": args.workers,
-    }
-    with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
-        json.dump(meta, f, ensure_ascii=False, indent=2)
+        # Spara metadata
+        meta = {
+            "timestamp": timestamp,
+            "tag": args.tag,
+            "n_questions": len(questions),
+            "models": models,
+            "api_base": API_BASE,
+            "max_tokens": MAX_TOKENS,
+            "system_prompt": SYSTEM_PROMPT,
+            "system_prompt_is_uniform": True,
+            "modules": args.modules or "all",
+            "workers": args.workers,
+        }
+        with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        if owner:
+            prov.finish_run(out_dir, "failed", error=e)
+        raise
+    if owner:
+        prov.finish_run(out_dir, "completed")
 
     print(f"\nKlart. Resultat i: {out_dir}", file=sys.stderr)
     print("\nKör datakvalitetskontroll innan analys:", file=sys.stderr)

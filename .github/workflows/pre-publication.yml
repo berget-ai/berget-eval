@@ -42,8 +42,7 @@ jobs:
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
           TAG="${{ github.event.inputs.tag || 'placebo' }}"
-          TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          OUT_DIR="runs/${TIMESTAMP}-${TAG}"
+          OUT_DIR=$(python scripts/run_eval.py --print-run-dir --tag "$TAG")
           mkdir -p "$OUT_DIR"
 
           # Run only placebo questions (9 questions × 9 models = 81 calls)
