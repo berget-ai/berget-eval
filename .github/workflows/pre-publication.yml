@@ -79,7 +79,7 @@ jobs:
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
           # Sample 50 pairs from latest run
-          python scripts/run_judge_calibration.py --sample-size 50
+          python scripts/judging/judge_calibration.py --sample-size 50
 
           # TODO: Re-judge with both Mistral Small and Medium
           # This requires extending run_judge_calibration.py to actually

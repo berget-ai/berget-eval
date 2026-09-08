@@ -17,7 +17,7 @@ Each check below corresponds to one of those. Exit code is non-zero if any
 blocking check fails.
 
 Usage:
-    python3 scripts/validate_run.py runs/<run-dir> [--strict]
+    python3 scripts/ci/validate_run.py runs/<run-dir> [--strict]
 """
 import argparse
 import json

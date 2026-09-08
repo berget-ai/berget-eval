@@ -4,7 +4,7 @@
 Används av GitHub Actions setup-job för att skapa en parallell matrix.
 
 Usage:
-  python scripts/list_models.py
+  python scripts/ci/list_models.py
   # Skriver: {"include": [{"model": "..."}, ...]}
 """
 import json

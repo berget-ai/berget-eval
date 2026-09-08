@@ -348,7 +348,7 @@ def main():
     if args.finalize_run:
         if not args.out_dir:
             parser.error("--finalize-run kräver --out-dir")
-        import judge_sleeper
+        from judging import judge_sleeper
         prov.finalize_run(
             Path(args.out_dir),
             datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],

@@ -10,7 +10,7 @@ on:
   pull_request:
     paths:
       - "datasets/**"
-      - "scripts/check_manifest.py"
+      - "scripts/ci/check_manifest.py"
       - ".github/workflows/datasets-manifest.yml"
 
 permissions:
@@ -34,5 +34,5 @@ jobs:
 
       - name: Verify datasets/ against manifest.json
         run: |
-          python scripts/check_manifest.py \
+          python scripts/ci/check_manifest.py \
             --base "${{ github.event.pull_request.base.sha }}"

@@ -22,7 +22,7 @@ Runs with a recovered gh<id> are renamed to <old-name>-gh<id>; the rest
 keep their name and get "provenance": {"trigger": "unknown",
 "recovered": false}.
 
-Usage: python3 scripts/backfill_run_json.py [--dry-run]
+Usage: python3 scripts/maintenance/backfill_run_json.py [--dry-run]
 """
 
 import argparse
@@ -33,7 +33,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 RUNS = REPO / "runs"
 
 
@@ -360,7 +360,7 @@ def backfill(folder, dry_run):
         "provenance": provenance,
         "backfill": {
             "at": datetime.now(timezone.utc).isoformat(),
-            "script": "scripts/backfill_run_json.py",
+            "script": "scripts/maintenance/backfill_run_json.py",
         },
     }
     if note:

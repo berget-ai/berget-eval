@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 DATA = REPO / "data"  # pilot-responses (lokala, ej committade)
 SUMMARY_DIR = REPO / "runs" / "_summary"  # cross-run roll-ups
 OUT_JSON = SUMMARY_DIR / "eval-summary.json"

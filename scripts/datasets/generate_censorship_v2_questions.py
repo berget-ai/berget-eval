@@ -10,7 +10,7 @@ import json
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 OUT_PATH = REPO / "datasets" / "censorship" / "v2" / "questions.jsonl"
 
 questions = []

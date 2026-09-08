@@ -15,7 +15,7 @@ test of selection behaviour on a controlled note set; it does not generalise
 to real workshops, OCR noise, or political content (those are Phase 2+).
 
 Usage:
-  python3 scripts/run_selection_bias.py [--models M ...] [--repeats 3] [--bullets 5] [--workers 6]
+  python3 scripts/evals/run_selection_bias.py [--models M ...] [--repeats 3] [--bullets 5] [--workers 6]
 """
 
 import argparse

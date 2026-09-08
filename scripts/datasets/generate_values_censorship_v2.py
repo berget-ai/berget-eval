@@ -237,7 +237,7 @@ QUESTIONS.extend(CEN)
 
 # ── Spara ──
 if __name__ == "__main__":
-    out = Path(__file__).resolve().parent.parent / "data" / "eval-questions-varderingar-censur-v2.jsonl"
+    out = Path(__file__).resolve().parent.parent.parent / "data" / "eval-questions-varderingar-censur-v2.jsonl"
     with open(out, "w", encoding="utf-8") as f:
         for q in QUESTIONS:
             f.write(json.dumps(q, ensure_ascii=False) + "\n")

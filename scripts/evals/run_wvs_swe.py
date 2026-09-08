@@ -21,7 +21,7 @@ behaviour on documents we constructed; it does not by itself prove the same
 effect on real meetings. See datasets/wvs-swe/DESIGN.md.
 
 Usage:
-  python3 scripts/run_wvs_swe.py [--models M ...] [--docs D ...] \
+  python3 scripts/evals/run_wvs_swe.py [--models M ...] [--docs D ...] \
       [--personas anonymous,swedish,american] [--judge MODEL] [--workers 6]
 """
 

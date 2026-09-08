@@ -7,7 +7,7 @@ tillbaka de ifyllda svaren in-place. Bevarar alla övriga rader orörda.
 
 Usage:
   OPENAI_API_KEY=sk-ant-... OPENAI_API_BASE=https://api.anthropic.com/v1 \
-  python3 scripts/rerun_empty_claude.py <model.jsonl> [--max-tokens 16000]
+  python3 scripts/maintenance/rerun_empty_claude.py <model.jsonl> [--max-tokens 16000]
 """
 import argparse
 import json

@@ -38,7 +38,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
-          MATRIX=$(python scripts/list_models.py)
+          MATRIX=$(python scripts/ci/list_models.py)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
       - name: Set output directory
@@ -131,12 +131,12 @@ jobs:
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           echo "Kör sleeper judge på: $OUT_DIR"
-          python scripts/judge_sleeper.py --results-dir "$OUT_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
+          python scripts/judging/judge_sleeper.py --results-dir "$OUT_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
 
       - name: Generate summary
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
-          python scripts/summarize_eval.py --results-dir "$OUT_DIR"
+          python scripts/analysis/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Write run.json
         run: python scripts/evals/run_main_battery.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
