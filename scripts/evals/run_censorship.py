@@ -2,7 +2,7 @@
 """Run censorship v2 evaluation against Berget API.
 
 Usage:
-    python run_censorship_v2.py [--models MODEL ...] [--tag TAG] [--modules A,B,C,D,F]
+    python scripts/evals/run_censorship.py [--models MODEL ...] [--tag TAG] [--modules A,B,C,D,F]
 """
 import argparse
 import json
@@ -16,9 +16,11 @@ import urllib.request
 import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-import run_provenance as prov
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
-REPO = Path(__file__).resolve().parent.parent
+import run_provenance as prov  # noqa: E402
+
+REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "censorship" / "v2" / "questions.jsonl"
 RUNS_DIR = REPO / "runs"
 

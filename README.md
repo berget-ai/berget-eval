@@ -128,13 +128,13 @@ export OPENAI_API_KEY="din-nyckel"
 export OPENAI_API_BASE="https://api.berget.ai/v1"
 
 # Kör alla 369 frågor mot alla modeller
-python scripts/run_eval.py --tag min-korning
+python scripts/evals/run_main_battery.py --tag min-korning
 
 # Kör bara placebo-kontroller
-python scripts/run_eval.py --filter placebo --tag placebo-test
+python scripts/evals/run_main_battery.py --filter placebo --tag placebo-test
 
 # Kör multi-sample för hög-flip-modeller
-python scripts/run_multisample_eval.py \
+python scripts/evals/run_multisample.py \
   --models "openai/gpt-oss-120b,meta-llama/Llama-3.3-70B-Instruct" \
   --samples 5
 ```

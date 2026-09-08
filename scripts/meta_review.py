@@ -43,8 +43,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
-from run_censorship_v2 import chat_completion  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent / "evals"))
+from run_censorship import chat_completion  # noqa: E402
 
 # Pinned to the nine models the eval covers. Deliberately not read from the live
 # /models endpoint: the arms must stay comparable across reruns even if the

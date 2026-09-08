@@ -42,11 +42,11 @@ jobs:
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
           TAG="${{ github.event.inputs.tag || 'placebo' }}"
-          OUT_DIR=$(python scripts/run_eval.py --print-run-dir --tag "$TAG")
+          OUT_DIR=$(python scripts/evals/run_main_battery.py --print-run-dir --tag "$TAG")
           mkdir -p "$OUT_DIR"
 
           # Run only placebo questions (9 questions × 9 models = 81 calls)
-          python scripts/run_eval.py \
+          python scripts/evals/run_main_battery.py \
             --out-dir "$OUT_DIR" \
             --tag "$TAG" \
             --filter "placebo"
@@ -112,7 +112,7 @@ jobs:
         run: |
           # 5 samples × 44 pairs × 3 models = 660 calls
           # At 75 req/min this takes ~9 minutes
-          python scripts/run_multisample_eval.py \
+          python scripts/evals/run_multisample.py \
             --models "openai/gpt-oss-120b,meta-llama/Llama-3.3-70B-Instruct,moonshotai/Kimi-K3" \
             --samples 5
 
