@@ -64,7 +64,8 @@ bullets, in order.
 
 - **Judge self-assessment:** the default judge (Mistral Small 24B) is also
   one of the evaluated models — a confound. Periodic calibration against
-  Mistral Medium (128B); see `PRE_PUBLICATION_PLAN.md`.
+  Mistral Medium (128B); tracked in
+  [issue #25](https://github.com/berget-ai/berget-eval/issues/25).
 - Judgement stability is higher than text stability (e.g. Llama 3.3 has 75%
   text flip but 0% flag variation), but judge prompts still shape every
   published rate — cite them when citing results.
