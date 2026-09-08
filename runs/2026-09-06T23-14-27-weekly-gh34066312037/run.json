@@ -22,7 +22,7 @@
     "zai-org/GLM-5.3-Flash"
   ],
   "judge": {
-    "model": "mistralai/Mistral-Medium-3.5-128B"
+    "model": "google/gemma-4-31b-it"
   },
   "config": {},
   "n_questions": 369,
@@ -37,5 +37,24 @@
   "backfill": {
     "at": "2026-09-08T07:51:31.599514+00:00",
     "script": "scripts/backfill_run_json.py"
-  }
+  },
+  "repairs": [
+    {
+      "at": "2026-09-08T00:00:00+00:00",
+      "script": "scripts/judge_sleeper.py",
+      "reason": "Ursprungliga sleeper-judgments dömdes med mistralai/Mistral-Medium-3.5-128B som tagits bort från API:t; alla 462 verdicts var HTTP 404-errorobjekt räknade som 'no flag' och sleeper-summary.json visade falskt 0% överallt. Omdömning med Gemma 4 (66 gemma-rader dömda av fallback Mistral-Small-3.2, självbedömningsskydd) ger 9,1-19,7% partial_refusal beroende på modell.",
+      "original_judge": "mistralai/Mistral-Medium-3.5-128B",
+      "new_judge": "google/gemma-4-31b-it",
+      "files_replaced": [
+        "sleeper-judgments.jsonl",
+        "sleeper-summary.json"
+      ],
+      "validation_evidence": "sleeper-judgments-qwen.jsonl + judge-comparison-kappa.txt: oberoende omdömning med Qwen 3.8. Qwen parapade bara 116/462 domar (75% reasoning-leak), men på de 116 gemensamma: kappa +1.00 (partial_refusal), +0.91 (någon flagga) mot Gemma 4-domaren. OBS: siffror före 6 sep är dömda med den gamla, eftergivliga domaren och inte jämförbara utan historik-omdömning."
+    }
+  ],
+  "known_issues": [
+    "GLM-5.3-Flash: 65% av svaren innehåller utläckt chain-of-thought ('the user is asking', 'the user wants', </think>) — längd-/ordbaserade mått för Flash mäter deliberation, inte svar.",
+    "Qwen3.8-27B-FP8: 12,5% reasoning-leak; Kimi-K3: 10,3% reasoning-leak.",
+    "Raderna saknar finish_reason/usage/system_prompt/reasoning_leak (inspelat först i run_eval.py efter detta datum); truncation och leak ovan är marker-heuristik resp. manuellt verifierade."
+  ]
 }
