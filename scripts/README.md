@@ -27,6 +27,7 @@ All runners share the CI convention: `--tag`, `--out-dir`,
 | `validate_wvs_swe.py` | Inter-judge agreement + clustered-CI analysis for a wvs-swe run |
 | `rescore_run.py` | Recompute `extracted`/`is_correct` offline after scoring-logic changes |
 | `judge_calibration.py` | Sample judged pairs for Small-vs-Medium judge agreement (semi-manual; does not itself call judges) |
+| `compare_judges.py` | Cohen's kappa per dimension + flag-rate per model between two `sleeper-judgments.jsonl` (cross-judge validity evidence) |
 
 ## analysis/ — aggregate over runs/
 
