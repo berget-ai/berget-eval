@@ -207,9 +207,9 @@ All data och kod är CC0. Du kan:
 ## Rapporter
 
 - [Saknade ord i ordlistor — del 1](docs/100-2026-08-07-saknade-ord-del1-pahittade.md)
-- [Saknade ord i ordlistor — del 2](docs/100-2026-08-07-saknade-ord-del2-kognat-moderna.md)
-- [Översättningsförslag](docs/101-2026-08-07-oversattningsforkslag.md)
-- [Förslag till SAOL](docs/102-2026-08-07-saol-forklag-termer.md)
+- [Saknade ord i ordlistor — del 2](docs/101-2026-08-07-saknade-ord-del2-kognat-moderna.md)
+- [Översättningsförslag](docs/102-2026-08-07-oversattningsforkslag.md)
+- [Förslag till SAOL](docs/103-2026-08-07-saol-forklag-termer.md)
 
 ## Licens
 

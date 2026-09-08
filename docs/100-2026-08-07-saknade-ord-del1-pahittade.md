@@ -9,7 +9,7 @@ SAOL (Svenska Akademiens ordlista, 2026) har nu slagits upp för varje ord.
 
 Rapporten är uppdelad i två filer:
 1. Påhittade ord och korrekta former (denna fil, 229 ord)
-2. [False friends och moderna IT-termer](100-2026-08-07-saknade-ord-del2-kognat-moderna.md)
+2. [False friends och moderna IT-termer](101-2026-08-07-saknade-ord-del2-kognat-moderna.md)
 
 ---
 
