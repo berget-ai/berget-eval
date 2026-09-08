@@ -10,7 +10,7 @@ representation per theme.
 Uniform input means an unbiased selector represents themes roughly equally.
 Deviation from uniform, or sharp divergence between models, is the signal.
 
-Design rationale and limits are in SELECTION_BIAS_DESIGN.md. This is a narrow
+Design rationale and limits are in datasets/selection-bias/DESIGN.md. This is a narrow
 test of selection behaviour on a controlled note set; it does not generalise
 to real workshops, OCR noise, or political content (those are Phase 2+).
 

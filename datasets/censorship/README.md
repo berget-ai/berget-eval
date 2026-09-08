@@ -10,7 +10,7 @@ Modern censorship rarely looks like "I cannot answer". It manifests as
 narrative steering, omission, hedging, and framing. This battery (v2) was
 redesigned around that insight, replacing v1's keyword-matching binary
 answered/refused scheme with a modular design grounded in published research
-(see [`../../CENSORSHIP_V2_DESIGN.md`](../../CENSORSHIP_V2_DESIGN.md);
+(see [`DESIGN.md`](DESIGN.md);
 XSTest, ChiSafe-PAS, and others).
 
 Core design principles:
@@ -36,7 +36,7 @@ Core design principles:
 |---------|------|----------:|---------|-----------------|-----------|
 | v2 | `v2/questions.jsonl` | 210 | 2026-08-09 | `46ef1d7d8286` | Redesigned battery after v1 length-truncation invalidated cross-model comparisons |
 
-**Current version used by runner:** v2 (`run_censorship_v2.py`).
+**Current version used by runner:** v2 (`scripts/evals/run_censorship.py`).
 
 ## Data schema
 
