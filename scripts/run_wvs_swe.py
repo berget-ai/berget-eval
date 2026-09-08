@@ -37,9 +37,19 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from run_censorship_v2 import chat_completion  # noqa: E402
+import run_provenance as prov  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
+RUNS_DIR = REPO / "runs"
+
+# Every file sent to any model in this pipeline (hashed into run.json).
+DATASETS_USED = [
+    ("wvs-swe", "v2", "datasets/wvs-swe/v2/documents.json"),
+    ("wvs-swe/prompts", "—", "datasets/wvs-swe/prompts.json"),
+    ("judges/wvs-swe.system", "—", "datasets/judges/wvs-swe-judge.system.md"),
+    ("judges/wvs-swe.prompt", "—", "datasets/judges/wvs-swe-judge.prompt.md"),
+]
 
 MODELS_DEFAULT = [
     "moonshotai/Kimi-K3", "moonshotai/Kimi-K2.6",
@@ -134,7 +144,33 @@ def main():
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--tag", default="manual")
     ap.add_argument("--out-dir", default=None, help="skriv hit istället för ny tidsstämplad katalog")
+    ap.add_argument("--print-run-dir", action="store_true",
+                    help="skriv ut run-katalogens sökväg och avsluta (för CI-setup)")
+    ap.add_argument("--finalize-run", action="store_true",
+                    help="skriv auktoritativ run.json för en ihopslagen körning (CI-finalize)")
     args = ap.parse_args()
+
+    if args.print_run_dir:
+        print(args.out_dir if args.out_dir
+              else Path("runs") / prov.build_run_id(f"wvs-swe-{args.tag}"))
+        return
+
+    if args.finalize_run:
+        if not args.out_dir:
+            ap.error("--finalize-run kräver --out-dir")
+        judge = None
+        cfg_path = Path(args.out_dir) / "config.json"
+        if cfg_path.exists():
+            cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+            if cfg.get("judge"):
+                judge = {"model": cfg["judge"]}
+        prov.finalize_run(
+            Path(args.out_dir),
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            judge=judge,
+        )
+        print(f"run.json skriven för {args.out_dir}", file=sys.stderr)
+        return
 
     if not os.environ.get("OPENAI_API_KEY"):
         sys.exit("Sätt OPENAI_API_KEY (eller exportera från BERGET_API_KEY)")
@@ -144,48 +180,61 @@ def main():
         docs = [d for d in docs if d["doc_id"] in args.docs]
     personas = [p.strip() for p in args.personas.split(",") if p.strip() in PERSONAS]
 
-    if args.out_dir:
-        outdir = Path(args.out_dir)
-    else:
-        ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-        outdir = REPO / "runs" / f"{ts}-wvs-swe-{args.tag}"
+    outdir = Path(args.out_dir) if args.out_dir else RUNS_DIR / prov.build_run_id(f"wvs-swe-{args.tag}")
     outdir.mkdir(parents=True, exist_ok=True)
-    (outdir / "config.json").write_text(json.dumps({
-        "models": args.models, "docs": [d["doc_id"] for d in docs],
-        "personas": personas, "judge": args.judge,
-        "persona_system_prompts": {k: v["system"] for k, v in PERSONAS.items()},
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    owner = prov.is_owner(outdir)
+    if owner:
+        prov.start_run(
+            outdir,
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            models=args.models,
+            judge={"model": args.judge},
+            config={"personas": personas, "docs": [d["doc_id"] for d in docs]},
+        )
+    try:
+        (outdir / "config.json").write_text(json.dumps({
+            "models": args.models, "docs": [d["doc_id"] for d in docs],
+            "personas": personas, "judge": args.judge,
+            "persona_system_prompts": {k: v["system"] for k, v in PERSONAS.items()},
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    outfile = outdir / "runs.jsonl"
-    tasks = [(m, p, d) for m in args.models for p in personas for d in docs]
-    print(f"WVS-SWE: {len(tasks)} körningar "
-          f"({len(args.models)} modeller x {len(personas)} personas x {len(docs)} dokument)")
-    print(f"Domare: {args.judge}   Utdata: {outfile}\n")
+        outfile = outdir / "runs.jsonl"
+        tasks = [(m, p, d) for m in args.models for p in personas for d in docs]
+        print(f"WVS-SWE: {len(tasks)} körningar "
+              f"({len(args.models)} modeller x {len(personas)} personas x {len(docs)} dokument)")
+        print(f"Domare: {args.judge}   Utdata: {outfile}\n")
 
-    results = []
-    with open(outfile, "a", encoding="utf-8") as fh:
-        with ThreadPoolExecutor(max_workers=args.workers) as pool:
-            futs = {pool.submit(one_task, m, p, d, args.judge): (m, p, d) for m, p, d in tasks}
-            done = 0
-            for fut in as_completed(futs):
-                m, p, d = futs[fut]
-                try:
-                    row = fut.result()
-                except Exception as exc:  # noqa: BLE001
-                    row = {"model": m, "persona": p, "doc_id": d["doc_id"],
-                           "doc_type": d["doc_type"], "error": str(exc),
-                           "long": {"judge": {}}, "short": {"judge": {}}}
-                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
-                fh.flush()
-                results.append(row)
-                done += 1
-                nj_long = len(row.get("long", {}).get("judge", {}))
-                nj_short = len(row.get("short", {}).get("judge", {}))
-                err = " ERROR" if row.get("error") else ""
-                print(f"  [{done}/{len(tasks)}] {m} | {p} | {d['doc_id']} "
-                      f"(domda long={nj_long} short={nj_short}){err}", flush=True)
+        results = []
+        with open(outfile, "a", encoding="utf-8") as fh:
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:
+                futs = {pool.submit(one_task, m, p, d, args.judge): (m, p, d) for m, p, d in tasks}
+                done = 0
+                for fut in as_completed(futs):
+                    m, p, d = futs[fut]
+                    try:
+                        row = fut.result()
+                    except Exception as exc:  # noqa: BLE001
+                        row = {"model": m, "persona": p, "doc_id": d["doc_id"],
+                               "doc_type": d["doc_type"], "error": str(exc),
+                               "long": {"judge": {}}, "short": {"judge": {}}}
+                    fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    fh.flush()
+                    results.append(row)
+                    done += 1
+                    nj_long = len(row.get("long", {}).get("judge", {}))
+                    nj_short = len(row.get("short", {}).get("judge", {}))
+                    err = " ERROR" if row.get("error") else ""
+                    print(f"  [{done}/{len(tasks)}] {m} | {p} | {d['doc_id']} "
+                          f"(domda long={nj_long} short={nj_short}){err}", flush=True)
 
-    summarize(results, docs)
+        summarize(results, docs)
+    except Exception as e:
+        if owner:
+            prov.finish_run(outdir, "failed", error=e)
+        raise
+    if owner:
+        prov.finish_run(outdir, "completed")
+
     print(f"\nKlart. {len(results)} rader -> {outfile}")
 
 

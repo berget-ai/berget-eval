@@ -36,12 +36,21 @@ import os
 import sys
 import time
 import urllib.request
+
+import run_provenance as prov
 from datetime import datetime, timezone
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "self-criticism" / "v1" / "questions.jsonl"
 RUNS_DIR = REPO / "runs"
+PROMPTS = json.loads((REPO / "datasets" / "self-criticism" / "prompts.json").read_text(encoding="utf-8"))
+
+# Every file sent to any model in this pipeline (hashed into run.json).
+DATASETS_USED = [
+    ("self-criticism", "v1", "datasets/self-criticism/v1/questions.jsonl"),
+    ("self-criticism/prompts", "—", "datasets/self-criticism/prompts.json"),
+]
 
 MODEL_VENDOR = {
     "google": "Google",
@@ -121,7 +130,26 @@ def main():
     ap.add_argument("--api-base", default=None, help="API-base (override env)")
     ap.add_argument("--out-dir", default=None)
     ap.add_argument("--tag", default="self-criticism")
+    ap.add_argument("--print-run-dir", action="store_true",
+                    help="Skriv ut run-katalogens sökväg och avsluta (för CI-setup)")
+    ap.add_argument("--finalize-run", action="store_true",
+                    help="Skriv auktoritativ run.json för en ihopslagen körning (CI-finalize)")
     args = ap.parse_args()
+
+    if args.print_run_dir:
+        print(args.out_dir if args.out_dir else Path("runs") / prov.build_run_id(args.tag))
+        return
+
+    if args.finalize_run:
+        if not args.out_dir:
+            ap.error("--finalize-run kräver --out-dir")
+        prov.finalize_run(
+            Path(args.out_dir),
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            config={"temperature": 0},
+        )
+        print(f"run.json skriven för {args.out_dir}", file=sys.stderr)
+        return
 
     api_key = os.environ.get("OPENAI_API_KEY", "")
     api_base = args.api_base or os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
@@ -142,64 +170,81 @@ def main():
         print(f"  - {m} (tillverkare: {get_vendor(m)})", file=sys.stderr)
 
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{args.tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / prov.build_run_id(args.tag)
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 
-    for i, model in enumerate(models, 1):
-        print(f"\n{'='*60}", file=sys.stderr)
-        print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
-        print(f"{'='*60}", file=sys.stderr)
-        vendor = get_vendor(model)
-        model_slug = model.replace("/", "-").replace(".", "-").lower()
-        out_path = out_dir / f"{model_slug}.jsonl"
-        system = "Du är en hjälpsam assistent."
+    owner = prov.is_owner(out_dir)
+    if owner:
+        prov.start_run(
+            out_dir,
+            datasets=[prov.dataset_entry(*d) for d in DATASETS_USED],
+            models=models,
+            config={"temperature": 0},
+            n_questions=len(questions),
+        )
+    try:
+        for i, model in enumerate(models, 1):
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"[{i}/{len(models)}] Kör {model}", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            vendor = get_vendor(model)
+            model_slug = model.replace("/", "-").replace(".", "-").lower()
+            out_path = out_dir / f"{model_slug}.jsonl"
+            system = PROMPTS["system"]
 
-        with open(out_path, "w", encoding="utf-8") as f:
-            for j, q in enumerate(questions, 1):
-                messages = [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": q["question"]},
-                ]
-                t0 = time.time()
-                content, finish = chat_completion(model, messages, api_base, api_key)
-                dt = time.time() - t0
+            with open(out_path, "w", encoding="utf-8") as f:
+                for j, q in enumerate(questions, 1):
+                    messages = [
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": q["question"]},
+                    ]
+                    t0 = time.time()
+                    content, finish = chat_completion(model, messages, api_base, api_key)
+                    dt = time.time() - t0
 
-                result = {
-                    "id": q["id"],
-                    "type": q["type"],
-                    "pair_id": q["pair_id"],
-                    "target_vendor": q["target_vendor"],
-                    "stance": q["stance"],
-                    "question": q["question"],
-                    "model": model,
-                    "model_vendor": vendor,
-                    "is_self_criticism": vendor == q["target_vendor"],
-                    "response": content,
-                    "finish_reason": finish,
-                    "words": len(content.split()) if content and not content.startswith("ERROR") else 0,
-                    "latency_s": round(dt, 2),
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
-                }
-                f.write(json.dumps(result, ensure_ascii=False) + "\n")
-                f.flush()
+                    result = {
+                        "id": q["id"],
+                        "type": q["type"],
+                        "pair_id": q["pair_id"],
+                        "target_vendor": q["target_vendor"],
+                        "stance": q["stance"],
+                        "question": q["question"],
+                        "model": model,
+                        "model_vendor": vendor,
+                        "is_self_criticism": vendor == q["target_vendor"],
+                        "response": content,
+                        "finish_reason": finish,
+                        "words": len(content.split()) if content and not content.startswith("ERROR") else 0,
+                        "latency_s": round(dt, 2),
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    }
+                    f.write(json.dumps(result, ensure_ascii=False) + "\n")
+                    f.flush()
 
-                status = "✓" if content and not content.startswith("ERROR") else "✗"
-                self_tag = " [EGEN]" if result["is_self_criticism"] else ""
-                print(f"  [{j}/{len(questions)}] {q['id']} ({q['target_vendor']}) "
-                      f"{result['words']}w finish={finish} {status}{self_tag} ({dt:.1f}s)",
-                      file=sys.stderr)
+                    status = "✓" if content and not content.startswith("ERROR") else "✗"
+                    self_tag = " [EGEN]" if result["is_self_criticism"] else ""
+                    print(f"  [{j}/{len(questions)}] {q['id']} ({q['target_vendor']}) "
+                          f"{result['words']}w finish={finish} {status}{self_tag} ({dt:.1f}s)",
+                          file=sys.stderr)
 
-    meta = {
-        "timestamp": timestamp,
-        "tag": args.tag,
-        "n_questions": len(questions),
-        "models": models,
-        "api_base": api_base,
-        "test": "self-criticism",
-    }
-    with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
-        json.dump(meta, f, ensure_ascii=False, indent=2)
+        meta = {
+            "timestamp": timestamp,
+            "tag": args.tag,
+            "n_questions": len(questions),
+            "models": models,
+            "api_base": api_base,
+            "test": "self-criticism",
+        }
+        with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        if owner:
+            prov.finish_run(out_dir, "failed", error=e)
+        raise
+    if owner:
+        prov.finish_run(out_dir, "completed")
 
     print(f"\nKlart. Resultat i: {out_dir}", file=sys.stderr)
 
