@@ -10,7 +10,7 @@ Förslag på svenska översättningar för ord som saknas i SAOL
 - **Behåll som lån** — lånordet är etablerat och svensk form är oetablerad
 
 SAOL-status visas i [del 1](100-2026-08-07-saknade-ord-del1-pahittade.md) och
-[del 2](100-2026-08-07-saknade-ord-del2-kognat-moderna.md).
+[del 2](101-2026-08-07-saknade-ord-del2-kognat-moderna.md).
 
 ---
 

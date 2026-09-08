@@ -8,6 +8,7 @@ CS IT-ordlista (14 810 ord) och svensk frekvensordlista (50 000 ord).
 SAOL (Svenska Akademiens ordlista, 2026) har nu slagits upp för varje ord.
 
 Rapporten är uppdelad i två filer:
+
 1. [Påhittade ord och korrekta former](100-2026-08-07-saknade-ord-del1-pahittade.md)
 2. False friends och moderna IT-termer (denna fil, 182 ord)
 
@@ -21,7 +22,7 @@ Vissa är etablerade lånord (t.ex. "backend"), andra är potentiella fallgropar
 där direktöversättning ger fel betydelse (t.ex. "race" → "ras").
 
 | Ord / term | Korrekt svensk form | Saknas i CS+SV-freq | I SAOL |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | admin | — | CS + SV-freq | ✓ |
 | arbetsflöde | — | CS + SV-freq | ✗ |
 | barn | — | CS | ✓ |
@@ -98,7 +99,7 @@ Termer från devops, AI/ML, webbutveckling och Kubernetes-
 ekosystemet som saknas i CS IT-ordlista. Kandidater för framtida upplagor.
 
 | Ord | Saknas i CS+SV-freq | I SAOL |
-|---|---|---|
+| --- | --- | --- |
 | ansvar | CS | ✓ |
 | användarinput | CS + SV-freq | ✗ |
 | användning | CS | ✓ |
@@ -217,7 +218,7 @@ ekosystemet som saknas i CS IT-ordlista. Kandidater för framtida upplagor.
 ## Sammanfattning
 
 | Kategori | Totalt | I SAOL | Saknas i SAOL |
-|---|---:|---:|---:|
+| --- | ---: | ---: | ---: |
 | 1. Påhittade ord | 141 | 18 | 123 |
 | 2. Korrekta svenska former | 88 | 33 | 55 |
 | 3. False friends / kognat | 68 | 35 | 33 |
@@ -227,7 +228,9 @@ ekosystemet som saknas i CS IT-ordlista. Kandidater för framtida upplagor.
 ## Metod
 
 1. **Källor:** Finetuning-data (254 SFT-par), false-friends-ordlista (100 poster),
-   moderna IT-termer (192 poster)
+   moderna IT-termer (192 poster).
+   *Antalen avser ögonblicksbilden 2026-08-07; källfilerna i `data/` har
+   därefter vuxit (350 SFT-par, 198 IT-termer).*
 2. **Referensordlistor:**
    - CS IT-ordlista (14 810 ord, från Computer Sweden)
    - Svensk frekvensordlista (50 000 ord, FrequencyWords 2018)
@@ -240,7 +243,7 @@ ekosystemet som saknas i CS IT-ordlista. Kandidater för framtida upplagor.
 
 ## Filreferenser
 
-- `data/2026-08-04-ai-pahittade-ord-finetuning.jsonl` — finetuning-data, 254 par
+- `data/svenska-it-ordval-finetuning.jsonl` — finetuning-data (254 par vid rapporttillfället)
 - `data/false-friends-ordlista.jsonl` — 100 false friends / kognat
 - `data/it-termer-moderna.jsonl` — 192 moderna IT-termer
 - `data/cs-it-ord-raw.txt` — CS IT-ordlista, 14 810 ord

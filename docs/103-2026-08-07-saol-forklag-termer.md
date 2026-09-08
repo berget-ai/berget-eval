@@ -137,9 +137,9 @@ svenska IT- och AI-språket.
 
 ## Se även
 
-- [Översättningsförslag för alla ord](101-2026-08-07-oversattningsforkslag.md)
+- [Översättningsförslag för alla ord](102-2026-08-07-oversattningsforkslag.md)
 - [Saknade ord — del 1](100-2026-08-07-saknade-ord-del1-pahittade.md)
-- [Saknade ord — del 2](100-2026-08-07-saknade-ord-del2-kognat-moderna.md)
+- [Saknade ord — del 2](101-2026-08-07-saknade-ord-del2-kognat-moderna.md)
 
 ---
 
