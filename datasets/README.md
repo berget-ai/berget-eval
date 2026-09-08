@@ -19,7 +19,8 @@ datasets/
 │   └── prompts.json              # system prompts (unversioned)
 ├── censorship/
 │   ├── v2/questions.jsonl        (210 questions — see note below)
-│   └── prompts.json
+│   ├── prompts.json
+│   └── DESIGN.md                 # methodology (documentation, not stimulus)
 ├── wvs-swe/
 │   ├── v1/documents.json
 │   ├── v2/documents.json         (length-matched)
@@ -27,7 +28,8 @@ datasets/
 │   └── DESIGN.md                 # methodology (documentation, not stimulus)
 ├── selection-bias/
 │   ├── v1/notes.json
-│   └── prompts.json
+│   ├── prompts.json
+│   └── DESIGN.md                 # methodology (documentation, not stimulus)
 ├── self-criticism/
 │   ├── v1/questions.jsonl
 │   └── prompts.json

@@ -19,7 +19,7 @@ three people present at every review while the rest of the team is never
 heard." Without this, the test would only measure whether the model finds a
 *word* important, not whether it selects a *theme* (the lexical-salience
 confound that invalidated censorship module B). Full rationale in
-[`../../SELECTION_BIAS_DESIGN.md`](../../SELECTION_BIAS_DESIGN.md).
+[`DESIGN.md`](DESIGN.md).
 
 ## Versions
 
