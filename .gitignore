@@ -1,10 +1,12 @@
 # Pilot-data (lokala körningar) - committa ej
 data/eval-pilot-responses-*.jsonl
 data/eval-pilot-responses.jsonl
-data/eval-polar-plot.png
-data/eval-summary.json
-data/eval-summary.md
 data/*.bak
+
+# Cross-run roll-ups (lokalt genererade) - committa ej
+runs/_summary/eval-polar-plot.png
+runs/_summary/eval-summary.json
+runs/_summary/eval-summary.md
 
 # Python
 __pycache__/

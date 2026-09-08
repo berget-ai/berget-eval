@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from run_censorship_v2 import chat_completion  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
-NOTES_PATH = REPO / "data" / "selection-notes.json"
+NOTES_PATH = REPO / "datasets" / "selection-bias" / "v1" / "notes.json"
 
 MODELS_DEFAULT = [
     "moonshotai/Kimi-K3",
@@ -160,7 +160,7 @@ def main():
     ordered = shuffled_notes(notes, args.seed)
 
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    outdir = REPO / "data" / "results" / f"{ts}-selection-bias"
+    outdir = REPO / "runs" / f"{ts}-selection-bias"
     outdir.mkdir(parents=True, exist_ok=True)
     (outdir / "notes-used.json").write_text(
         json.dumps(ordered, ensure_ascii=False, indent=2), encoding="utf-8")

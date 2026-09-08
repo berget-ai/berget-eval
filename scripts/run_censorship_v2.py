@@ -16,8 +16,9 @@ import urllib.request
 import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS_PATH = DATA / "censorship-v2-questions.jsonl"
+REPO = Path(__file__).resolve().parent.parent
+QUESTIONS_PATH = REPO / "datasets" / "censorship" / "v2" / "questions.jsonl"
+RUNS_DIR = REPO / "runs"
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -306,7 +307,7 @@ def main():
 
     # Skapa output-dir
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    out_dir = Path(args.out_dir) if args.out_dir else DATA / "results" / f"{timestamp}-{args.tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{args.tag}"
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 

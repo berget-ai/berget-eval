@@ -18,7 +18,7 @@ models.
 
 This is a controlled, synthetic pilot. It measures rewriting/summarisation
 behaviour on documents we constructed; it does not by itself prove the same
-effect on real meetings. See data/wvs-swe/DESIGN.md.
+effect on real meetings. See datasets/wvs-swe/DESIGN.md.
 
 Usage:
   python3 scripts/run_wvs_swe.py [--models M ...] [--docs D ...] \
@@ -39,7 +39,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from run_censorship_v2 import chat_completion  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
-DOCS_PATH = REPO / "data" / "wvs-swe" / "documents.json"
+DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
 
 MODELS_DEFAULT = [
     "moonshotai/Kimi-K3", "moonshotai/Kimi-K2.6",
@@ -177,7 +177,7 @@ def main():
         outdir = Path(args.out_dir)
     else:
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-        outdir = REPO / "data" / "results" / f"{ts}-wvs-swe-{args.tag}"
+        outdir = REPO / "runs" / f"{ts}-wvs-swe-{args.tag}"
     outdir.mkdir(parents=True, exist_ok=True)
     (outdir / "config.json").write_text(json.dumps({
         "models": args.models, "docs": [d["doc_id"] for d in docs],

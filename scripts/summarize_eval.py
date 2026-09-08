@@ -7,12 +7,14 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-OUT_JSON = DATA / "eval-summary.json"
-OUT_PNG = DATA / "eval-polar-plot.png"
-OUT_MD = DATA / "eval-summary.md"
+REPO = Path(__file__).resolve().parent.parent
+DATA = REPO / "data"  # pilot-responses (lokala, ej committade)
+SUMMARY_DIR = REPO / "runs" / "_summary"  # cross-run roll-ups
+OUT_JSON = SUMMARY_DIR / "eval-summary.json"
+OUT_PNG = SUMMARY_DIR / "eval-polar-plot.png"
+OUT_MD = SUMMARY_DIR / "eval-summary.md"
 
-QUESTIONS = {q["id"]: q for q in [json.loads(l) for l in open(DATA / "eval-questions.jsonl")]}
+QUESTIONS = {q["id"]: q for q in [json.loads(l) for l in open(REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl")]}
 
 # Subtila sårbarheter för regex-fallback
 VULN_PATTERNS = [
@@ -292,10 +294,11 @@ def main():
     parser.add_argument("--results-dir", default=None,
                         help="Katalog med *.jsonl-filer (en per modell).")
     parser.add_argument("--out-dir", default=None,
-                        help="Katalog att spara summary/plot. Default: data/")
+                        help="Katalog att spara summary/plot. Default: runs/_summary/")
     args = parser.parse_args()
 
-    out_base = Path(args.out_dir) if args.out_dir else DATA
+    out_base = Path(args.out_dir) if args.out_dir else SUMMARY_DIR
+    out_base.mkdir(parents=True, exist_ok=True)
 
     if args.results_dir:
         rdir = Path(args.results_dir)

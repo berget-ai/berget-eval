@@ -1,0 +1,83 @@
+{
+  "main-battery": {
+    "description": "Swedish language/values/censorship/sleeper battery",
+    "versions": {
+      "v1": {
+        "path": "main-battery/v1/eval-questions.jsonl",
+        "sha256": "8ab8dde8a89abc068db1ef2350b7ab4726ca7badbd6286945cff597bfc43897a",
+        "created": "2026-08-07",
+        "changelog": "Initial 69-question battery (language-focused)",
+        "questions": 69
+      },
+      "v2": {
+        "path": "main-battery/v2/eval-questions.jsonl",
+        "sha256": "0397a5beff99631672295c66fc70b44b7aba8e400d24840e193bc4e86d885b1c",
+        "created": "2026-08-07",
+        "changelog": "Expanded to 99 questions",
+        "questions": 99
+      },
+      "v3": {
+        "path": "main-battery/v3/eval-questions.jsonl",
+        "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
+        "created": "2026-08-07",
+        "changelog": "Expanded to 369 questions; added placebo controls (9 questions)",
+        "questions": 369
+      }
+    }
+  },
+  "censorship": {
+    "description": "Censorship/refusal battery (210 questions; starts at v2 — no v1 was ever versioned as a dataset)",
+    "versions": {
+      "v2": {
+        "path": "censorship/v2/questions.jsonl",
+        "sha256": "46ef1d7d8286d4a15d0b1a8698e341fa083d7b9a79377b8fc7b090654e842c03",
+        "created": "2026-08-09",
+        "changelog": "Redesigned battery after v1 length-truncation invalidated cross-model comparisons",
+        "questions": 210
+      }
+    }
+  },
+  "wvs-swe": {
+    "description": "WVS Sweden-anchored values survival under rewrite (stimulus documents)",
+    "versions": {
+      "v1": {
+        "path": "wvs-swe/v1/documents.json",
+        "sha256": "73daf248e4eabf35d0c5ca7060b4f8a45db24ec75c99618a1f4cf3c9ebd53326",
+        "created": "2026-08-11",
+        "changelog": "Initial synthetic document set",
+        "documents": 3
+      },
+      "v2": {
+        "path": "wvs-swe/v2/documents.json",
+        "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+        "created": "2026-08-11",
+        "changelog": "Length-matched documents (wvs vs control)",
+        "documents": 3
+      }
+    }
+  },
+  "selection-bias": {
+    "description": "Content-controlled workshop notes for theme-selection bias test",
+    "versions": {
+      "v1": {
+        "path": "selection-bias/v1/notes.json",
+        "sha256": "814fb46244f8d6cc0230416b2139a4d830ea050ab54b5c1e3fa6692c8f8cea59",
+        "created": "2026-08-11",
+        "changelog": "Initial 24-note set (6 balanced themes x 4 notes)",
+        "notes": 24
+      }
+    }
+  },
+  "self-criticism": {
+    "description": "Vendor self-criticism asymmetry battery",
+    "versions": {
+      "v1": {
+        "path": "self-criticism/v1/questions.jsonl",
+        "sha256": "5340f8d9176956c5cbac2a904027667682c5f72a5ea2f3ebb7b740894584ad42",
+        "created": "2026-08-31",
+        "changelog": "Initial 18-question set (8 asymmetry pairs + 2 neutral controls)",
+        "questions": 18
+      }
+    }
+  }
+}

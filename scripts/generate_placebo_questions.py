@@ -11,8 +11,8 @@ Usage:
 import json
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS_PATH = DATA / "eval-questions.jsonl"
+REPO = Path(__file__).resolve().parent.parent
+QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 
 # Placebo pairs: same task, neutral corporate context
 PLACEBO_PAIRS = [

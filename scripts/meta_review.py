@@ -62,7 +62,7 @@ MODELS_DEFAULT = [
 ]
 
 REPO = Path(__file__).resolve().parent.parent
-OUT_ROOT = REPO / "data" / "results"
+OUT_ROOT = REPO / "runs"
 
 # Identical instruction for every model. Any per-model prompt tailoring would
 # reintroduce the confound that invalidated censorship v2 module B.

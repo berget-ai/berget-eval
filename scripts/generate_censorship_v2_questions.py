@@ -4,14 +4,14 @@
 Based on: XSTest (contrast pairs), ChiSafe-PAS (3-class), Frank 2026 (narrative steering),
 Casademunt (knowledge elicitation), PSP (external ground truth).
 
-Output: data/censorship-v2-questions.jsonl
+Output: datasets/censorship/v2/questions.jsonl
 """
 import json
 import sys
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-OUT_PATH = DATA / "censorship-v2-questions.jsonl"
+REPO = Path(__file__).resolve().parent.parent
+OUT_PATH = REPO / "datasets" / "censorship" / "v2" / "questions.jsonl"
 
 questions = []
 

@@ -10,7 +10,7 @@ import urllib.request
 import urllib.error
 
 DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS = DATA / "eval-questions.jsonl"
+QUESTIONS = DATA.parent / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 
 MODEL_ARG = sys.argv[1] if len(sys.argv) > 1 else "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
 #Filnamn-säker slugify av modelnamn

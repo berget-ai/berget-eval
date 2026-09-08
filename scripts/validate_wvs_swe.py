@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from run_censorship_v2 import chat_completion  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
-DOCS_PATH = REPO / "data" / "wvs-swe" / "documents.json"
+DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
 
 STATUS_SCORE = {"present": 1.0, "toned_down": 0.5, "absent": 0.0}
 STATUSES = ["present", "toned_down", "absent"]

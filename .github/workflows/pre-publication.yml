@@ -43,7 +43,7 @@ jobs:
         run: |
           TAG="${{ github.event.inputs.tag || 'placebo' }}"
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          OUT_DIR="data/results/${TIMESTAMP}-${TAG}"
+          OUT_DIR="runs/${TIMESTAMP}-${TAG}"
           mkdir -p "$OUT_DIR"
 
           # Run only placebo questions (9 questions × 9 models = 81 calls)
@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: placebo-results
-          path: data/results/
+          path: runs/
 
   # ── 2. Judge calibration ──────────────────────────────────────────────────
   calibration:
@@ -90,7 +90,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: calibration-results
-          path: data/results/
+          path: runs/
 
   # ── 3. Multi-sample for high flip-rate models ─────────────────────────────
   multisample:
@@ -121,7 +121,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: multisample-results
-          path: data/results/
+          path: runs/
 
   # ── 4. Commit all results ─────────────────────────────────────────────────
   finalize:
@@ -149,6 +149,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/results/
+          git add runs/
           git commit -m "chore: pre-publication data collection ${{ github.event.inputs.run_type }}" || echo "Inget att committa"
           git push

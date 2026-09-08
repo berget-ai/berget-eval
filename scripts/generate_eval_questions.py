@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 DATA = Path(__file__).resolve().parent.parent / "data"
-OUT = DATA / "eval-questions.jsonl"
+OUT = DATA.parent / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 random.seed(42)
 
 # ── 1. MCQ-frågor från finetuning-datan ──

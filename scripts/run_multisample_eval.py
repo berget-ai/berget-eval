@@ -17,9 +17,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 import urllib.request
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS_PATH = DATA / "eval-questions.jsonl"
-RESULTS_DIR = DATA / "results"
+REPO = Path(__file__).resolve().parent.parent
+QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
+RESULTS_DIR = REPO / "runs"
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
