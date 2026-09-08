@@ -17,9 +17,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 import urllib.request
 
-import run_provenance as prov
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
-REPO = Path(__file__).resolve().parent.parent
+import run_provenance as prov  # noqa: E402
+
+REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 RESULTS_DIR = REPO / "runs"
 PROMPTS = json.loads((REPO / "datasets" / "main-battery" / "prompts.json").read_text(encoding="utf-8"))

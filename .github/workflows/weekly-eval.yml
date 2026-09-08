@@ -45,7 +45,7 @@ jobs:
         id: set-dir
         run: |
           TAG="${{ github.event.inputs.tag || 'weekly' }}"
-          OUT_DIR=$(python scripts/run_eval.py --print-run-dir --tag "$TAG")
+          OUT_DIR=$(python scripts/evals/run_main_battery.py --print-run-dir --tag "$TAG")
           echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -76,7 +76,7 @@ jobs:
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           mkdir -p "$OUT_DIR"
-          python scripts/run_eval.py \
+          python scripts/evals/run_main_battery.py \
             --models "${{ matrix.model }}" \
             --out-dir "$OUT_DIR" \
             --tag "${{ needs.setup.outputs.tag }}"
@@ -139,7 +139,7 @@ jobs:
           python scripts/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Write run.json
-        run: python scripts/run_eval.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
+        run: python scripts/evals/run_main_battery.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
 
       - name: Commit results
         run: |

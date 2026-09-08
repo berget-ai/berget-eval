@@ -14,10 +14,10 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO / "scripts"))
+sys.path.insert(0, str(REPO / "scripts" / "evals"))
 
-# Import from run_eval (chat_completion, build_prompt, get_system_prompt)
-import run_eval  # noqa: E402
+# Import from run_main_battery (chat_completion, build_prompt, get_system_prompt)
+import run_main_battery as run_eval  # noqa: E402
 
 
 def main():

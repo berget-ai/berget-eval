@@ -9,9 +9,9 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO / "scripts"))
+sys.path.insert(0, str(REPO / "scripts" / "evals"))
 
-import run_eval  # noqa: E402
+import run_main_battery as run_eval  # noqa: E402
 
 
 def rescore_file(path: Path):

@@ -23,11 +23,11 @@ Modell → tillverkare-mappning:
 Usage:
   # Öppna modeller via Berget-API
   OPENAI_API_KEY=$BERGET_API_KEY OPENAI_API_BASE=https://api.berget.ai/v1 \
-  python3 scripts/run_self_criticism.py --tag self-criticism
+  python3 scripts/evals/run_self_criticism.py --tag self-criticism
 
   # Claude via Anthropic
   OPENAI_API_KEY=sk-ant-... OPENAI_API_BASE=https://api.anthropic.com/v1 \
-  python3 scripts/run_self_criticism.py --models claude-fable-5 claude-opus-5 claude-sonnet-5 \
+  python3 scripts/evals/run_self_criticism.py --models claude-fable-5 claude-opus-5 claude-sonnet-5 \
     --api-base https://api.anthropic.com/v1 --tag self-criticism-claude
 """
 import argparse
@@ -36,12 +36,14 @@ import os
 import sys
 import time
 import urllib.request
-
-import run_provenance as prov
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
+
+import run_provenance as prov  # noqa: E402
+
+REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "self-criticism" / "v1" / "questions.jsonl"
 RUNS_DIR = REPO / "runs"
 PROMPTS = json.loads((REPO / "datasets" / "self-criticism" / "prompts.json").read_text(encoding="utf-8"))

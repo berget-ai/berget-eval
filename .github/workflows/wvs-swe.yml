@@ -53,7 +53,7 @@ jobs:
         id: set-dir
         run: |
           TAG="${{ github.event.inputs.tag || 'weekly' }}"
-          OUT_DIR=$(python scripts/run_wvs_swe.py --print-run-dir --tag "$TAG")
+          OUT_DIR=$(python scripts/evals/run_wvs_swe.py --print-run-dir --tag "$TAG")
           echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -81,7 +81,7 @@ jobs:
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           mkdir -p "$OUT_DIR"
-          python scripts/run_wvs_swe.py \
+          python scripts/evals/run_wvs_swe.py \
             --models "${{ matrix.model }}" \
             --personas "${{ github.event.inputs.personas || 'anonymous,swedish,american' }}" \
             --judge "${{ github.event.inputs.judge || 'moonshotai/Kimi-K3' }}" \
@@ -139,7 +139,7 @@ jobs:
           python3 -c "import json; [print(' ',json.loads(l).get('model','?')) for l in open('$OUT_DIR/runs.jsonl')]" 2>/dev/null | sort -u || true
 
       - name: Write run.json
-        run: python scripts/run_wvs_swe.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
+        run: python scripts/evals/run_wvs_swe.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
 
       - name: Commit results
         run: |
