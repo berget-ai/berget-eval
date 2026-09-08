@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-08-07T23-25-49-shuffled-values",
+  "started_at": "2026-08-07T23:25:49+00:00",
+  "status": "completed",
+  "git_commit": "ccdb7eb2de5fc03637a9e64c33016b4752c09561",
+  "datasets": [
+    {
+      "name": "main-battery",
+      "version": "unknown",
+      "path": "data/eval-questions.jsonl",
+      "sha256": "68d1fd868f7647d2342ff9ce20c4fdd723d01e9fe2ec5dd18ba6a415716fdfcc",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "mistralai/Mistral-Medium-3.5-128B",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "moonshotai/Kimi-K2.6",
+    "moonshotai/Kimi-K3",
+    "openai/gpt-oss-120b",
+    "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.2"
+  ],
+  "judge": {
+    "model": "mistralai/Mistral-Medium-3.5-128B"
+  },
+  "config": {},
+  "n_questions": 322,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:25.905939+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

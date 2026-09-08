@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-08-11T14-09-11-wvs-swe-v2-lengthmatched",
+  "started_at": "2026-08-11T14:09:11+00:00",
+  "status": "completed",
+  "git_commit": "b653d65befd0669dd13c303fb2834431564aa6f2",
+  "datasets": [
+    {
+      "name": "wvs-swe",
+      "version": "v2",
+      "path": "datasets/wvs-swe/v2/documents.json",
+      "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+      "resolution": "inferred-from-git",
+      "note": "absent in git at run timestamp; resolved at results-commit c70a48f"
+    }
+  ],
+  "models": [
+    "moonshotai/Kimi-K3",
+    "moonshotai/Kimi-K2.6",
+    "zai-org/GLM-5.2",
+    "zai-org/GLM-4.7-FP8",
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "openai/gpt-oss-120b",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "mistralai/Mistral-Medium-3.5-128B"
+  ],
+  "judge": {
+    "model": "moonshotai/Kimi-K3"
+  },
+  "config": {},
+  "n_questions": null,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:27.605712+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

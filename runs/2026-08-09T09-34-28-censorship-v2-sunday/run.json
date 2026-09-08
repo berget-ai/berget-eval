@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-08-09T09-34-28-censorship-v2-sunday",
+  "started_at": "2026-08-09T09:34:28+00:00",
+  "status": "failed",
+  "git_commit": "c7405733aac48d9b8cad5dac0a170c28779c3911",
+  "datasets": [
+    {
+      "name": "censorship",
+      "version": "v2",
+      "path": "datasets/censorship/v2/questions.jsonl",
+      "sha256": "46ef1d7d8286d4a15d0b1a8698e341fa083d7b9a79377b8fc7b090654e842c03",
+      "resolution": "inferred-from-git",
+      "note": "absent in git at run timestamp; resolved at results-commit a029f24"
+    }
+  ],
+  "models": [
+    "openai/gpt-oss-120b"
+  ],
+  "judge": null,
+  "config": {},
+  "n_questions": 210,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:25.977523+00:00",
+    "script": "scripts/backfill_run_json.py"
+  },
+  "note": "row counts != 210 questions: {'openai-gpt-oss-120b.jsonl': 13}"
+}

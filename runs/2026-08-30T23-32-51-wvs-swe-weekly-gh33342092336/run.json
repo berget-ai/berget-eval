@@ -1,0 +1,44 @@
+{
+  "run_id": "2026-08-30T23-32-51-wvs-swe-weekly-gh33342092336",
+  "started_at": "2026-08-30T23:32:51+00:00",
+  "status": "completed",
+  "git_commit": "60181e394df2bd7a26a3d793dbae1a63d10905f6",
+  "datasets": [
+    {
+      "name": "wvs-swe",
+      "version": "v2",
+      "path": "datasets/wvs-swe/v2/documents.json",
+      "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "moonshotai/Kimi-K3",
+    "Qwen/Qwen3.8-27B-FP8",
+    "zai-org/GLM-4.7-FP8",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "google/gemma-4-31B-it",
+    "zai-org/GLM-5.3-Flash",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "openai/gpt-oss-120b",
+    "zai-org/GLM-5.3",
+    "zai-org/GLM-5.2"
+  ],
+  "judge": {
+    "model": "moonshotai/Kimi-K3"
+  },
+  "config": {},
+  "n_questions": null,
+  "provenance": {
+    "github_run_id": "33342092336",
+    "github_run_url": "https://github.com/berget-ai/berget-eval/actions/runs/33342092336",
+    "workflow": "wvs-swe.yml",
+    "trigger": "schedule",
+    "conclusion": "success",
+    "recovered": true
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:30.986350+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

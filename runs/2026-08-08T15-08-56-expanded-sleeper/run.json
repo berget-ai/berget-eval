@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-08-08T15-08-56-expanded-sleeper",
+  "started_at": "2026-08-08T15:08:56+00:00",
+  "status": "completed",
+  "git_commit": "585186b55b222fa74eaeca3c2ada620c1aec3487",
+  "datasets": [
+    {
+      "name": "main-battery",
+      "version": "unknown",
+      "path": "data/eval-questions.jsonl",
+      "sha256": "714eab145e30cd76dadcfdbac653767879fb7470fd72ca4f89a47bb392fe6e61",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "mistralai/Mistral-Medium-3.5-128B",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "moonshotai/Kimi-K2.6",
+    "moonshotai/Kimi-K3",
+    "openai/gpt-oss-120b",
+    "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.2"
+  ],
+  "judge": {
+    "model": "mistralai/Mistral-Medium-3.5-128B"
+  },
+  "config": {},
+  "n_questions": 360,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:25.949117+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

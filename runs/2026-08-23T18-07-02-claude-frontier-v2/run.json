@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-08-23T18-07-02-claude-frontier-v2",
+  "started_at": "2026-08-23T18:07:02+00:00",
+  "status": "completed",
+  "git_commit": "cf0617dc3a9ad419512d78f891e94354da47f9a7",
+  "datasets": [
+    {
+      "name": "main-battery",
+      "version": "v3",
+      "path": "datasets/main-battery/v3/eval-questions.jsonl",
+      "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "claude-fable-5",
+    "claude-opus-5",
+    "claude-sonnet-5"
+  ],
+  "judge": null,
+  "config": {},
+  "n_questions": 369,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:28.791488+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}
