@@ -41,7 +41,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
-import run_provenance as prov  # noqa: E402
+from lib import provenance as prov  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "self-criticism" / "v1" / "questions.jsonl"

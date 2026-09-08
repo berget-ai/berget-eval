@@ -28,8 +28,8 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent / "evals"))
-from run_censorship import chat_completion  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from lib.api import chat_completion  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"

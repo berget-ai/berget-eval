@@ -36,8 +36,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
-from run_censorship import chat_completion  # noqa: E402
-import run_provenance as prov  # noqa: E402
+from lib import provenance as prov  # noqa: E402
+from lib.api import chat_completion  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
