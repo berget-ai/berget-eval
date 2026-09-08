@@ -1,83 +1,131 @@
 {
-  "main-battery": {
-    "description": "Swedish language/values/censorship/sleeper battery",
-    "versions": {
-      "v1": {
-        "path": "main-battery/v1/eval-questions.jsonl",
-        "sha256": "8ab8dde8a89abc068db1ef2350b7ab4726ca7badbd6286945cff597bfc43897a",
-        "created": "2026-08-07",
-        "changelog": "Initial 69-question battery (language-focused)",
-        "questions": 69
-      },
-      "v2": {
-        "path": "main-battery/v2/eval-questions.jsonl",
-        "sha256": "0397a5beff99631672295c66fc70b44b7aba8e400d24840e193bc4e86d885b1c",
-        "created": "2026-08-07",
-        "changelog": "Expanded to 99 questions",
-        "questions": 99
-      },
-      "v3": {
-        "path": "main-battery/v3/eval-questions.jsonl",
-        "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
-        "created": "2026-08-07",
-        "changelog": "Expanded to 369 questions; added placebo controls (9 questions)",
-        "questions": 369
+  "datasets": {
+    "main-battery": {
+      "description": "Swedish language/values/censorship/sleeper battery",
+      "versions": {
+        "v1": {
+          "path": "main-battery/v1/eval-questions.jsonl",
+          "sha256": "8ab8dde8a89abc068db1ef2350b7ab4726ca7badbd6286945cff597bfc43897a",
+          "created": "2026-08-07",
+          "changelog": "Initial 69-question battery (language-focused)",
+          "questions": 69
+        },
+        "v2": {
+          "path": "main-battery/v2/eval-questions.jsonl",
+          "sha256": "0397a5beff99631672295c66fc70b44b7aba8e400d24840e193bc4e86d885b1c",
+          "created": "2026-08-07",
+          "changelog": "Expanded to 99 questions",
+          "questions": 99
+        },
+        "v3": {
+          "path": "main-battery/v3/eval-questions.jsonl",
+          "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
+          "created": "2026-08-07",
+          "changelog": "Expanded to 369 questions; added placebo controls (9 questions)",
+          "questions": 369
+        }
+      }
+    },
+    "censorship": {
+      "description": "Censorship/refusal battery (210 questions; starts at v2 — no v1 was ever versioned as a dataset)",
+      "versions": {
+        "v2": {
+          "path": "censorship/v2/questions.jsonl",
+          "sha256": "46ef1d7d8286d4a15d0b1a8698e341fa083d7b9a79377b8fc7b090654e842c03",
+          "created": "2026-08-09",
+          "changelog": "Redesigned battery after v1 length-truncation invalidated cross-model comparisons",
+          "questions": 210
+        }
+      }
+    },
+    "wvs-swe": {
+      "description": "WVS Sweden-anchored values survival under rewrite (stimulus documents)",
+      "versions": {
+        "v1": {
+          "path": "wvs-swe/v1/documents.json",
+          "sha256": "73daf248e4eabf35d0c5ca7060b4f8a45db24ec75c99618a1f4cf3c9ebd53326",
+          "created": "2026-08-11",
+          "changelog": "Initial synthetic document set",
+          "documents": 3
+        },
+        "v2": {
+          "path": "wvs-swe/v2/documents.json",
+          "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+          "created": "2026-08-11",
+          "changelog": "Length-matched documents (wvs vs control)",
+          "documents": 3
+        }
+      }
+    },
+    "selection-bias": {
+      "description": "Content-controlled workshop notes for theme-selection bias test",
+      "versions": {
+        "v1": {
+          "path": "selection-bias/v1/notes.json",
+          "sha256": "814fb46244f8d6cc0230416b2139a4d830ea050ab54b5c1e3fa6692c8f8cea59",
+          "created": "2026-08-11",
+          "changelog": "Initial 24-note set (6 balanced themes x 4 notes)",
+          "notes": 24
+        }
+      }
+    },
+    "self-criticism": {
+      "description": "Vendor self-criticism asymmetry battery",
+      "versions": {
+        "v1": {
+          "path": "self-criticism/v1/questions.jsonl",
+          "sha256": "5340f8d9176956c5cbac2a904027667682c5f72a5ea2f3ebb7b740894584ad42",
+          "created": "2026-08-31",
+          "changelog": "Initial 18-question set (8 asymmetry pairs + 2 neutral controls)",
+          "questions": 18
+        }
       }
     }
   },
-  "censorship": {
-    "description": "Censorship/refusal battery (210 questions; starts at v2 — no v1 was ever versioned as a dataset)",
-    "versions": {
-      "v2": {
-        "path": "censorship/v2/questions.jsonl",
-        "sha256": "46ef1d7d8286d4a15d0b1a8698e341fa083d7b9a79377b8fc7b090654e842c03",
-        "created": "2026-08-09",
-        "changelog": "Redesigned battery after v1 length-truncation invalidated cross-model comparisons",
-        "questions": 210
-      }
-    }
-  },
-  "wvs-swe": {
-    "description": "WVS Sweden-anchored values survival under rewrite (stimulus documents)",
-    "versions": {
-      "v1": {
-        "path": "wvs-swe/v1/documents.json",
-        "sha256": "73daf248e4eabf35d0c5ca7060b4f8a45db24ec75c99618a1f4cf3c9ebd53326",
-        "created": "2026-08-11",
-        "changelog": "Initial synthetic document set",
-        "documents": 3
-      },
-      "v2": {
-        "path": "wvs-swe/v2/documents.json",
-        "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
-        "created": "2026-08-11",
-        "changelog": "Length-matched documents (wvs vs control)",
-        "documents": 3
-      }
-    }
-  },
-  "selection-bias": {
-    "description": "Content-controlled workshop notes for theme-selection bias test",
-    "versions": {
-      "v1": {
-        "path": "selection-bias/v1/notes.json",
-        "sha256": "814fb46244f8d6cc0230416b2139a4d830ea050ab54b5c1e3fa6692c8f8cea59",
-        "created": "2026-08-11",
-        "changelog": "Initial 24-note set (6 balanced themes x 4 notes)",
-        "notes": 24
-      }
-    }
-  },
-  "self-criticism": {
-    "description": "Vendor self-criticism asymmetry battery",
-    "versions": {
-      "v1": {
-        "path": "self-criticism/v1/questions.jsonl",
-        "sha256": "5340f8d9176956c5cbac2a904027667682c5f72a5ea2f3ebb7b740894584ad42",
-        "created": "2026-08-31",
-        "changelog": "Initial 18-question set (8 asymmetry pairs + 2 neutral controls)",
-        "questions": 18
-      }
+  "unversioned_files": {
+    "censorship/prompts.json": {
+      "sha256": "852e42418dc1b64651c1d6494aa752341f6c97d53fed8ed852ff9edac3abae4f",
+      "description": "System prompt for run_censorship_v2.py"
+    },
+    "judges/selection-bias-judge.prompt.md": {
+      "sha256": "da0c6da47572ae8eb23e4dd07ff7a7a47f6a18530fe0668ecc9b5e2b67082f2a",
+      "description": "Theme-classification judge template (run_selection_bias.py)"
+    },
+    "judges/selection-bias-judge.system.md": {
+      "sha256": "5cc72a8c4d79854cc043232366966bf0e66f7fb87df87dad028061be3d4d1527",
+      "description": "Theme-classification judge system prompt"
+    },
+    "judges/sleeper-judge.prompt.md": {
+      "sha256": "7c6730ec872d924d3117454c4fa8d494399ab703c6862cbe30181ccad5595cbf",
+      "description": "Sleeper-agent judge pair-comparison template"
+    },
+    "judges/sleeper-judge.system.md": {
+      "sha256": "c621f2a9859ff2274fc679ddb35fc63f2d21340f1fd4a64999ac2c17dfcd89e1",
+      "description": "Sleeper-agent judge system prompt (judge_sleeper.py)"
+    },
+    "judges/wvs-swe-judge.prompt.md": {
+      "sha256": "fc530cce3219d1ee242b14ea541e0c3b3e196ec1fb4d2239521222e7a9ef0a5a",
+      "description": "WVS claim-survival judge template (run_wvs_swe.py, validate_wvs_swe.py)"
+    },
+    "judges/wvs-swe-judge.system.md": {
+      "sha256": "b9cc9647e7ee839c56b53112b57ef8c83072faae68bd56b867b3397e647c3e3b",
+      "description": "WVS claim-survival judge system prompt"
+    },
+    "main-battery/prompts.json": {
+      "sha256": "634fc716c7769f0bff2f5f0361ce3c6df8a332e1c07086d81af3364dd0b0432a",
+      "description": "System prompts for run_eval.py / run_multisample_eval.py"
+    },
+    "selection-bias/prompts.json": {
+      "sha256": "5cc0203b643a8bc78147146422b12902512e941d1ecf3a9aa1f9c1ea5b5e3d27",
+      "description": "Summary instruction for run_selection_bias.py"
+    },
+    "self-criticism/prompts.json": {
+      "sha256": "df8bc24b34d17768e755f6db5711fbf9f4b28e4dc4d6d605e99f4c1e9209bf72",
+      "description": "System prompt for run_self_criticism.py"
+    },
+    "wvs-swe/prompts.json": {
+      "sha256": "ba9f918f4cecf4d0e6a25ab87123b9cc8d5a2e4169499daf0c154e0cc0eadbab",
+      "description": "Persona definitions + rewrite/summary templates for run_wvs_swe.py"
     }
   }
 }
