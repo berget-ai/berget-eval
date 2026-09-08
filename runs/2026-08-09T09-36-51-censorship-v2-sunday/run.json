@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-08-09T09-36-51-censorship-v2-sunday",
+  "started_at": "2026-08-09T09:36:51+00:00",
+  "status": "completed",
+  "git_commit": "c7405733aac48d9b8cad5dac0a170c28779c3911",
+  "datasets": [
+    {
+      "name": "censorship",
+      "version": "v2",
+      "path": "datasets/censorship/v2/questions.jsonl",
+      "sha256": "46ef1d7d8286d4a15d0b1a8698e341fa083d7b9a79377b8fc7b090654e842c03",
+      "resolution": "inferred-from-git",
+      "note": "absent in git at run timestamp; resolved at results-commit cf0617d"
+    }
+  ],
+  "models": [
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "mistralai/Mistral-Medium-3.5-128B",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "moonshotai/Kimi-K2.6",
+    "moonshotai/Kimi-K3",
+    "openai/gpt-oss-120b",
+    "Qwen/Qwen3.8-27B-FP8",
+    "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.2"
+  ],
+  "judge": null,
+  "config": {},
+  "n_questions": 210,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:26.025835+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

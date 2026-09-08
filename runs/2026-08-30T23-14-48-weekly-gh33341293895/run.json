@@ -1,0 +1,43 @@
+{
+  "run_id": "2026-08-30T23-14-48-weekly-gh33341293895",
+  "started_at": "2026-08-30T23:14:48+00:00",
+  "status": "completed",
+  "git_commit": "60181e394df2bd7a26a3d793dbae1a63d10905f6",
+  "datasets": [
+    {
+      "name": "main-battery",
+      "version": "v3",
+      "path": "datasets/main-battery/v3/eval-questions.jsonl",
+      "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "moonshotai/Kimi-K3",
+    "openai/gpt-oss-120b",
+    "zai-org/GLM-4.7-FP8",
+    "zai-org/GLM-5.2",
+    "zai-org/GLM-5.3-Flash",
+    "zai-org/GLM-5.3"
+  ],
+  "judge": {
+    "model": "mistralai/Mistral-Medium-3.5-128B"
+  },
+  "config": {},
+  "n_questions": 369,
+  "provenance": {
+    "github_run_id": "33341293895",
+    "github_run_url": "https://github.com/berget-ai/berget-eval/actions/runs/33341293895",
+    "workflow": "weekly-eval.yml",
+    "trigger": "schedule",
+    "conclusion": "failure",
+    "recovered": true
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:30.374424+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

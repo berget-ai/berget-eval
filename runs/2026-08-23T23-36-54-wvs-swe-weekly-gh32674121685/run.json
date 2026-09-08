@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-08-23T23-36-54-wvs-swe-weekly-gh32674121685",
+  "started_at": "2026-08-23T23:36:54+00:00",
+  "status": "completed",
+  "git_commit": "cf0617dc3a9ad419512d78f891e94354da47f9a7",
+  "datasets": [
+    {
+      "name": "wvs-swe",
+      "version": "v2",
+      "path": "datasets/wvs-swe/v2/documents.json",
+      "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+      "resolution": "inferred-from-git"
+    }
+  ],
+  "models": [
+    "moonshotai/Kimi-K3"
+  ],
+  "judge": {
+    "model": "moonshotai/Kimi-K3"
+  },
+  "config": {},
+  "n_questions": null,
+  "provenance": {
+    "github_run_id": "32674121685",
+    "github_run_url": "https://github.com/berget-ai/berget-eval/actions/runs/32674121685",
+    "workflow": "wvs-swe.yml",
+    "trigger": "schedule",
+    "conclusion": "success",
+    "recovered": true
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:29.771890+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}

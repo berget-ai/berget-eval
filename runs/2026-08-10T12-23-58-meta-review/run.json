@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-08-10T12-23-58-meta-review",
+  "started_at": "2026-08-10T12:23:58+00:00",
+  "status": "completed",
+  "git_commit": "3e76ca031a6088f8b98659b9622381ba2ad9d42c",
+  "datasets": [],
+  "models": [
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "google/gemma-4-31B-it",
+    "zai-org/GLM-4.7-FP8",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "openai/gpt-oss-120b",
+    "moonshotai/Kimi-K2.6",
+    "moonshotai/Kimi-K3",
+    "zai-org/GLM-5.2",
+    "mistralai/Mistral-Medium-3.5-128B"
+  ],
+  "judge": null,
+  "config": {},
+  "n_questions": null,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:26.564215+00:00",
+    "script": "scripts/backfill_run_json.py"
+  },
+  "note": "meta-review article review; no question dataset"
+}

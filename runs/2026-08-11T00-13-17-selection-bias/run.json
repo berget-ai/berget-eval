@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-08-11T00-13-17-selection-bias",
+  "started_at": "2026-08-11T00:13:17+00:00",
+  "status": "completed",
+  "git_commit": "b653d65befd0669dd13c303fb2834431564aa6f2",
+  "datasets": [
+    {
+      "name": "selection-bias",
+      "version": "v1",
+      "path": "datasets/selection-bias/v1/notes.json",
+      "sha256": "814fb46244f8d6cc0230416b2139a4d830ea050ab54b5c1e3fa6692c8f8cea59",
+      "resolution": "inferred-from-git",
+      "note": "absent in git at run timestamp; resolved at results-commit c70a48f"
+    }
+  ],
+  "models": [
+    "moonshotai/Kimi-K3",
+    "moonshotai/Kimi-K2.6",
+    "zai-org/GLM-5.2",
+    "zai-org/GLM-4.7-FP8",
+    "google/gemma-4-31B-it",
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "openai/gpt-oss-120b",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "mistralai/Mistral-Medium-3.5-128B"
+  ],
+  "judge": {
+    "model": "moonshotai/Kimi-K3"
+  },
+  "config": {},
+  "n_questions": null,
+  "provenance": {
+    "trigger": "unknown",
+    "recovered": false
+  },
+  "backfill": {
+    "at": "2026-09-08T07:51:26.619641+00:00",
+    "script": "scripts/backfill_run_json.py"
+  }
+}
