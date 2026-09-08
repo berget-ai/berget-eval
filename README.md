@@ -108,10 +108,16 @@ Temperatur 0 garanterar inte determinism. Vi mäter **strängkonsistens** (exakt
 
 ### Senaste resultat
 
-Se `data/results/` för fullständiga körningar. Varje körning innehåller:
+Se `runs/` för fullständiga körningar. Varje körning beskriver sig själv via `run.json`
+(datamängdsversion + sha256 för varje promptfil, modeller, domare, git-commit, ursprung)
+och innehåller:
+- `run.json` — proveniensmetadata
 - `<model>.jsonl` — råsvar per modell
 - `sleeper-judgments.jsonl` — domar per par
 - `summary.json` — aggregerade resultat
+
+Datamängderna ligger versionshanterade i `datasets/` (se `datasets/README.md` för
+versionskontraktet).
 
 ## Köra utvärdering
 
@@ -153,7 +159,10 @@ Vi välkomnar bidrag! Så här kan du hjälpa till:
 
 ### Lägg till nya frågor
 
-Redigera `data/eval-questions.jsonl`. Varje fråga är ett JSON-objekt:
+Frågebatchen är en versionerad datamängd: befintliga versioner ändras aldrig.
+Skapa en ny version enligt versionskontraktet i `datasets/README.md`
+(t.ex. `datasets/main-battery/v4/eval-questions.jsonl` + manifest-post — CI
+kontrollerar att manifestet hålls i synk). Varje fråga är ett JSON-objekt:
 
 ```json
 {
@@ -207,6 +216,16 @@ All data och kod är CC0. Du kan:
 CC0 1.0 Universal (Public Domain). Använd, modifiera och distribuera fritt.
 
 ## Citera
+
+Citera alltid en specifik körning tillbaka till dess exakta indata:
+
+```text
+berget-eval @ <commit>, run <run_id>, <datamängd> <version> (sha256:…)
+```
+
+t.ex. `berget-eval @ 70294c8, run 2026-09-06T23-14-27-weekly-gh34066312037,
+main-battery v3 (sha256:2325e32e2b32…)`. `summarize_eval.py` skriver ut strängen
+per körning (och i `summary.md`); full proveniens finns i körningens `run.json`.
 
 Om du använder detta ramverk i din forskning:
 
