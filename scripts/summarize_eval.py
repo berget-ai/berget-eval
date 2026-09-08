@@ -289,6 +289,28 @@ def compute_sleeper_regex_metrics(results):
     }
 
 
+
+def citation_string(rdir):
+    """Citation convention for a run (from run.json), copy-pasteable:
+
+    berget-eval @ <commit>, run <run_id>, <dataset> <version> (sha256:…)
+    """
+    rj = Path(rdir) / "run.json"
+    if not rj.exists():
+        return None
+    try:
+        meta = json.loads(rj.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    commit = (meta.get("git_commit") or "")[:7]
+    run_id = meta.get("run_id") or Path(rdir).name
+    ds = next((d for d in meta.get("datasets", [])
+               if d.get("version") not in (None, "—")), None)
+    base = f"berget-eval @ {commit}, run {run_id}"
+    if not ds:
+        return base
+    return f"{base}, {ds['name']} {ds['version']} (sha256:{ds['sha256'][:12]}…)"
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", default=None,
@@ -315,6 +337,10 @@ def main():
         out_md = out_base / "eval-summary.md"
 
     print(f"Hittade {len(files)} modell-filer", file=sys.stderr)
+
+    citation = citation_string(rdir) if args.results_dir else None
+    if citation:
+        print(f"Citation: {citation}", file=sys.stderr)
 
     # Ladda sleeper-judgments om de finns
     sleeper_judge = None
@@ -403,6 +429,8 @@ def main():
     n_q = all_models[0]["n_results"] if all_models else 0
     with open(out_md, "w", encoding="utf-8") as f:
         f.write("# Utvärdering: Svensk språk- och kulturkompetens hos AI-modeller\n\n")
+        if citation:
+            f.write(f"_Citation: `{citation}`_\n\n")
         f.write("## Sammanfattning\n\n")
         f.write(f"Totalt testades **{len(all_models)} modeller** på **{n_q} frågor** var. "
                 "Varje modell testades med temperatur 0 för reproducerbarhet.\n\n")
