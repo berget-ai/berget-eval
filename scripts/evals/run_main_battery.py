@@ -96,8 +96,24 @@ MCQ_RESPONSE_FORMAT = {
 MCQ_MAX_TOKENS = 4000
 
 
+# Markörer för chain-of-thought som läcker in i svarsfältet. Samma lista som
+# scripts/ci/validate_run.py använder så att inspelningen vid körning och
+# verifieringen efteråt mäter samma sak.
+LEAK_MARKERS = ("the user is asking", "the user wants", "användaren ber",
+                "användaren frågar", "jag måste överväga", "jag behöver ge",
+                "i need to", "we need to", "</think>", "<|close|>", "<|channel|>")
+
+
+def detect_leak(text):
+    """True om svaret börjar med internmonolog i stället för själva svaret."""
+    head = (text or "").lstrip()[:300].lower()
+    return any(m in head for m in LEAK_MARKERS)
+
+
 def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
                     response_format=None):
+    """Returnerar (content, meta). meta = {finish_reason, completion_tokens,
+    prompt_tokens} vid lyckat anrop, annars {error: True}."""
     url = f"{API_BASE}/chat/completions"
     body = {
         "model": model,
@@ -127,7 +143,14 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
         try:
             with urllib.request.urlopen(req, timeout=120) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-                return data["choices"][0]["message"]["content"]
+                choice = data["choices"][0]
+                usage = data.get("usage") or {}
+                meta = {
+                    "finish_reason": choice.get("finish_reason"),
+                    "completion_tokens": usage.get("completion_tokens"),
+                    "prompt_tokens": usage.get("prompt_tokens"),
+                }
+                return choice["message"]["content"], meta
         except urllib.error.HTTPError as e:
             body_err = e.read().decode("utf-8", errors="replace")[:200]
             last_err = f"HTTP_ERROR {e.code}: {body_err}"
@@ -142,11 +165,11 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
                 time.sleep(2 * (attempt + 1))
                 continue
             # 4xx -> ge upp
-            return last_err
+            return last_err, {"error": True}
         except Exception as e:
             last_err = f"ERROR: {e}"
             time.sleep(2 * (attempt + 1))
-    return last_err or "ERROR: max retries exceeded"
+    return last_err or "ERROR: max retries exceeded", {"error": True}
 
 
 def build_prompt(q):
@@ -248,7 +271,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             # större budget på fri-text-frågor så svaret hinner fram.
             if model.startswith("claude-") and not is_mcq:
                 max_tokens = max(max_tokens, 4000)
-            response = chat_completion(
+            response, meta = chat_completion(
                 model, messages, max_tokens=max_tokens,
                 response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,
             )
@@ -262,6 +285,14 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 "response": response,
                 "latency_s": round(dt, 2),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
+                # Inspelade fält som validate_run.py:s CHECK 1-3 faktiskt kan
+                # verifiera (heuristik-fallbackerna är bara för gamla runs).
+                "system_prompt": system,
+                "finish_reason": meta.get("finish_reason"),
+                "truncated": meta.get("finish_reason") == "length",
+                "completion_tokens": meta.get("completion_tokens"),
+                "prompt_tokens": meta.get("prompt_tokens"),
+                "reasoning_leak": detect_leak(response),
             }
 
             # Sätt expected och is_correct
