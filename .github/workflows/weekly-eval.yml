@@ -46,7 +46,7 @@ jobs:
         run: |
           TAG="${{ github.event.inputs.tag || 'weekly' }}"
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          OUT_DIR="data/results/${TIMESTAMP}-${TAG}"
+          OUT_DIR="runs/${TIMESTAMP}-${TAG}"
           echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -144,7 +144,7 @@ jobs:
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/results/
+          git add runs/
           git commit -m "chore: veckolig modellutvärdering $(basename $OUT_DIR)" || echo "Inget att committa"
           # Rebasera på senaste main och försök igen vid race (t.ex. om
           # wvs-swe-körningen pushar samtidigt), i stället för att ge upp.

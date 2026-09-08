@@ -2,8 +2,8 @@
 """Full runner - kör alla frågor mot alla (eller valda) modeller.
 
 Skillnad mot eval_pilot.py:
-  - Kör ALLA frågor i data/eval-questions.jsonl (inte bara första 5 per typ)
-  - Sparar resultat i data/results/<metadata-timestamp>/<model-slug>.jsonl
+  - Kör ALLA frågor i datasets/main-battery/v3/eval-questions.jsonl (inte bara första 5 per typ)
+  - Sparar resultat i runs/<metadata-timestamp>/<model-slug>.jsonl
   - Stöd för rate-limit retries
   - Kan välja modeller via --models eller kör alla via API:et
   - Genererar sammanställning (summarize_eval) per körning
@@ -19,8 +19,9 @@ from pathlib import Path
 import urllib.request
 import urllib.error
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS_PATH = DATA / "eval-questions.jsonl"
+REPO = Path(__file__).resolve().parent.parent
+QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
+RUNS_DIR = REPO / "runs"
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -356,7 +357,7 @@ def main():
     # Skapa output-dir
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
     tag = args.tag or "run"
-    out_dir = Path(args.out_dir) if args.out_dir else DATA / "results" / f"{timestamp}-{tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{tag}"
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 

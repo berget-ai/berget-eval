@@ -13,8 +13,7 @@ import json
 import random
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-RESULTS_DIR = DATA / "results"
+RESULTS_DIR = Path(__file__).resolve().parent.parent / "runs"
 
 def load_judgments(run_dir):
     """Load all sleeper judgments from a run."""

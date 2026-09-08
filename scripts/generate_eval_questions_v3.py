@@ -12,9 +12,9 @@ import random
 import sys
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data"
+REPO = Path(__file__).resolve().parent.parent
 KULTUR_DIR = Path(__file__).resolve().parent.parent / "data" / "kulturkanon"
-OUT = DATA / "eval-questions.jsonl"
+OUT = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 random.seed(42)
 
 # ── 1. Svårare språk-MCQ med närmare distraktorer ──
@@ -430,7 +430,7 @@ def main():
         print(f"  {t}: {n}", file=sys.stderr)
 
     # Skriv till en ny fil först - vi vill backa upp den gamla
-    backup = DATA / "eval-questions-v2.jsonl"
+    backup = REPO / "datasets" / "main-battery" / "v2" / "eval-questions.jsonl"
     with open(OUT, "r", encoding="utf-8") as f:
         old = f.read()
     with open(backup, "w", encoding="utf-8") as f:

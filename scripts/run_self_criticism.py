@@ -39,8 +39,9 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data"
-QUESTIONS_PATH = DATA / "self-criticism-questions.jsonl"
+REPO = Path(__file__).resolve().parent.parent
+QUESTIONS_PATH = REPO / "datasets" / "self-criticism" / "v1" / "questions.jsonl"
+RUNS_DIR = REPO / "runs"
 
 MODEL_VENDOR = {
     "google": "Google",
@@ -141,7 +142,7 @@ def main():
         print(f"  - {m} (tillverkare: {get_vendor(m)})", file=sys.stderr)
 
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-    out_dir = Path(args.out_dir) if args.out_dir else DATA / "results" / f"{timestamp}-{args.tag}"
+    out_dir = Path(args.out_dir) if args.out_dir else RUNS_DIR / f"{timestamp}-{args.tag}"
     out_dir.mkdir(parents=True, exist_ok=True)
     print(f"\nOutput dir: {out_dir}", file=sys.stderr)
 

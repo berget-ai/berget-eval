@@ -3,7 +3,7 @@
 
 Usage:
     OPENAI_API_KEY=<key> OPENAI_API_BASE=<base> python scripts/rerun_failed.py \
-        --run-dir data/results/2026-08-31T13-11-51-flash-rerun-2026-08-31 \
+        --run-dir runs/2026-08-31T13-11-51-flash-rerun-2026-08-31 \
         --model zai-org/GLM-5.3-Flash
 """
 
@@ -39,7 +39,7 @@ def main():
 
     # Läs questions-filen för att få prompts
     questions = {}
-    with open(REPO / "data" / "eval-questions.jsonl", encoding="utf-8") as f:
+    with open(REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl", encoding="utf-8") as f:
         for line in f:
             q = json.loads(line)
             questions[q["id"]] = q

@@ -16,7 +16,7 @@ import run_eval  # noqa: E402
 
 def rescore_file(path: Path):
     questions = {}
-    with open(REPO / "data" / "eval-questions.jsonl", encoding="utf-8") as f:
+    with open(REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl", encoding="utf-8") as f:
         for line in f:
             q = json.loads(line)
             questions[q["id"]] = q
