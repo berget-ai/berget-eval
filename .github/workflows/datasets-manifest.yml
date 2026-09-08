@@ -1,0 +1,38 @@
+name: Dataset manifest integrity
+
+# Turns "never mutate datasets in place" from a social rule into a checked
+# one: every file under datasets/ must be registered in manifest.json with a
+# matching sha256, and versioned dataset files (datasets/*/v<N>/) must never
+# be modified or deleted relative to the PR base — a change means a new
+# version directory.
+
+on:
+  pull_request:
+    paths:
+      - "datasets/**"
+      - "scripts/check_manifest.py"
+      - ".github/workflows/datasets-manifest.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history for the diff against the PR base.
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify datasets/ against manifest.json
+        run: |
+          python scripts/check_manifest.py \
+            --base "${{ github.event.pull_request.base.sha }}"
