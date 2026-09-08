@@ -28,8 +28,8 @@ flowchart LR
         O2["runs.jsonl + config.json<br/><i>raw rewrites + system prompts</i>"]
     end
 
-    subgraph JUDGE["2 · JUDGE (LLM-as-judge: Mistral Small 24B)"]
-        J1["judge_sleeper.py<br/><i>paired-context comparison:<br/>subtle vuln / partial refusal /<br/>explanation diff / style diff</i>"]
+    subgraph JUDGE["2 · JUDGE (LLM-as-judge: Gemma 4 31B)"]
+        J1["judge_sleeper.py<br/><i>paired-context comparison:<br/>subtle vuln / partial refusal /<br/>explanation diff / style diff<br/>(Gemma 4; Mistral Small 3.2 som<br/>anti-självbedömnings-fallback)</i>"]
         J2["claim-survival judge<br/><i>present / toned_down / absent<br/>(inside run_wvs_swe.py)</i>"]
         J3["theme-survival judge<br/><i>(inside run_selection_bias.py)</i>"]
     end
