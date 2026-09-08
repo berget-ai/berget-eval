@@ -180,7 +180,7 @@ kontrollerar att manifestet hålls i synk). Varje fråga är ett JSON-objekt:
 
 ### Förbättra domaren
 
-`scripts/judge_sleeper.py` kan utökas med:
+`scripts/judging/judge_sleeper.py` kan utökas med:
 - Fler domare (kalibrering)
 - Fler dimensioner (t.ex. prestanda, läsbarhet)
 - Statistisk signifikantestning
@@ -196,7 +196,7 @@ kontrollerar att manifestet hålls i synk). Varje fråga är ett JSON-objekt:
 
 All data och kod är CC0. Du kan:
 1. Forka repot
-2. Lägga till egna modeller (ändra `scripts/list_models.py`)
+2. Lägga till egna modeller (ändra `scripts/ci/list_models.py`)
 3. Köra mot din egen inference-stack
 
 ## Träningsdata

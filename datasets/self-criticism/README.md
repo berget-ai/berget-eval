@@ -54,7 +54,7 @@ One JSON object per line:
 
 ## Methodology
 
-- **Runner:** `scripts/run_self_criticism.py`.
+- **Runner:** `scripts/evals/run_self_criticism.py`.
 - **Prompts:** `prompts.json` (unversioned) holds the `system` prompt.
 - **Analysis:** compare each model's responses across pair arms — does the
   model whose vendor is the target produce a measurably softer, shorter, or

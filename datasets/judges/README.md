@@ -72,7 +72,7 @@ bullets, in order.
 ## Changing a judge prompt
 
 Edit the file and update its sha256 in `../manifest.json` **in the same PR**
-(`shasum -a 256 <file>`). CI (`scripts/check_manifest.py`) fails otherwise.
+(`shasum -a 256 <file>`). CI (`scripts/ci/check_manifest.py`) fails otherwise.
 Consider whether the change invalidates comparability with historical runs —
 if so, treat it like a new dataset version and note it in the changelog.
 

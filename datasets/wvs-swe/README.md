@@ -71,7 +71,7 @@ Each item in `items`:
 
 ## Methodology
 
-- **Runner:** `scripts/run_wvs_swe.py` (validation: `validate_wvs_swe.py`).
+- **Runner:** `scripts/evals/run_wvs_swe.py` (validation: `judging/validate_wvs_swe.py`).
 - **Prompts:** `prompts.json` (unversioned) defines three **personas**:
   - `anonymous` — no role, just "rewrite"
   - `swedish` — "you are a Swedish person writing for Swedish colleagues"

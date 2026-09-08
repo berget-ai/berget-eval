@@ -1,6 +1,6 @@
 # Scripts restructure plan: make the evaluation entry points obvious
 
-**Status:** Proposed
+**Status:** Implemented (PRs #20–#23 + hotfix #22; housekeeping PR #19)
 **Goal:** A reader (or reviewer, or new contributor) must be able to answer within
 seconds: *which scripts run the actual evaluations?* Today all 31 scripts sit flat
 in `scripts/`, and the `run_*.py` prefix — the closest thing to a marker for "this
@@ -304,17 +304,45 @@ should be a follow-up issue before the next pre-publication data collection.
 | Generators under `scripts/datasets/` | Keep out of `datasets/` | Preserves "datasets are versioned inputs, never mutated" boundary |
 | Filenames inside `evals/` | Rename to match dataset names | `run_eval.py` overclaims; `run_censorship_v2.py` couples runner name to dataset version — **pending approval** |
 
-## Open questions
+## Open questions — resolved during implementation
 
-1. Approve the two renames (`run_eval.py` → `run_main_battery.py`,
-   `run_censorship_v2.py` → `run_censorship.py`), or directory-only moves?
+1. **Renames approved**: `run_eval.py` → `run_main_battery.py`,
+   `run_censorship_v2.py` → `run_censorship.py` (also
+   `run_multisample_eval.py` → `run_multisample.py`).
 2. ~~`meta_review.py` placement~~ — **resolved by evidence** (cross-reference
    §C): it creates run folders but bypasses provenance; placed in `analysis/`
    with a provenance fix in PR 3.
-3. `eval_pilot.py` — archive as proposed, or does anyone still use it for
-   smoke-testing new questions before a dataset version is cut? (If yes, it
-   belongs in `maintenance/` instead.)
-4. Should PR 3's `meta_review.py` provenance fix also record the *reviewed run*
-   as a dataset entry (sha256 of the judgments file it reads)? That would make
-   meta-review findings citable under the same convention as everything else,
-   at the cost of a slightly larger behavior change.
+3. **`eval_pilot.py` → `archive/`** (approved).
+4. **Meta-review input hashing: approved, implemented truthfully.** The
+   premise was that meta_review reads a reviewed run's judgments file — it
+   doesn't. The review arm reads an article file, so *that* is what's hashed
+   into `datasets[]` (resolution: recorded); the swap arm's score tables are
+   embedded in code, so its `datasets[]` is empty with a `tables_source`
+   config note.
+
+## Implementation notes (things the plan didn't predict)
+
+- **Hotfix #22 (P1):** moving `run_provenance.py` into `scripts/lib/` without
+  adjusting its `REPO` depth broke `dataset_entry()` hashing — every eval run
+  would have crashed at start. `--print-run-dir`/`--help` verification missed
+  it because `git -C` walks up to the repo root; only an end-to-end run that
+  hashes datasets exposes it. Lesson applied to PR 3 verification (full
+  run → judge → summarize → finalize smoke).
+- **Generators execute on import** (no `__main__` guard): an import-based
+  smoke check in PR 3 accidentally ran them and rewrote frozen files under
+  `datasets/main-battery/`. Restored from git; `check_manifest` confirmed
+  sha256 sync. Follow-up (not done here): add `__main__` guards — it
+  re-indents whole files, so it is its own PR.
+- **`scripts/datasets/` got 6 generators, not 9** — the other 3 were already
+  on the archive list (the plan text said "9× generate_*.py, live ones only";
+  3 of the 9 are not live).
+- **pi-lens/Pyright** flags `Import "lib" could not be resolved` on the new
+  imports — it cannot follow the runtime `sys.path` bootstrap (runtime
+  verified working throughout). A repo-wide `pyrightconfig.json` with
+  `extraPaths: ["scripts"]` would fix static resolution; left as a maintainer
+  decision. Separately, `ast-grep:no-bare-except` misfires on
+  `except json.JSONDecodeError:` (marked false-positive twice).
+- **Five `chat_completion` variants** remain in `run_main_battery.py`,
+  `run_self_criticism.py`, `run_multisample.py`, `judge_sleeper.py`,
+  `archive/eval_pilot.py` — only the shared one was extracted to `lib/api.py`.
+  Consolidation is a separate behavior-touching effort.
