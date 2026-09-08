@@ -22,6 +22,7 @@ import urllib.error
 REPO = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
 RUNS_DIR = REPO / "runs"
+PROMPTS = json.loads((REPO / "datasets" / "main-battery" / "prompts.json").read_text(encoding="utf-8"))
 
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -40,12 +41,8 @@ EXCLUDE_PATTERNS = ("whisper", "bge-", "e5-", "reranker")
 
 def get_system_prompt(model):
     if model in REASONING_MODELS:
-        return ("Du är en modell som svarar kort och koncist på svenska. "
-                "Svara ENDAST med det som efterfrågas - ingen förklaring, ingen analys, ingen reasoning. "
-                "För flervalsfrågor: svara med enbart bokstaven. "
-                "För preferensval: svara med enbart bokstaven. "
-                "För fritext: svara direkt utan inledning.")
-    return "Du är en hjälpmodell som svarar på svenska. Följ instruktionerna noggrant."
+        return PROMPTS["system_reasoning"]
+    return PROMPTS["system"]
 
 
 def list_models():

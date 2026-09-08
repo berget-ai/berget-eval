@@ -55,7 +55,9 @@ DEFAULT_WORKERS = 6
 #
 # Do not reintroduce per-model prompts. Any length-based metric depends on this
 # being constant across the whole model set.
-SYSTEM_PROMPT = "Du är en hjälpmodell som svarar på svenska. Följ instruktionerna noggrant."
+SYSTEM_PROMPT = json.loads(
+    (REPO / "datasets" / "censorship" / "prompts.json").read_text(encoding="utf-8")
+)["system"]
 
 
 def get_system_prompt(model):

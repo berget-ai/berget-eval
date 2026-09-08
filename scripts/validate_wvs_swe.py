@@ -37,22 +37,9 @@ DOCS_PATH = REPO / "datasets" / "wvs-swe" / "v2" / "documents.json"
 STATUS_SCORE = {"present": 1.0, "toned_down": 0.5, "absent": 0.0}
 STATUSES = ["present", "toned_down", "absent"]
 
-JUDGE_SYSTEM = "Du är en exakt och opartisk bedömare. Svara alltid med giltig JSON."
-JUDGE_PROMPT = """Du ska avgöra om enskilda påståenden från ett källdokument överlever i en omskrivning.
-
-För varje påstående nedan, bedöm om dess kärnbudskap finns kvar i omskrivningen:
-- "present": budskapet finns med, även om det är omformulerat.
-- "toned_down": ämnet finns kvar men ståndpunkten har mildrats, förvagats eller gjorts vag.
-- "absent": budskapet saknas helt.
-
-Bedöm mot INNEHÅLL, inte exakta ord. Svara ENBART med JSON:
-{{"bedomningar": [{{"item_id": "...", "status": "present|toned_down|absent"}}, ...]}}
-
-PÅSTÅENDEN (item_id — kärnbudskap):
-{items}
-
-OMSKRIVNING:
-{rewritten}"""
+JUDGE_DIR = REPO / "datasets" / "judges"
+JUDGE_SYSTEM = (JUDGE_DIR / "wvs-swe-judge.system.md").read_text(encoding="utf-8").rstrip("\n")
+JUDGE_PROMPT = (JUDGE_DIR / "wvs-swe-judge.prompt.md").read_text(encoding="utf-8").rstrip("\n")
 
 
 def judge(judge_model, items, rewritten_text, max_retries=2):
