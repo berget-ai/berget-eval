@@ -1,0 +1,164 @@
+[
+  {
+    "model_id": "google/gemma-4-31B-it",
+    "model_short": "google-gemma-4-31b-it",
+    "metrics": {
+      "Lang-MCQ": 0.75,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6833333333333332,
+      "Swenglish-free": 0.9967479674796748,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.7,
+      "Values": 0.5636363636363636,
+      "Censorship-free": 0.9222222222222223
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "model_short": "mistralai-mistral-small-3-2-24b-instruct-2506",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.13333333333333333,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.6499999999999999,
+      "Swenglish-free": 0.9975609756097561,
+      "Culture-MCQ": 0.6,
+      "Culture-TF": 0.8,
+      "Values": 0.7272727272727273,
+      "Censorship-free": 0.8111111111111111
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "moonshotai/Kimi-K3",
+    "model_short": "moonshotai-kimi-k3",
+    "metrics": {
+      "Lang-MCQ": 0.65,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.3,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.7611111111111111,
+      "Swenglish-free": 0.973170731707317,
+      "Culture-MCQ": 0.9,
+      "Culture-TF": 0.5,
+      "Values": 0.6,
+      "Censorship-free": 0.9777777777777777
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "Qwen/Qwen3.8-27B-FP8",
+    "model_short": "qwen-qwen3-8-27b-fp8",
+    "metrics": {
+      "Lang-MCQ": 0.6,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.13333333333333333,
+      "False-friends": 0.8,
+      "Long-form": 1.0,
+      "Translation": 0.6666666666666666,
+      "Swenglish-free": 0.9690217391304348,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.8,
+      "Values": 0.6363636363636364,
+      "Censorship-free": 0.9666666666666667
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "zai-org/GLM-5.2",
+    "model_short": "zai-org-glm-5-2",
+    "metrics": {
+      "Lang-MCQ": 0.7,
+      "Lang-Preference": 0.8333333333333334,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 1.0,
+      "Long-form": 1.0,
+      "Translation": 0.7166666666666666,
+      "Swenglish-free": 0.9861788617886179,
+      "Culture-MCQ": 0.7,
+      "Culture-TF": 0.6,
+      "Values": 0.7090909090909091,
+      "Censorship-free": 0.9888888888888889
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  },
+  {
+    "model_id": "zai-org/GLM-5.3-Flash",
+    "model_short": "zai-org-glm-5-3-flash",
+    "metrics": {
+      "Lang-MCQ": 0.8,
+      "Lang-Preference": 0.9166666666666666,
+      "Conversation": 0.26666666666666666,
+      "False-friends": 0.9,
+      "Long-form": 1.0,
+      "Translation": 0.9055555555555556,
+      "Swenglish-free": 0.960054347826087,
+      "Culture-MCQ": 0.75,
+      "Culture-TF": 0.0,
+      "Values": 0.6545454545454545,
+      "Censorship-free": 0.9888888888888889
+    },
+    "sleeper": {
+      "total": 66,
+      "dims": {
+        "subtle_vuln": 0.0,
+        "partial_refusal": 0.0,
+        "explanation_diff": 0.0,
+        "code_style_diff": 0.0
+      }
+    },
+    "n_results": 369
+  }
+]
