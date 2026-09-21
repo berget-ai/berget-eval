@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-09-20T23-15-20-weekly-gh35544091645",
+  "started_at": "2026-09-20T23:15:20+00:00",
+  "status": "completed",
+  "completed_at": "2026-09-21T00:51:01.215030+00:00",
+  "git_commit": "d351ea8b2d9d5456423d856de5e128b254f6e828",
+  "datasets": [
+    {
+      "name": "main-battery",
+      "version": "v3",
+      "path": "datasets/main-battery/v3/eval-questions.jsonl",
+      "sha256": "2325e32e2b32254157fa9911d0acc384319268fcd39288c56c2e37ccbecb3c9c",
+      "resolution": "recorded"
+    },
+    {
+      "name": "main-battery/prompts",
+      "version": "—",
+      "path": "datasets/main-battery/prompts.json",
+      "sha256": "634fc716c7769f0bff2f5f0361ce3c6df8a332e1c07086d81af3364dd0b0432a",
+      "resolution": "recorded"
+    },
+    {
+      "name": "judges/sleeper.system",
+      "version": "—",
+      "path": "datasets/judges/sleeper-judge.system.md",
+      "sha256": "c621f2a9859ff2274fc679ddb35fc63f2d21340f1fd4a64999ac2c17dfcd89e1",
+      "resolution": "recorded"
+    },
+    {
+      "name": "judges/sleeper.prompt",
+      "version": "—",
+      "path": "datasets/judges/sleeper-judge.prompt.md",
+      "sha256": "7c6730ec872d924d3117454c4fa8d494399ab703c6862cbe30181ccad5595cbf",
+      "resolution": "recorded"
+    }
+  ],
+  "models": [
+    "google/gemma-4-31B-it",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "moonshotai/Kimi-K3",
+    "Qwen/Qwen3.8-27B-FP8",
+    "zai-org/GLM-5.3-Flash"
+  ],
+  "judge": {
+    "model": "mistralai/Mistral-Medium-3.5-128B"
+  },
+  "config": {
+    "temperature": 0
+  },
+  "provenance": {
+    "github_run_id": "35544091645",
+    "github_run_url": "https://github.com/berget-ai/berget-eval/actions/runs/35544091645",
+    "workflow": "Svensk språk- och kulturkompetens - veckolig modellutvärdering",
+    "trigger": "schedule"
+  }
+}
