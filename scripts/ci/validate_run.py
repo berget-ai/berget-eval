@@ -35,6 +35,10 @@ LEAK_FAIL = 0.10
 def load(run_dir):
     by_model = {}
     for f in sorted(run_dir.glob("*.jsonl")):
+        # sleepers/runs files are judgment/rewrite artifacts, not model results —
+        # same rule as CHECK 0's completeness count and models_from_jsonl().
+        if f.name.startswith(("sleeper", "runs")):
+            continue
         rows = []
         with open(f, encoding="utf-8") as fh:
             for line in fh:

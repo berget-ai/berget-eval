@@ -125,13 +125,18 @@ jobs:
           find artifact-tmp/ -name "*.jsonl" -exec cp {} "$OUT_DIR/" \;
 
       - name: Run sleeper agent judge
+        id: judge
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
         run: |
           OUT_DIR="${{ needs.setup.outputs.out_dir }}"
           echo "Kör sleeper judge på: $OUT_DIR"
-          python scripts/judging/judge_sleeper.py --results-dir "$OUT_DIR" || echo "Judge misslyckades, fortsätter med regex-fallback"
+          # Misslyckas domaren ska rådatan ändå committas men run:en markerad
+          # som failed (se steget längre ner) — aldrig tyst fortsättning som
+          # 6-sep-run:en där 462 404-fel såg ut som 0% flags i summary.
+          python scripts/judging/judge_sleeper.py --results-dir "$OUT_DIR" \
+            || echo "failed=true" >> "$GITHUB_OUTPUT"
 
       - name: Generate summary
         run: |
@@ -140,6 +145,34 @@ jobs:
 
       - name: Write run.json
         run: python scripts/evals/run_main_battery.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
+
+      - name: Validate run (blocking gate)
+        id: validate
+        # Gate per BENCHMARK_PIPELINE.md: en run som inte klarar integritets-
+        # kontrollen får inte gå in i aggregeringar som "completed". Datan
+        # committas ändå (med status=failed) så felet kan inspekteras.
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          python scripts/ci/validate_run.py "$OUT_DIR" \
+            || echo "blocked=true" >> "$GITHUB_OUTPUT"
+
+      - name: Mark run as failed if gate blocked or judge failed
+        if: steps.validate.outputs.blocked == 'true' || steps.judge.outputs.failed == 'true'
+        run: |
+          OUT_DIR="${{ needs.setup.outputs.out_dir }}"
+          REASON="validate_run.py blocked"
+          if [ "${{ steps.judge.outputs.failed }}" = "true" ]; then
+            REASON="sleeper judge failed"
+          fi
+          python -c "
+          import json, pathlib
+          p = pathlib.Path('$OUT_DIR') / 'run.json'
+          run = json.loads(p.read_text(encoding='utf-8'))
+          run['status'] = 'failed'
+          run['error'] = '$REASON (see workflow log)'
+          p.write_text(json.dumps(run, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(f'run.json: status=failed ($REASON)')
+          "
 
       - name: Commit results
         run: |
@@ -164,3 +197,9 @@ jobs:
         with:
           name: evaluation-results
           path: ${{ needs.setup.outputs.out_dir }}
+
+      - name: Fail workflow if run did not pass gate
+        # Görs EFTER commit/artifact så misslyckade runs finns att inspektera,
+        # men gör fortfarande hela workflow:en röd så någon tittar.
+        if: steps.validate.outputs.blocked == 'true' || steps.judge.outputs.failed == 'true'
+        run: exit 1
