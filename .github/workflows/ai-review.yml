@@ -20,11 +20,13 @@ jobs:
   review:
     name: AI Review
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: |
       github.event_name == 'pull_request' ||
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issue_comment' &&
        github.event.issue.pull_request &&
+       github.event.issue.state == 'open' &&
        contains(github.event.comment.body, '@berget') &&
        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'),
                 github.event.comment.author_association))
@@ -38,6 +40,21 @@ jobs:
               (github.event.issue.pull_request && format('refs/pull/{0}/merge', github.event.issue.number)) ||
               github.sha
             }}
+
+      # The PR under review must not control the reviewer's instructions:
+      # always use the system prompt from main, never the PR's own copy.
+      # (First bootstrap: if the prompt is not on main yet, the PR copy in
+      # this very PR is the trusted source — it becomes main on merge.)
+      - name: Use trusted system prompt from main
+        run: |
+          if git cat-file -e "refs/remotes/origin/main:.github/prompts/review-system.md" 2>/dev/null; then
+            git show "refs/remotes/origin/main:.github/prompts/review-system.md" \
+              > .github/prompts/review-system.md
+            echo "Using system prompt from origin/main"
+          else
+            echo "Prompt not on main yet — falling back to PR copy (bootstrap)"
+          fi
+
       - uses: berget-ai/ai-review-action@1400f87fac1db96181eea507e7d86997d6c02ba1 # v1.3 (@berget trigger)
         with:
           api_key: ${{ secrets.BERGET_API_KEY }}
