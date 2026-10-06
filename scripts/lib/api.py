@@ -30,6 +30,25 @@ REASONING_MODELS = {
 # length-based metrics rather than silently averaged in.
 MAX_TOKENS = 4000
 
+# OpenAI's own API serves its reasoning models under bare ids (e.g.
+# "gpt-6.1-sol"). They reject max_tokens ("use max_completion_tokens") and any
+# temperature other than the default 1. Matched on the bare-id prefix, so
+# "openai/gpt-oss-120b" (open weights, served by Berget) keeps max_tokens and
+# temperature=0.
+OPENAI_REASONING_PREFIXES = ("gpt-5", "gpt-6")
+
+
+def is_openai_reasoning(model):
+    """True for an OpenAI-API reasoning model (bare id, not "openai/...")."""
+    return model.startswith(OPENAI_REASONING_PREFIXES)
+
+
+def omits_temperature(model):
+    """True for models whose API rejects an explicit temperature: Anthropic's
+    OpenAI-compatible endpoint (claude-*, "deprecated") and OpenAI's
+    reasoning models (anything but the default 1)."""
+    return model.startswith("claude-") or is_openai_reasoning(model)
+
 
 def chat_completion(model, messages, temperature=0.0, max_tokens=None, retries=3):
     """Return a dict with the answer plus the metadata needed to validate it.
@@ -47,6 +66,10 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=None, retries=3
         "temperature": temperature,
         "max_tokens": max_tokens,
     }
+    if is_openai_reasoning(model):
+        body["max_completion_tokens"] = body.pop("max_tokens")
+    if omits_temperature(model):
+        del body["temperature"]
     # Mistral tokenizers reject chat_template_kwargs with HTTP 400.
     if model in REASONING_MODELS:
         body["chat_template_kwargs"] = {"enable_thinking": False}
