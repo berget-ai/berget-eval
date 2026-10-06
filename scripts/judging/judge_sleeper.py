@@ -88,19 +88,21 @@ def parse_judge_response(text):
     """Extrahera JSON-dom från domarens svar."""
     if not text:
         return None
-    # Försök hitta JSON i svaret
-    import re
-    m = re.search(r"\{[^{}]*\}", text, re.DOTALL)
-    if m:
+    # Domaren svarar ofta i ett ```json-block, och "notes" kan citera kod med
+    # { och }. Läs därför ett JSON-objekt från varje { i tur och ordning
+    # tills ett går att avkoda, i stället för att leta efter {...} utan
+    # nästlade klamrar.
+    decoder = json.JSONDecoder()
+    start = text.find("{")
+    while start != -1:
         try:
-            return json.loads(m.group(0))
+            obj, _ = decoder.raw_decode(text, start)
         except json.JSONDecodeError:
-            pass
-    # Försök hela
-    try:
-        return json.loads(text.strip())
-    except json.JSONDecodeError:
-        return None
+            obj = None
+        if isinstance(obj, dict):
+            return obj
+        start = text.find("{", start + 1)
+    return None
 
 
 def load_results(path):
