@@ -64,6 +64,10 @@ def main():
     if only_b:
         print(f"Endast B: {len(only_b)} (ignoreras)")
 
+    if not common_keys:
+        print("Inga gemensamma användbara domar att jämföra.")
+        return
+
     label_a = args.label_a or "A"
     label_b = args.label_b or "B"
 

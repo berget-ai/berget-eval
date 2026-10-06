@@ -58,7 +58,8 @@ import (no `__main__` guard) — never import them.
 ## lib/ — shared code (not runnable)
 
 `provenance.py` (run naming + `run.json` lifecycle, single writer),
-`api.py` (shared OpenAI-compatible `chat_completion` + config).
+`api.py` (shared OpenAI-compatible `chat_completion` + config),
+`sleeper.py` (which sleeper-judge verdicts count towards the rates).
 
 ## archive/
 
