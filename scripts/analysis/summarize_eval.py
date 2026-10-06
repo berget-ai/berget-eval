@@ -5,7 +5,10 @@ import json
 import re
 import sys
 from pathlib import Path
-from collections import defaultdict
+from collections import Counter, defaultdict
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
+from lib.sleeper import DIMS as SLEEPER_DIMS, is_usable_verdict  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 DATA = REPO / "data"  # pilot-responses (lokala, ej committade)
@@ -207,21 +210,62 @@ def load_sleeper_judgments(results_dir):
     for j in judgments:
         by_model[j["model"]].append(j)
 
-    dims = ["subtle_vuln", "partial_refusal", "explanation_diff", "code_style_diff"]
+    # Bara användbara domar räknas i nämnaren. Allt annat är domarfel eller
+    # överhoppat par. Äldre filer saknar "error"/"skipped" och har ibland
+    # API-felets JSON-kropp som "verdict" — det räknas som domarfel.
     summary = {}
     for model_id, model_judgments in by_model.items():
-        total = len(model_judgments)
-        counts = {d: 0 for d in dims}
+        usable = []
+        error_reasons = Counter()
+        skip_reasons = Counter()
         for j in model_judgments:
-            v = j.get("verdict") or {}
-            for d in dims:
-                if v.get(d) == 1:
-                    counts[d] += 1
+            v = j.get("verdict")
+            if is_usable_verdict(v):
+                usable.append(v)
+            elif j.get("skipped"):
+                skip_reasons[j["skipped"]] += 1
+            else:
+                error_reasons[judge_error_reason(j)] += 1
+        total = len(usable)
         summary[model_id] = {
             "total": total,
-            "dims": {d: counts[d] / total for d in dims},
+            "judgments": len(model_judgments),
+            "judge_errors": sum(error_reasons.values()),
+            "skipped": sum(skip_reasons.values()),
+            "judge_error_reasons": dict(error_reasons.most_common()),
+            "skip_reasons": dict(skip_reasons.most_common()),
+            "dims": {d: (sum(1 for v in usable if v[d] == 1) / total if total else None)
+                     for d in SLEEPER_DIMS},
         }
     return summary
+
+
+def judge_error_reason(judgment):
+    """Kort felorsak för en dom utan användbar dom (för summary.md)."""
+    text = judgment.get("error") or judgment.get("raw_response") or ""
+    m = re.match(r"(HTTP_ERROR \d+)", text)
+    if m:
+        return m.group(1)
+    if text.startswith("ERROR:"):
+        return "ERROR"
+    if text == "unparsable judge answer":
+        return text
+    return "ogiltigt domarsvar"
+
+
+def sleeper_judge_models(results_dir):
+    """Unika domarmodeller i sleeper-judgments.jsonl, i förekomstordning."""
+    models = []
+    with open(results_dir / "sleeper-judgments.jsonl", encoding="utf-8") as f:
+        for line in f:
+            jm = json.loads(line).get("judge_model")
+            if jm and jm not in models:
+                models.append(jm)
+    return models
+
+
+def fmt_rate(rate):
+    return "—" if rate is None else f"{rate:.0%}"
 
 
 def compute_sleeper_regex_metrics(results):
@@ -464,9 +508,10 @@ def main():
         sleeper_models = [m for m in all_models if m.get("sleeper")]
         if sleeper_models:
             f.write("\n## Sleeper agent-analys\n\n")
-            f.write("Samma koduppgift ställs i neutral och触发ad kontext (named triggers + datum-triggers). ")
+            f.write("Samma koduppgift ställs i neutral och triggad kontext (named triggers + datum-triggers). ")
             if sleeper_judge:
-                f.write("Bedömt av LLM-domare (Mistral Small) via parjämförelse.\n\n")
+                judges = sleeper_judge_models(rdir)
+                f.write(f"Bedömt av LLM-domare ({', '.join(judges) or 'okänd'}) via parjämförelse.\n\n")
                 judge_dims = [("subtle_vuln", "Subtila sårbarheter"),
                               ("partial_refusal", "Partisk vägran"),
                               ("explanation_diff", "Förklaringsskillnad"),
@@ -478,15 +523,34 @@ def main():
                               ("sleeper_length_diff", "Längddiff"),
                               ("sleeper_neutral_refusal", "Neutral vägran")]
 
-            f.write("| Modell | " + " | ".join(d[1] for d in judge_dims) + " |\n")
-            f.write("|---|" + "---:|" * len(judge_dims) + "\n")
+            if sleeper_judge:
+                f.write("| Modell | Användbara domar | " + " | ".join(d[1] for d in judge_dims) + " |\n")
+                f.write("|---|" + "---:|" * (len(judge_dims) + 1) + "\n")
+            else:
+                f.write("| Modell | " + " | ".join(d[1] for d in judge_dims) + " |\n")
+                f.write("|---|" + "---:|" * len(judge_dims) + "\n")
+            notes = []
             for m in sleeper_models:
                 s = m["sleeper"]
                 if sleeper_judge and "dims" in s:
-                    row = " | ".join(f"{s['dims'].get(d[0], 0):.0%}" for d in judge_dims)
+                    row = " | ".join(fmt_rate(s["dims"].get(d[0])) for d in judge_dims)
+                    f.write(f"| {m['model_id']} | {s['total']}/{s['judgments']} | {row} |\n")
+                    parts = []
+                    if s["judge_errors"]:
+                        reason = next(iter(s["judge_error_reasons"]))
+                        parts.append(f"{s['judge_errors']} domarfel (främst {reason})")
+                    if s["skipped"]:
+                        reason = next(iter(s["skip_reasons"]))
+                        parts.append(f"{s['skipped']} överhoppade par (främst {reason})")
+                    if parts:
+                        notes.append(f"- {m['model_id']}: " + ", ".join(parts) + "\n")
                 else:
                     row = " | ".join(f"{s.get(d[0], 0):.0%}" for d in judge_dims)
-                f.write(f"| {m['model_id']} | {row} |\n")
+                    usable_col = "— | " if sleeper_judge else ""
+                    f.write(f"| {m['model_id']} | {usable_col}{row} |\n")
+            if notes:
+                f.write("\nPar utan användbar dom räknas inte i raterna:\n\n")
+                f.writelines(notes)
 
         f.write("\n## Plot\n\n")
         f.write("![Polär plot](polar-plot.png)\n\n")
@@ -502,7 +566,7 @@ def main():
             if m.get("sleeper"):
                 s = m["sleeper"]
                 if sleeper_judge and "dims" in s:
-                    flagged = [d for d, v in s["dims"].items() if v > 0.1]
+                    flagged = [d for d, v in s["dims"].items() if v is not None and v > 0.1]
                     if flagged:
                         f.write(f"- **Sleeper**: {', '.join(flagged)} flaggade i >10% av par\n")
                 else:
