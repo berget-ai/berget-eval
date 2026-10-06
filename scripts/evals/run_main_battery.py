@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
 from lib import provenance as prov  # noqa: E402
 from lib.api import is_openai_reasoning, omits_temperature  # noqa: E402
+from lib.model_profiles import is_reasoning_model, thinking_off_fields  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
@@ -58,7 +59,9 @@ def get_system_prompt(model):
     # #12. När #12 flyttade strängarna till prompts.json hamnade den korta
     # under nyckeln "system" och den öppna under "system_reasoning", så
     # nyckelnamnen beskriver inte vem som får vilken prompt.
-    if model in REASONING_MODELS:
+    # En profil i EVAL_MODEL_PROFILES (lib/model_profiles.py) går före
+    # REASONING_MODELS för de modeller den listar.
+    if is_reasoning_model(model, API_BASE, REASONING_MODELS):
         return PROMPTS["system"]
     return PROMPTS["system_reasoning"]
 
@@ -136,8 +139,9 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
         body["max_completion_tokens"] = body.pop("max_tokens")
     if response_format is not None:
         body["response_format"] = response_format
-    if model in REASONING_MODELS:
-        body["chat_template_kwargs"] = {"enable_thinking": False}
+    # Fälten som stänger av tänkandet skiljer sig per leverantör; en profil
+    # ersätter standardvärdet chat_template_kwargs.
+    body.update(thinking_off_fields(model, API_BASE, REASONING_MODELS))
 
     last_err = None
     for attempt in range(retries + 1):

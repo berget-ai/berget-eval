@@ -13,6 +13,8 @@ import time
 import urllib.error
 import urllib.request
 
+from lib.model_profiles import thinking_off_fields
+
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.berget.ai/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
@@ -71,8 +73,7 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=None, retries=3
     if omits_temperature(model):
         del body["temperature"]
     # Mistral tokenizers reject chat_template_kwargs with HTTP 400.
-    if model in REASONING_MODELS:
-        body["chat_template_kwargs"] = {"enable_thinking": False}
+    body.update(thinking_off_fields(model, API_BASE, REASONING_MODELS))
 
     last_err = None
     for attempt in range(retries + 1):

@@ -25,6 +25,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from lib import model_profiles
+
 REPO = Path(__file__).resolve().parent.parent.parent
 
 
@@ -87,6 +89,8 @@ def dataset_entry(name, version, rel_path):
 
 def start_run(out_dir, *, datasets, models, judge=None, config=None, n_questions=None):
     """Write run.json with status 'running'. Returns the run dict."""
+    # Loaded first so a bad profile file fails before any run folder or API call.
+    profiles = model_profiles.provenance()
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     run = {
@@ -101,6 +105,8 @@ def start_run(out_dir, *, datasets, models, judge=None, config=None, n_questions
         "n_questions": n_questions,
         "provenance": provenance(),
     }
+    if profiles is not None:
+        run["model_profiles"] = profiles
     _write(out_dir, run)
     return run
 
