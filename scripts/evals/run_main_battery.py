@@ -22,6 +22,7 @@ import urllib.error
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
 from lib import provenance as prov  # noqa: E402
+from lib.api import is_openai_reasoning, omits_temperature  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
@@ -120,10 +121,14 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
         "messages": messages,
         "max_tokens": max_tokens,
     }
-    # Anthropic-modeller (claude-*) avvisar 'temperature' (deprecated). Hoppa över
-    # den bara för dem; öppna modeller behåller temperature=0 för reproducerbarhet.
-    if not model.startswith("claude-"):
+    # Anthropic-modeller (claude-*) avvisar 'temperature' (deprecated), OpenAI:s
+    # reasoning-modeller (gpt-5*, gpt-6*) allt utom default 1. Hoppa över den
+    # bara för dem; öppna modeller behåller temperature=0 för reproducerbarhet.
+    if not omits_temperature(model):
         body["temperature"] = temperature
+    # OpenAI:s reasoning-modeller avvisar max_tokens ("use max_completion_tokens").
+    if is_openai_reasoning(model):
+        body["max_completion_tokens"] = body.pop("max_tokens")
     if response_format is not None:
         body["response_format"] = response_format
     if model in REASONING_MODELS:
@@ -265,11 +270,13 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                 max_tokens = MCQ_MAX_TOKENS
             else:
                 max_tokens = 400
-            # Reasoning-modeller (Claude) förbrukar tokens på intern reasoning
-            # innan det synliga svaret skrivs. Vid för lågt tak blir content tom
-            # (finish_reason='length') utan att vara en refusal. Ge dem mycket
-            # större budget på fri-text-frågor så svaret hinner fram.
-            if model.startswith("claude-") and not is_mcq:
+            # Reasoning-modeller (Claude, OpenAI:s gpt-5*/gpt-6*) förbrukar tokens
+            # på intern reasoning innan det synliga svaret skrivs. Vid för lågt
+            # tak blir content tom (finish_reason='length') utan att vara en
+            # refusal. Ge dem mycket större budget på fri-text-frågor så svaret
+            # hinner fram.
+            if ((model.startswith("claude-") or is_openai_reasoning(model))
+                    and not is_mcq):
                 max_tokens = max(max_tokens, 4000)
             response, meta = chat_completion(
                 model, messages, max_tokens=max_tokens,
