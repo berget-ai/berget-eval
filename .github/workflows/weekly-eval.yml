@@ -173,6 +173,9 @@ jobs:
           p.write_text(json.dumps(run, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           print(f'run.json: status=failed ($REASON)')
           "
+          # summary.md skrevs innan run.json fanns; skriv om den så att
+          # statusen står överst i sammanfattningen.
+          python scripts/analysis/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Commit results
         run: |
