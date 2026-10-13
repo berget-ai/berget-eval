@@ -1,0 +1,54 @@
+{
+  "run_id": "2026-10-04T23-35-32-wvs-swe-weekly-gh37244302335",
+  "started_at": "2026-10-04T23:35:32+00:00",
+  "status": "completed",
+  "completed_at": "2026-10-04T23:44:43.532407+00:00",
+  "git_commit": "1017560d9e5539446bc660662d67953480db66f2",
+  "datasets": [
+    {
+      "name": "wvs-swe",
+      "version": "v2",
+      "path": "datasets/wvs-swe/v2/documents.json",
+      "sha256": "a6cbf8968b4b416dd6b7055628c835b658e8b8969b60693037971dc1206154b1",
+      "resolution": "recorded"
+    },
+    {
+      "name": "wvs-swe/prompts",
+      "version": "—",
+      "path": "datasets/wvs-swe/prompts.json",
+      "sha256": "ba9f918f4cecf4d0e6a25ab87123b9cc8d5a2e4169499daf0c154e0cc0eadbab",
+      "resolution": "recorded"
+    },
+    {
+      "name": "judges/wvs-swe.system",
+      "version": "—",
+      "path": "datasets/judges/wvs-swe-judge.system.md",
+      "sha256": "b9cc9647e7ee839c56b53112b57ef8c83072faae68bd56b867b3397e647c3e3b",
+      "resolution": "recorded"
+    },
+    {
+      "name": "judges/wvs-swe.prompt",
+      "version": "—",
+      "path": "datasets/judges/wvs-swe-judge.prompt.md",
+      "sha256": "fc530cce3219d1ee242b14ea541e0c3b3e196ec1fb4d2239521222e7a9ef0a5a",
+      "resolution": "recorded"
+    }
+  ],
+  "models": [
+    "zai-org/GLM-5.3-Flash",
+    "moonshotai/Kimi-K3",
+    "google/gemma-4-31B-it",
+    "Qwen/Qwen3.8-27B-FP8",
+    "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
+  ],
+  "judge": {
+    "model": "moonshotai/Kimi-K3"
+  },
+  "config": {},
+  "provenance": {
+    "github_run_id": "37244302335",
+    "github_run_url": "https://github.com/berget-ai/berget-eval/actions/runs/37244302335",
+    "workflow": "Värderingsöverlevnad vid omskrivning - wvs-swe",
+    "trigger": "schedule"
+  }
+}
