@@ -58,7 +58,60 @@ import (no `__main__` guard) — never import them.
 ## lib/ — shared code (not runnable)
 
 `provenance.py` (run naming + `run.json` lifecycle, single writer),
-`api.py` (shared OpenAI-compatible `chat_completion` + config).
+`api.py` (shared OpenAI-compatible `chat_completion` + config),
+`model_profiles.py` (optional per-provider model profiles, see below).
+
+## Running other providers: model profiles
+
+Reasoning-model handling (the reasoning system prompt in the main battery,
+and the request fields that turn thinking off) is keyed on Berget's model
+ids. Other providers use other ids for the same model, and the switch that
+turns thinking off differs per provider. To run against another
+`OPENAI_API_BASE`, point `EVAL_MODEL_PROFILES` at a JSON file:
+
+```json
+{
+  "profiles": [
+    {
+      "model": "moonshotai/kimi-k3",
+      "api_base": "https://api.tensorx.ai/v1",
+      "reasoning_model": true,
+      "thinking_off": {"chat_template_kwargs": {"enable_thinking": false}},
+      "note": "TensorX id for Kimi K3"
+    },
+    {
+      "model": "zai-org/GLM-5.3-Flash",
+      "api_base": "https://api.berget.ai/v1",
+      "reasoning_model": true,
+      "thinking_off": {"reasoning_effort": "low"},
+      "note": "enable_thinking=false leaks chain-of-thought here"
+    }
+  ]
+}
+```
+
+```bash
+EVAL_MODEL_PROFILES=profiles.json OPENAI_API_BASE=https://api.tensorx.ai/v1 \
+  python3 scripts/evals/run_main_battery.py --models moonshotai/kimi-k3
+```
+
+- `model` (required): exact id as sent in the request.
+- `api_base` (optional): matched against `OPENAI_API_BASE`, trailing `/`
+  ignored. Omitted = any provider; an entry with a matching `api_base` wins.
+- `reasoning_model` (required): same meaning as `REASONING_MODELS`
+  membership.
+- `thinking_off` (optional, default `{}`): top-level request fields sent
+  instead of the built-in `chat_template_kwargs`; `{}` sends nothing extra.
+- `note` (optional): ignored.
+
+A listed model's profile fully replaces the built-in handling; unlisted
+models keep it. Unknown keys, wrong types or duplicate (`model`,
+`api_base`) entries fail at run start. The file path, its sha256 and its
+entries are recorded under `model_profiles` in `run.json`. Without the env
+var nothing changes.
+
+Wired into `run_main_battery.py` and everything using `lib/api.py`.
+`run_multisample.py` still uses its own `REASONING_MODELS`.
 
 ## archive/
 
