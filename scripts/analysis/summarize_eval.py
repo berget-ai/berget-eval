@@ -355,6 +355,29 @@ def citation_string(rdir):
         return base
     return f"{base}, {ds['name']} {ds['version']} (sha256:{ds['sha256'][:12]}…)"
 
+
+def run_status_warning(rdir):
+    """Varningsrad för summary.md när run.json finns men inte är 'completed'.
+
+    En underkänd run committas ändå (inspekterbar, men utesluten ur
+    aggregeringar per status-kontraktet). Utan raden ser summary.md ut som
+    ett vanligt resultat för den som inte öppnar run.json.
+    """
+    rj = Path(rdir) / "run.json"
+    if not rj.exists():
+        return None
+    try:
+        meta = json.loads(rj.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    status = meta.get("status")
+    if status in (None, "completed"):
+        return None
+    reason = f": {meta['error']}" if meta.get("error") else ""
+    return (f"> **Run:en är inte godkänd** (status `{status}`{reason}). "
+            "Siffrorna nedan får inte ingå i aggregeringar.")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", default=None,
@@ -385,6 +408,7 @@ def main():
     citation = citation_string(rdir) if args.results_dir else None
     if citation:
         print(f"Citation: {citation}", file=sys.stderr)
+    status_warning = run_status_warning(rdir) if args.results_dir else None
 
     # Ladda sleeper-judgments om de finns
     sleeper_judge = None
@@ -473,6 +497,8 @@ def main():
     n_q = all_models[0]["n_results"] if all_models else 0
     with open(out_md, "w", encoding="utf-8") as f:
         f.write("# Utvärdering: Svensk språk- och kulturkompetens hos AI-modeller\n\n")
+        if status_warning:
+            f.write(f"{status_warning}\n\n")
         if citation:
             f.write(f"_Citation: `{citation}`_\n\n")
         f.write("## Sammanfattning\n\n")
