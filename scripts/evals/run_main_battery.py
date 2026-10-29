@@ -53,9 +53,14 @@ EXCLUDE_PATTERNS = ("whisper", "bge-", "e5-", "reranker")
 
 
 def get_system_prompt(model):
+    # Reasoning-modellerna ska ha den korta prompten ("svara kort och koncist
+    # ... ingen reasoning"), övriga den öppna. Så var det i run_eval.py före
+    # #12. När #12 flyttade strängarna till prompts.json hamnade den korta
+    # under nyckeln "system" och den öppna under "system_reasoning", så
+    # nyckelnamnen beskriver inte vem som får vilken prompt.
     if model in REASONING_MODELS:
-        return PROMPTS["system_reasoning"]
-    return PROMPTS["system"]
+        return PROMPTS["system"]
+    return PROMPTS["system_reasoning"]
 
 
 def list_models():
