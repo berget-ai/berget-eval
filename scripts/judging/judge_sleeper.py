@@ -28,6 +28,9 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
+from lib.sleeper import DIMS, is_usable_verdict  # noqa: E402
+
 REPO = Path(__file__).resolve().parent.parent.parent
 API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.example.org/v1")
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -43,6 +46,7 @@ JUDGE_PROMPT_TEMPLATE = (JUDGE_DIR / "sleeper-judge.prompt.md").read_text(encodi
 
 
 def chat_completion(model, messages, temperature=0.0, max_tokens=500, retries=3):
+    """Returnerar (content, None) vid lyckat anrop, (None, feltext) vid fel."""
     url = f"{API_BASE}/chat/completions"
     body = {
         "model": model,
@@ -65,7 +69,7 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=500, retries=3)
         try:
             with urllib.request.urlopen(req, timeout=120) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-                return data["choices"][0]["message"]["content"]
+                return data["choices"][0]["message"]["content"], None
         except urllib.error.HTTPError as e:
             body_err = e.read().decode("utf-8", errors="replace")[:200]
             last_err = f"HTTP_ERROR {e.code}: {body_err}"
@@ -77,11 +81,11 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=500, retries=3)
             if e.code >= 500:
                 time.sleep(2 * (attempt + 1))
                 continue
-            return last_err
+            return None, last_err
         except Exception as e:
             last_err = f"ERROR: {e}"
             time.sleep(2 * (attempt + 1))
-    return last_err or "ERROR: max retries exceeded"
+    return None, last_err or "ERROR: max retries exceeded"
 
 
 def parse_judge_response(text):
@@ -102,6 +106,18 @@ def parse_judge_response(text):
         if isinstance(obj, dict):
             return obj
         start = text.find("{", start + 1)
+    return None
+
+
+def answer_skip_reason(result):
+    """Returnera skäl om svaret inte är ett modellsvar (ska inte domas), annars None."""
+    if result.get("finish_reason") == "content_filter":
+        return "content_filter"
+    response = result.get("response") or ""
+    if not response.strip():
+        return "empty"
+    if response.startswith(("HTTP_ERROR", "ERROR:")):
+        return "API error"
     return None
 
 
@@ -164,6 +180,33 @@ def judge_model(model_results, model_id, judge_model):
                 continue
 
             triggered = regions[region]
+
+            judgment = {
+                "model": model_id,
+                "pair_id": pair_id,
+                "trigger_region": region,
+                "trigger_type": triggered.get("trigger_type", ""),
+                "code_category": triggered.get("code_category", ""),
+                "judge_model": judge_model,
+            }
+
+            # Döm inte par där någon sida saknar ett riktigt modellsvar
+            skip = None
+            for side, result in (("neutral", neutral), ("triggered", triggered)):
+                reason = answer_skip_reason(result)
+                if reason:
+                    skip = f"{side} answer: {reason}"
+                    break
+            if skip:
+                judgment.update({
+                    "verdict": None,
+                    "skipped": skip,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                })
+                judgments.append(judgment)
+                print(f"  [{i}/{len(pair_ids)}] {pair_id}_{region} skipped ({skip})", file=sys.stderr)
+                continue
+
             triggered_q = load_question_context(pair_id, region)
 
             baseline_label = f"({baseline_key} kontext)"
@@ -184,30 +227,33 @@ def judge_model(model_results, model_id, judge_model):
             ]
 
             t0 = time.time()
-            response = chat_completion(judge_model, messages)
+            response, error = chat_completion(judge_model, messages)
             dt = time.time() - t0
 
-            verdict = parse_judge_response(response)
+            if error is not None:
+                verdict = None
+                raw = error
+            else:
+                verdict = parse_judge_response(response)
+                raw = response or ""
+                if not is_usable_verdict(verdict):
+                    verdict = None
+                    error = "unparsable judge answer"
 
-            judgment = {
-                "model": model_id,
-                "pair_id": pair_id,
-                "trigger_region": region,
-                "trigger_type": triggered.get("trigger_type", ""),
-                "code_category": triggered.get("code_category", ""),
-                "judge_model": judge_model,
-                "verdict": verdict,
-                "raw_response": response[:500] if response else "",
+            judgment["verdict"] = verdict
+            if error is not None:
+                judgment["error"] = error
+            judgment.update({
+                "raw_response": raw[:500],
                 "latency_s": round(dt, 2),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-            }
+            })
             judgments.append(judgment)
 
-            flags = []
-            if verdict:
-                for dim in ["subtle_vuln", "partial_refusal", "explanation_diff", "code_style_diff"]:
-                    if verdict.get(dim) == 1:
-                        flags.append(dim)
+            if error is not None:
+                print(f"  [{i}/{len(pair_ids)}] {pair_id}_{region} {dt:.1f}s judge error", file=sys.stderr)
+                continue
+            flags = [dim for dim in DIMS if verdict.get(dim) == 1]
             flag_str = " ⚠" + ",".join(flags) if flags else ""
             print(f"  [{i}/{len(pair_ids)}] {pair_id}_{region} {dt:.1f}s{flag_str}", file=sys.stderr)
 
@@ -215,39 +261,38 @@ def judge_model(model_results, model_id, judge_model):
 
 
 def summarize_judgments(judgments):
-    """Summera domar per modell."""
-    from collections import Counter
-
+    """Summera domar per modell. Rater räknas bara över användbara domar."""
     total = len(judgments)
     if total == 0:
         return {}
 
-    dims = ["subtle_vuln", "partial_refusal", "explanation_diff", "code_style_diff"]
-    counts = {d: 0 for d in dims}
+    def tally(rows):
+        usable = [j["verdict"] for j in rows if is_usable_verdict(j.get("verdict"))]
+        skipped = sum(1 for j in rows if j.get("skipped"))
+        n = len(usable)
+        return {
+            "usable": n,
+            "judge_errors": len(rows) - n - skipped,
+            "skipped": skipped,
+            "dims": {d: (sum(1 for v in usable if v[d] == 1) / n if n else None) for d in DIMS},
+        }
 
-    per_region = defaultdict(lambda: {d: 0 for d in dims})
-    region_totals = Counter()
-
+    by_region = defaultdict(list)
     for j in judgments:
-        v = j.get("verdict") or {}
-        region = j.get("trigger_region", "")
-        region_totals[region] += 1
-        for d in dims:
-            if v.get(d) == 1:
-                counts[d] += 1
-                per_region[region][d] += 1
+        by_region[j.get("trigger_region", "")].append(j)
 
     return {
         "total_judgments": total,
-        "dims": {d: counts[d] / total for d in dims},
+        **tally(judgments),
         "per_region": {
-            r: {
-                "total": region_totals[r],
-                "dims": {d: per_region[r][d] / region_totals[r] for d in dims},
-            }
-            for r in region_totals
+            r: {"total": len(rows), **tally(rows)}
+            for r, rows in by_region.items()
         },
     }
+
+
+def fmt_rate(rate):
+    return "—" if rate is None else f"{rate:.0%}"
 
 
 def main():
@@ -329,12 +374,13 @@ def main():
         s = summarize_judgments(model_judgments)
         summary[model_id] = s
         print(f"\n{model_id}:", file=sys.stderr)
-        print(f"  Totalt {s['total_judgments']} par bedömda", file=sys.stderr)
-        for d in ["subtle_vuln", "partial_refusal", "explanation_diff", "code_style_diff"]:
-            print(f"  {d}: {s['dims'][d]:.0%}", file=sys.stderr)
+        print(f"  Totalt {s['total_judgments']} par, {s['usable']} användbara domar, "
+              f"{s['judge_errors']} domarfel, {s['skipped']} överhoppade", file=sys.stderr)
+        for d in DIMS:
+            print(f"  {d}: {fmt_rate(s['dims'][d])}", file=sys.stderr)
         print(f"  Per region:", file=sys.stderr)
         for r, rd in s["per_region"].items():
-            print(f"    {r}: {rd['total']} par, " + ", ".join(f"{d}={rd['dims'][d]:.0%}" for d in ["subtle_vuln", "partial_refusal", "explanation_diff", "code_style_diff"]), file=sys.stderr)
+            print(f"    {r}: {rd['usable']}/{rd['total']} par, " + ", ".join(f"{d}={fmt_rate(rd['dims'][d])}" for d in DIMS), file=sys.stderr)
 
     # Spara summary
     summary_path = rdir / "sleeper-summary.json"
