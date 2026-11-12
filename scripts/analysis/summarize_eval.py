@@ -356,6 +356,41 @@ def citation_string(rdir):
     return f"{base}, {ds['name']} {ds['version']} (sha256:{ds['sha256'][:12]}…)"
 
 
+
+def length_exclusion_warning(results):
+    """Varningsblock för summary.md när en modell har för många truncade/läckta
+    rader: dess längdbaserade mätvärden räknas inte med. Trösklarna är i sync
+    med scripts/ci/validate_run.py (LEAK_FAIL / TRUNCATION_FAIL = 10 %).
+    """
+    MARKERS = ("the user is asking", "the user wants", "användaren ber",
+               "användaren frågar", "jag måste överväga", "jag behöver ge",
+               "i need to", "we need to", "let me think", "först måste jag",
+               "```", "<|close|>", "<|channel|>", "assistantfinal")
+    notes = []
+    for r in sorted(results):
+        rows = results[r]
+        n = len(rows)
+        if not n:
+            continue
+        trunc = sum(1 for x in rows if x.get("truncated"))
+        leak = sum(1 for x in rows if x.get("reasoning_leak")
+                   or any(k in (x.get("response") or "").lstrip()[:300].lower()
+                          for k in MARKERS))
+        tr = trunc / n
+        lr = leak / n
+        reasons = []
+        if tr >= 0.10:
+            reasons.append(f"{tr:.0%} av svaren truncades")
+        if lr >= 0.10:
+            reasons.append(f"{lr:.0%} av svaren innehåller resonemang")
+        if reasons:
+            notes.append(
+                f"- **{r}**: " + ", ".join(reasons) + ". Längdbaserade "
+                "mätvärden (False-friends, Swenglish-free, Conversation, "
+                "Translation) är exkluderade; övriga mätvärden är giltiga.")
+    return notes
+
+
 def run_status_warning(rdir):
     """Varningsrad för summary.md när run.json finns men inte är 'completed'.
 
@@ -409,6 +444,7 @@ def main():
     if citation:
         print(f"Citation: {citation}", file=sys.stderr)
     status_warning = run_status_warning(rdir) if args.results_dir else None
+    length_notes = length_exclusion_warning(results) if args.results_dir else None
 
     # Ladda sleeper-judgments om de finns
     sleeper_judge = None
@@ -517,6 +553,12 @@ def main():
             row = " | ".join(f"{mtr.get(c, 0):.0%}" for c in cols)
             f.write(f"| {m['model_id']} | {row} | {avg:.0%} |\n")
         f.write("\n")
+        if length_notes:
+            f.write("## Begränsningar i den här körningen\n\n")
+            f.write("\n".join(length_notes) + "\n\n")
+            f.write("Längdbaserade mätvärden för de listade modellerna exkluderas "
+                    "ur aggregeringar; rader med truncation/resonemang avlägsnas "
+                    "från längdjämförelser och räknas inte som svar.\n\n")
         f.write("## Metriker\n\n")
         f.write("- **Lang-MCQ**: Flervalsfrågor - vilket är rätt svenskt ord för påhittat ord?\n")
         f.write("- **Lang-Preference**: Vilken mening är mest korrekt skriven på svenska?\n")
