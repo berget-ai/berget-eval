@@ -54,15 +54,10 @@ EXCLUDE_PATTERNS = ("whisper", "bge-", "e5-", "reranker")
 
 
 def get_system_prompt(model):
-    # Reasoning-modellerna ska ha den korta prompten ("svara kort och koncist
-    # ... ingen reasoning"), övriga den öppna. Så var det i run_eval.py före
-    # #12. När #12 flyttade strängarna till prompts.json hamnade den korta
-    # under nyckeln "system" och den öppna under "system_reasoning", så
-    # nyckelnamnen beskriver inte vem som får vilken prompt.
-    # En profil i EVAL_MODEL_PROFILES (lib/model_profiles.py) går före
-    # REASONING_MODELS för de modeller den listar.
-    if is_reasoning_model(model, API_BASE, REASONING_MODELS):
-        return PROMPTS["system"]
+    # CHECK 3 kräver EN identisk systemprompt för alla modeller — annars mäter
+    # längdbaserade metriker vår differentiering, inte modellerna (v1-defekt #2).
+    # Reasoning-avfångning sköts numera av profiles (thinking_off) och
+    # leak-detektion i validate_run.py, inte av olika prompts.
     return PROMPTS["system_reasoning"]
 
 
@@ -278,7 +273,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             elif is_mcq:
                 max_tokens = MCQ_MAX_TOKENS
             else:
-                max_tokens = 400
+                max_tokens = 2000
             # Reasoning-modeller (Claude, OpenAI:s gpt-5*/gpt-6*) förbrukar tokens
             # på intern reasoning innan det synliga svaret skrivs. Vid för lågt
             # tak blir content tom (finish_reason='length') utan att vara en
