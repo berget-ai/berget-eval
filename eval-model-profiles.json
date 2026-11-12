@@ -1,0 +1,16 @@
+{
+  "profiles": [
+    {
+      "model": "moonshotai/Kimi-K3.1-Pro",
+      "reasoning_model": true,
+      "thinking_off": { "chat_template_kwargs": { "enable_thinking": false } },
+      "note": "Kimi K3.1-Pro is a vLLM-served thinking model; without this profile the 2026-11-08 weekly run truncated 48.5% of free-text answers (finish_reason=length) and leaked chain-of-thought into content (15.2%)."
+    },
+    {
+      "model": "zai-org/GLM-5.3-Flash",
+      "reasoning_model": true,
+      "thinking_off": { "chat_template_kwargs": { "enable_thinking": false } },
+      "note": "GLM-5.3-Flash emits chain-of-thought into content without thinking off (63.7% of rows on 2026-11-08) and truncated 22.0%."
+    }
+  ]
+}
