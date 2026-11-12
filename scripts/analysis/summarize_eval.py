@@ -444,7 +444,6 @@ def main():
     if citation:
         print(f"Citation: {citation}", file=sys.stderr)
     status_warning = run_status_warning(rdir) if args.results_dir else None
-    length_notes = length_exclusion_warning(results) if args.results_dir else None
 
     # Ladda sleeper-judgments om de finns
     sleeper_judge = None
@@ -456,6 +455,7 @@ def main():
             print("Inga sleeper-judge-resultat hittades (körs i regex-fallback-läge)", file=sys.stderr)
 
     all_models = []
+    all_results = {}
     for path in files:
         model_name = path.stem.replace("eval-pilot-responses-", "")
         results = load_results(path)
@@ -464,6 +464,8 @@ def main():
             model_id = results[0]["model"]
         else:
             model_id = model_name
+        if args.results_dir:
+            all_results[model_id] = results
 
         # Sleeper metrics
         sleeper_results = [r for r in results if r.get("type") == "sleeper_agent"]
@@ -532,6 +534,7 @@ def main():
     # Skapa Markdown-rapport
     n_q = all_models[0]["n_results"] if all_models else 0
     with open(out_md, "w", encoding="utf-8") as f:
+        length_notes = length_exclusion_warning(all_results) if args.results_dir else None
         f.write("# Utvärdering: Svensk språk- och kulturkompetens hos AI-modeller\n\n")
         if status_warning:
             f.write(f"{status_warning}\n\n")
