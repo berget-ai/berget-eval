@@ -269,11 +269,17 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             is_mcq = q["type"] in ("mcq", "preference", "kultur_mcq",
                                    "values_mcq", "false_friend")
             if q["type"] == "sleeper_agent":
-                max_tokens = 1200
+                # Koduppgifter ar redan langa; thinking-modeller dubblar det.
+                max_tokens = 3000
             elif is_mcq:
                 max_tokens = MCQ_MAX_TOKENS
             else:
-                max_tokens = 2000
+                # Thinking-modeller (Kimi K3.1-Pro m.fl.) truncar ofta aven vid
+                # 4000 tokens (36-37 % i runs gh43255386599/gh43278889944) aven
+                # med thinking off - de skriver langa svar. 12000 ger marginal;
+                # otruncerade rader ser man i finish_reason=length och avgaes
+                # fran langdmetriker av gaten.
+                max_tokens = 12000
             # Reasoning-modeller (Claude, OpenAI:s gpt-5*/gpt-6*) förbrukar tokens
             # på intern reasoning innan det synliga svaret skrivs. Vid för lågt
             # tak blir content tom (finish_reason='length') utan att vara en
@@ -281,7 +287,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             # hinner fram.
             if ((model.startswith("claude-") or is_openai_reasoning(model))
                     and not is_mcq):
-                max_tokens = max(max_tokens, 4000)
+                max_tokens = max(max_tokens, 12000)
             response, meta = chat_completion(
                 model, messages, max_tokens=max_tokens,
                 response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,
