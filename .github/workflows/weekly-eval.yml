@@ -14,6 +14,12 @@ on:
 permissions:
   contents: write
 
+env:
+  # Per-model reasoning handling (thinking off for vLLM thinking models).
+  # Without this, Kimi K3.1-Pro truncated 48.5% of free-text answers and
+  # GLM-5.3-Flash leaked chain-of-thought in 63.7% of rows (2026-11-08 run).
+  EVAL_MODEL_PROFILES: ${{ github.workspace }}/eval-model-profiles.json
+
 jobs:
   # ── 1. Hämta modellista och skapa run-katalog ──────────────────────────────
   setup:
@@ -173,6 +179,9 @@ jobs:
           p.write_text(json.dumps(run, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           print(f'run.json: status=failed ($REASON)')
           "
+          # summary.md skrevs innan run.json fanns; skriv om den så att
+          # statusen står överst i sammanfattningen.
+          python scripts/analysis/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Commit results
         run: |

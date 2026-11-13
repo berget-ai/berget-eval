@@ -91,7 +91,7 @@ i svenska företag och myndigheter.
 | **användarinmatning** | user input | Svensk form för 'user input' i Prompt-Gränssnitt. |
 | **batchstorlek** | batch size | Etablerad term för 'batch size' i maskininlärning. |
 | **förklarbarhet** | explainability | Svensk form för 'explainability' (XAI). |
-| **heldragning** | inference | Svensk form för 'inference' vid modellanvändning. Ovanlig; 'inferens' etablerat lån. |
+| **inferens** | inference | Svensk form för 'inference' vid modellanvändning. Ovanlig; 'inferens' etablerat lån. |
 | **inlärningshastighet** | learning rate | Svensk form för 'learning rate' i träning av neurala nätverk. |
 | **kontextfönster** | context window | Svensk form för 'context window' i LLM-kontext. |
 | **modellsvar** | model response | Svensk sammansättning för AI-modellens utdata. |

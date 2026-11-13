@@ -22,6 +22,8 @@ import urllib.error
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # scripts/
 
 from lib import provenance as prov  # noqa: E402
+from lib.api import is_openai_reasoning, omits_temperature  # noqa: E402
+from lib.model_profiles import is_reasoning_model, thinking_off_fields  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent
 QUESTIONS_PATH = REPO / "datasets" / "main-battery" / "v3" / "eval-questions.jsonl"
@@ -52,9 +54,11 @@ EXCLUDE_PATTERNS = ("whisper", "bge-", "e5-", "reranker")
 
 
 def get_system_prompt(model):
-    if model in REASONING_MODELS:
-        return PROMPTS["system_reasoning"]
-    return PROMPTS["system"]
+    # CHECK 3 kräver EN identisk systemprompt för alla modeller — annars mäter
+    # längdbaserade metriker vår differentiering, inte modellerna (v1-defekt #2).
+    # Reasoning-avfångning sköts numera av profiles (thinking_off) och
+    # leak-detektion i validate_run.py, inte av olika prompts.
+    return PROMPTS["system_reasoning"]
 
 
 def list_models():
@@ -120,14 +124,19 @@ def chat_completion(model, messages, temperature=0.0, max_tokens=400, retries=3,
         "messages": messages,
         "max_tokens": max_tokens,
     }
-    # Anthropic-modeller (claude-*) avvisar 'temperature' (deprecated). Hoppa över
-    # den bara för dem; öppna modeller behåller temperature=0 för reproducerbarhet.
-    if not model.startswith("claude-"):
+    # Anthropic-modeller (claude-*) avvisar 'temperature' (deprecated), OpenAI:s
+    # reasoning-modeller (gpt-5*, gpt-6*) allt utom default 1. Hoppa över den
+    # bara för dem; öppna modeller behåller temperature=0 för reproducerbarhet.
+    if not omits_temperature(model):
         body["temperature"] = temperature
+    # OpenAI:s reasoning-modeller avvisar max_tokens ("use max_completion_tokens").
+    if is_openai_reasoning(model):
+        body["max_completion_tokens"] = body.pop("max_tokens")
     if response_format is not None:
         body["response_format"] = response_format
-    if model in REASONING_MODELS:
-        body["chat_template_kwargs"] = {"enable_thinking": False}
+    # Fälten som stänger av tänkandet skiljer sig per leverantör; en profil
+    # ersätter standardvärdet chat_template_kwargs.
+    body.update(thinking_off_fields(model, API_BASE, REASONING_MODELS))
 
     last_err = None
     for attempt in range(retries + 1):
@@ -260,17 +269,25 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             is_mcq = q["type"] in ("mcq", "preference", "kultur_mcq",
                                    "values_mcq", "false_friend")
             if q["type"] == "sleeper_agent":
-                max_tokens = 1200
+                # Koduppgifter ar redan langa; thinking-modeller dubblar det.
+                max_tokens = 3000
             elif is_mcq:
                 max_tokens = MCQ_MAX_TOKENS
             else:
-                max_tokens = 400
-            # Reasoning-modeller (Claude) förbrukar tokens på intern reasoning
-            # innan det synliga svaret skrivs. Vid för lågt tak blir content tom
-            # (finish_reason='length') utan att vara en refusal. Ge dem mycket
-            # större budget på fri-text-frågor så svaret hinner fram.
-            if model.startswith("claude-") and not is_mcq:
-                max_tokens = max(max_tokens, 4000)
+                # Thinking-modeller (Kimi K3.1-Pro m.fl.) truncar ofta aven vid
+                # 4000 tokens (36-37 % i runs gh43255386599/gh43278889944) aven
+                # med thinking off - de skriver langa svar. 12000 ger marginal;
+                # otruncerade rader ser man i finish_reason=length och avgaes
+                # fran langdmetriker av gaten.
+                max_tokens = 12000
+            # Reasoning-modeller (Claude, OpenAI:s gpt-5*/gpt-6*) förbrukar tokens
+            # på intern reasoning innan det synliga svaret skrivs. Vid för lågt
+            # tak blir content tom (finish_reason='length') utan att vara en
+            # refusal. Ge dem mycket större budget på fri-text-frågor så svaret
+            # hinner fram.
+            if ((model.startswith("claude-") or is_openai_reasoning(model))
+                    and not is_mcq):
+                max_tokens = max(max_tokens, 12000)
             response, meta = chat_completion(
                 model, messages, max_tokens=max_tokens,
                 response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,

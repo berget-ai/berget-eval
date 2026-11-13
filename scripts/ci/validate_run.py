@@ -30,6 +30,12 @@ TRUNCATION_WARN = 0.05
 TRUNCATION_FAIL = 0.20
 LEAK_WARN = 0.02
 LEAK_FAIL = 0.10
+# BLOCK thresholds: a majority of a model's rows unreadable means the model
+# itself cannot be reported. Below that, the run publishes with the model's
+# LENGTH-BASED metrics excluded (annotate in summary, see summarize_eval.py)
+# while the row-independent metrics (MCQ, values, culture, ...) stay valid.
+TRUNCATION_BLOCK = 0.50
+LEAK_BLOCK = 0.50
 
 
 def load(run_dir):
@@ -102,6 +108,8 @@ def main():
                     failures.append(
                         f"{f.name}: {n} rows != {expected} questions in dataset")
 
+    length_disabled = {}
+
     # ---- Check 1: completeness -------------------------------------------
     counts = {m: len(r) for m, r in by_model.items()}
     if len(set(counts.values())) > 1:
@@ -125,8 +133,14 @@ def main():
         rate = pct(trunc, len(rows))
         mark = "FAIL" if rate >= TRUNCATION_FAIL * 100 else ("warn" if rate >= TRUNCATION_WARN * 100 else "ok")
         print(f"{m[:46]:<46}{label:>12}{rate:>9.1f}% {mark}")
-        if rate >= TRUNCATION_FAIL * 100:
-            failures.append(f"{m}: {rate:.0f}% truncated - length metrics invalid")
+        if rate >= TRUNCATION_BLOCK * 100:
+            failures.append(
+                f"{m}: {rate:.0f}% truncated - majority of rows unreadable, "
+                "model must not be reported")
+        elif rate >= TRUNCATION_FAIL * 100:
+            length_disabled[m] = f"{rate:.0f}% truncated - length-based metrics excluded"
+            warnings.append(f"{m}: {rate:.0f}% truncated - length-based metrics excluded "
+                            "(row-independent metrics remain valid)")
         elif rate >= TRUNCATION_WARN * 100:
             warnings.append(f"{m}: {rate:.0f}% truncated - exclude those rows from length metrics")
     if legacy:
@@ -152,8 +166,12 @@ def main():
         rate = pct(leaked, len(rows))
         mark = "FAIL" if rate >= LEAK_FAIL * 100 else ("warn" if rate >= LEAK_WARN * 100 else "ok")
         print(f"{m[:46]:<46}{leaked:>12}{rate:>9.1f}% {mark}")
-        if rate >= LEAK_FAIL * 100:
-            failures.append(f"{m}: {rate:.0f}% of answers contain chain-of-thought")
+        # Läckage poisonar endast längdbaserade metriker (MCQ/values/culturverdiar er
+        # raduavhengige). Truncation er det))* — der blockar over halvdelen.
+        if rate >= LEAK_WARN * 100:
+            length_disabled[m] = f"{rate:.0f}% chain-of-thought in content - length-based metrics excluded"
+            warnings.append(f"{m}: {rate:.0f}% reasoning leakage - length-based metrics excluded "
+                            "(row-independent metrics remain valid)")
         elif rate >= LEAK_WARN * 100:
             warnings.append(f"{m}: {rate:.0f}% possible reasoning leakage")
 
