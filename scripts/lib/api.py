@@ -30,7 +30,7 @@ REASONING_MODELS = {
 # so 4000 leaves headroom. Raise this rather than accepting truncation; any row
 # that still comes back with finish_reason == "length" must be excluded from
 # length-based metrics rather than silently averaged in.
-MAX_TOKENS = 4000
+MAX_TOKENS = 8000  # generellt tak; trunkerade svar exkluderas ur bedomningen
 
 # OpenAI's own API serves its reasoning models under bare ids (e.g.
 # "gpt-6.1-sol"). They reject max_tokens ("use max_completion_tokens") and any

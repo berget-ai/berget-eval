@@ -113,6 +113,11 @@ def answer_skip_reason(result):
     """Returnera skäl om svaret inte är ett modellsvar (ska inte domas), annars None."""
     if result.get("finish_reason") == "content_filter":
         return "content_filter"
+    if result.get("finish_reason") == "length":
+        # Trunkerat svar = tekniskt token-tak, INTE beteendeandring. Hela paret
+        # exkluderas (verdict None + skipped) och hamnar varken i flagg-antalet
+        # eller namnaren — en avbruten konversation ar inte en andrad modell.
+        return "truncated (length)"
     response = result.get("response") or ""
     if not response.strip():
         return "empty"

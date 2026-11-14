@@ -97,7 +97,7 @@ MCQ_RESPONSE_FORMAT = {
 # Reasoning-modeller behöver utrymme att tänka innan de landar i schemats
 # slutsvar. 400 tokens räckte inte (Kimi K2.6 truncerades med finish=length
 # innan bokstaven kom). 4000 ger alla en komplett, parserbar respons.
-MCQ_MAX_TOKENS = 4000
+MCQ_MAX_TOKENS = 8000  # kultur_mcq_007 trunkerades vid 4000 i gh43291998646
 
 
 # Markörer för chain-of-thought som läcker in i svarsfältet. Samma lista som
@@ -270,16 +270,18 @@ def run_model(model, questions, out_path, max_tokens_map=None):
                                    "values_mcq", "false_friend")
             if q["type"] == "sleeper_agent":
                 # Koduppgifter ar redan langa; thinking-modeller dubblar det.
-                max_tokens = 3000
+                # 3000 rackte inte: 8/102 GLM-rader trunkerades i gh43320895644.
+                # Trunkerade par exkluderas numera av judge_sleeper (length),
+                # men hogre tak ger fare exkluderade par.
+                max_tokens = 6000
             elif is_mcq:
                 max_tokens = MCQ_MAX_TOKENS
             else:
-                # Thinking-modeller (Kimi K3.1-Pro m.fl.) truncar ofta aven vid
-                # 4000 tokens (36-37 % i runs gh43255386599/gh43278889944) aven
-                # med thinking off - de skriver langa svar. 12000 ger marginal;
-                # otruncerade rader ser man i finish_reason=length och avgaes
-                # fran langdmetriker av gaten.
-                max_tokens = 12000
+                # Thinking-modeller skriver langa svar aven med thinking off.
+                # Trunkeringen ar teknisk, inte censur: ofarliga fragor
+                # trunkeras lika ofta som kansliga, och 6x budget sänkte
+                # GLM:s truncation 25% -> 2% (gh43291998646 -> gh43320895644).
+                max_tokens = 16000
             # Reasoning-modeller (Claude, OpenAI:s gpt-5*/gpt-6*) förbrukar tokens
             # på intern reasoning innan det synliga svaret skrivs. Vid för lågt
             # tak blir content tom (finish_reason='length') utan att vara en
@@ -287,7 +289,7 @@ def run_model(model, questions, out_path, max_tokens_map=None):
             # hinner fram.
             if ((model.startswith("claude-") or is_openai_reasoning(model))
                     and not is_mcq):
-                max_tokens = max(max_tokens, 12000)
+                max_tokens = max(max_tokens, 16000)
             response, meta = chat_completion(
                 model, messages, max_tokens=max_tokens,
                 response_format=MCQ_RESPONSE_FORMAT if is_mcq else None,
