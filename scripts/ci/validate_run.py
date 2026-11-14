@@ -97,6 +97,18 @@ def main():
                 "partial runs must not enter aggregates")
         else:
             print(f"  ok - status=completed (run_id {meta.get('run_id')})")
+        scheduled = meta.get("scheduled_models")
+        if scheduled:
+            missing = sorted(set(scheduled) - set(by_model))
+            unexpected = sorted(set(by_model) - set(scheduled))
+            if missing or unexpected:
+                print(f"  FAIL - scheduled={len(scheduled)}, found={len(by_model)}, "
+                      f"missing={missing}, unexpected={unexpected}")
+                failures.append(
+                    f"result models do not match setup matrix: missing={missing}, "
+                    f"unexpected={unexpected}")
+            else:
+                print(f"  ok - all {len(scheduled)} scheduled models have results")
         expected = meta.get("n_questions")
         if expected:
             for f in sorted(run_dir.glob("*.jsonl")):

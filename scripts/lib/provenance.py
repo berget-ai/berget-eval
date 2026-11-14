@@ -178,12 +178,15 @@ def _models_in_file(path):
         return
 
 
-def finalize_run(out_dir, *, datasets, judge=None, config=None):
+def finalize_run(out_dir, *, datasets, judge=None, config=None,
+                 n_questions=None, scheduled_models=None):
     """Write the authoritative run.json for a CI-merged run folder.
 
     Used in workflow finalize jobs after per-model artifacts are merged:
     run_id and started_at come from the folder name, models from the result
-    files present, provenance from ambient GitHub env vars.
+    files present, provenance from ambient GitHub env vars. CI also passes
+    the scheduled model matrix and dataset size so validate_run can reject a
+    nominally complete run with missing models or truncated result files.
     """
     out_dir = Path(out_dir)
     run_id = out_dir.name
@@ -200,8 +203,10 @@ def finalize_run(out_dir, *, datasets, judge=None, config=None):
         "git_commit": git_commit(),
         "datasets": datasets,
         "models": models_from_jsonl(out_dir),
+        "scheduled_models": scheduled_models,
         "judge": judge,
         "config": config or {},
+        "n_questions": n_questions,
         "provenance": provenance(),
     }
     _write(out_dir, run)

@@ -98,7 +98,7 @@ jobs:
   finalize:
     needs: [setup, eval]
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120  # fler sleeper-par + alla fyra modeller ska hinnas dömas
     if: always()
     steps:
       - name: Checkout
@@ -150,6 +150,8 @@ jobs:
           python scripts/analysis/summarize_eval.py --results-dir "$OUT_DIR"
 
       - name: Write run.json
+        env:
+          EVAL_EXPECTED_MODELS: ${{ needs.setup.outputs.matrix }}
         run: python scripts/evals/run_main_battery.py --finalize-run --out-dir "${{ needs.setup.outputs.out_dir }}"
 
       - name: Validate run (blocking gate)
