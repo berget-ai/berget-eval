@@ -59,7 +59,7 @@ jobs:
   eval:
     needs: setup
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 360  # 405 fragor + 16000-token budget: gemma gick pa 2h-taket i gh43600811640
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
